@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_bar_height"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/title_bar">
+
+    <Button
+        android:id="@+id/left_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawable_navigation_button"
+        android:drawableLeft="@drawable/back"
+        android:paddingLeft="13dp"
+        android:layout_marginLeft="10dp"
+        android:contentDescription="@string/back_button" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/title_activity_login"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/title_text_size"
+        />
+
+    <Button
+        android:id="@+id/right_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawable_navigation_button"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/title_button_text_size"
+        android:text="@string/action_register"
+        android:layout_marginRight="10dp" />
+
+</LinearLayout>

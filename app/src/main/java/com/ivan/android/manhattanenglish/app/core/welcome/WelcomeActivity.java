@@ -1,6 +1,7 @@
 package com.ivan.android.manhattanenglish.app.core.welcome;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.login.LoginActivity;
 import com.viewpagerindicator.PageIndicator;
 
 
@@ -80,7 +82,9 @@ public class WelcomeActivity extends FragmentActivity {
 
 
     public void toLogin() {
-
+        Intent login = new Intent(this, LoginActivity.class);
+        startActivity(login);
+        finish();
     }
 
 

@@ -3,6 +3,25 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowFullscreen">false</item>
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowBackground">@color/common_background</item>
+    </style>
+
+    <style name="EditTextInput" parent="EditTextInputDefault">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="EditTextInputDefault">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColorHint">@color/hint_text_color</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/login_text_color</item>
+        <item name="android:paddingLeft">@dimen/form_edit_text_margin</item>
     </style>
 
 </resources>
