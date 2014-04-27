@@ -1,21 +1,19 @@
 package com.ivan.android.manhattanenglish.app.core.login;
 
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
-public class RegisterActivity extends ActionBarActivity {
+public class RegisterActivity extends ActionBarActivity implements StudentRegisterFragment.RegisterListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -144,21 +142,19 @@ public class RegisterActivity extends ActionBarActivity {
 
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class StudentRegisterFragment extends Fragment {
 
-
-        public StudentRegisterFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_student_register, container, false);
-            return rootView;
-        }
+    @Override
+    public void sendAuthCode(String tel) {
+        //todo
     }
 
+    @Override
+    public void register(String tel, String password, String authCode) {
+        //todo
+    }
+
+    @Override
+    public void beVip(String tel, String password, String authCode) {
+        //todo
+    }
 }

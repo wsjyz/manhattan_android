@@ -79,7 +79,8 @@ public class LoginActivity extends Activity {
         mForgetPsw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "developing", Toast.LENGTH_SHORT).show();
+                Intent findPassword = new Intent(LoginActivity.this, FindPasswordActivity.class);
+                startActivity(findPassword);
             }
         });
 

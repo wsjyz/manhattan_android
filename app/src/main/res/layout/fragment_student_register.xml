@@ -70,6 +70,7 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/auth_code"
                 style="@style/EditTextInputDefault"
                 android:layout_width="0dp"
                 android:hint="@string/auth_code_here"
@@ -79,6 +80,7 @@
                 android:layout_marginRight="@dimen/form_edit_text_margin" />
 
             <Button
+                android:id="@+id/auth_code_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
