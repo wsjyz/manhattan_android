@@ -39,6 +39,10 @@
             android:name="com.ivan.android.manhattanenglish.app.core.login.FindPasswordActivity"
             android:label="@string/title_activity_find_password" >
         </activity>
+        <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity"
+            android:label="@string/title_activity_student_home" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,150 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity">
+
+    <com.ivan.android.manhattanenglish.app.customviews.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_default_height"
+        custom:showLeft="false"
+        custom:titleText="@string/app_name"
+        custom:rightButtonPaddingLeft="17dp"
+        custom:rightButtonIcon="@drawable/user_info" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:padding="@dimen/common_margin"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/appoint_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/common_margin"
+            android:background="@drawable/appointment"
+            tools:ignore="NestedWeights" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/course_button"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:background="@drawable/course" />
+
+            <Button
+                android:id="@+id/teacher_button"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/teacher"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:padding="@dimen/common_margin"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            tools:ignore="NestedWeights">
+            <Button
+                android:id="@+id/homework_button"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:background="@drawable/homework" />
+
+            <Button
+                android:id="@+id/infomation_button"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/infomation"
+
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/ask_qustion_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:background="@drawable/ask_question" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_default_height"
+        android:orientation="horizontal"
+
+        android:gravity="center"
+        android:background="@drawable/foot_bar">
+
+        <Button
+            android:id="@+id/collect_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/drawable_collect_button"
+            android:background="@android:color/transparent" />
+
+        <Button
+            android:id="@+id/appoint_query_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/drawable_appoint_button"
+            android:background="@android:color/transparent" />
+
+        <Button
+            android:id="@+id/audition_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/drawable_audition_button"
+            android:background="@android:color/transparent" />
+
+        <Button
+            android:id="@+id/more_info_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/drawable_more_button"
+            android:background="@android:color/transparent" />
+
+    </LinearLayout>
+
+</LinearLayout>

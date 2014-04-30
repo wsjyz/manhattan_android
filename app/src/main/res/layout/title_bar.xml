@@ -35,7 +35,6 @@
         android:background="@drawable/drawable_navigation_button"
         android:textColor="@android:color/white"
         android:textSize="@dimen/title_button_text_size"
-        android:text="@string/action_register"
         android:layout_marginRight="10dp" />
 
 </LinearLayout>

@@ -25,8 +25,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/form_default_height"
-        android:layout_marginLeft="@dimen/form_edit_text_margin"
-        android:layout_marginRight="@dimen/form_edit_text_margin"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginRight="@dimen/common_margin"
         android:orientation="horizontal"
         android:background="@drawable/login_form_border">
 
@@ -34,8 +34,8 @@
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/form_edit_text_margin"
-            android:layout_marginRight="@dimen/form_edit_text_margin"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:layout_marginRight="@dimen/common_margin"
             android:src="@drawable/account" />
 
         <EditText
@@ -48,7 +48,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/form_default_height"
-        android:layout_margin="@dimen/form_edit_text_margin"
+        android:layout_margin="@dimen/common_margin"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@drawable/login_form_border">
@@ -57,8 +57,8 @@
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/form_edit_text_margin"
-            android:layout_marginRight="@dimen/form_edit_text_margin"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:layout_marginRight="@dimen/common_margin"
             android:src="@drawable/password" />
 
         <EditText
@@ -71,7 +71,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/form_edit_text_margin"
+        android:layout_margin="@dimen/common_margin"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -84,7 +84,7 @@
             android:checked="false"
             android:text="@string/auto_login"
             android:textColor="@color/login_text_color"
-            android:paddingLeft="@dimen/form_edit_text_margin"
+            android:paddingLeft="@dimen/common_margin"
             android:layout_marginLeft="20dp" />
 
         <TextView
@@ -103,7 +103,7 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/form_login_button_height"
-        android:layout_marginTop="@dimen/form_edit_text_margin"
+        android:layout_marginTop="@dimen/common_margin"
         android:layout_marginLeft="@dimen/form_login_button_horizontal_margin"
         android:layout_marginRight="@dimen/form_login_button_horizontal_margin"
         android:background="@drawable/drawable_login_button"

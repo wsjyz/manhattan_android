@@ -21,7 +21,7 @@
         <item name="android:textColorHint">@color/hint_text_color</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/login_text_color</item>
-        <item name="android:paddingLeft">@dimen/form_edit_text_margin</item>
+        <item name="android:paddingLeft">@dimen/common_margin</item>
     </style>
 
 </resources>
