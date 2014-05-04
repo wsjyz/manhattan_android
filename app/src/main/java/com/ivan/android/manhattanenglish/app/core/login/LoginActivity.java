@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
@@ -122,35 +123,21 @@ public class LoginActivity extends Activity {
 
         // Check for a valid tel
         if (TextUtils.isEmpty(tel)) {
-            mTelView.setError(getString(R.string.error_field_required));
-            focusView = mTelView;
-            cancel = true;
-        } else if (!isEmailValid(tel)) {
-            mTelView.setError(getString(R.string.error_invalid_email));
+            mTelView.setError(getString(R.string.error_tel_required));
             focusView = mTelView;
             cancel = true;
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
             mAuthTask = new UserLoginTask(tel, password);
             mAuthTask.execute((Void) null);
         }
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
-
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= 8;
     }
 
 
@@ -180,6 +167,8 @@ public class LoginActivity extends Activity {
             mAuthTask = null;
 
             if (success) {
+                Intent intent = new Intent(LoginActivity.this, StudentHomeActivity.class);
+                startActivity(intent);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

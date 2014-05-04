@@ -1,12 +1,16 @@
 package com.ivan.android.manhattanenglish.app.core.home;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 public class StudentHomeActivity extends ActionBarActivity {
@@ -61,6 +65,17 @@ public class StudentHomeActivity extends ActionBarActivity {
         mAuditionBtn = (Button) findViewById(R.id.audition_btn);
 
         mMoreInfoBtn = (Button) findViewById(R.id.more_info_btn);
+        mMoreInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigate(MoreInfoActivity.class);
+            }
+        });
+    }
+
+    private void navigate(Class<? extends Activity> activity) {
+        Intent intent = new Intent(this, activity);
+        startActivity(intent);
     }
 
 }

@@ -2,10 +2,14 @@
 <resources>
 
     <color name="common_background">#E4E4E4</color>
-    <color name="hint_text_color">#9B9B9B</color>
+    <color name="hint_text_color">#C8C8C8</color>
     <color name="login_text_color">#838383</color>
     <color name="border_color">#C8C8C8</color>
     <color name="tab_border_color">#D8D8D8</color>
     <color name="tab_background">#F7F7F7</color>
     <color name="form_button_text">#9C9C9C</color>
+    <color name="item_selected">#E1E1E1</color>
+
+    <color name="label_text_color">#AFAFAF</color>
+    <color name="common_text_color">#707070</color>
 </resources>

@@ -18,4 +18,10 @@
     <dimen name="register_tab_height">50dp</dimen>
     <dimen name="register_tab_padding_top">14dp</dimen>
 
+    <!--more info -->
+    <dimen name="more_info_list_item_height">60dp</dimen>
+    <dimen name="more_info_list_item_padding">12dp</dimen>
+    <dimen name="more_info_text_size">18sp</dimen>
+    <dimen name="contact_us_label_text_size">20sp</dimen>
+    <dimen name="contact_us_title_margin">20dp</dimen>
 </resources>
