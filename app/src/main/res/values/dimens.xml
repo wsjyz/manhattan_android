@@ -24,4 +24,8 @@
     <dimen name="more_info_text_size">18sp</dimen>
     <dimen name="contact_us_label_text_size">20sp</dimen>
     <dimen name="contact_us_title_margin">20dp</dimen>
+    
+    <!--infomation setting-->
+    <dimen name="infomation_title_text_size">18sp</dimen>
+    <dimen name="infomation_content_text_size">16sp</dimen>
 </resources>

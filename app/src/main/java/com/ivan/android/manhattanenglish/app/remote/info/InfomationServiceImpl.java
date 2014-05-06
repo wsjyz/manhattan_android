@@ -9,9 +9,8 @@ import com.ivan.android.manhattanenglish.app.utils.OpenPage;
  * Time: PM4:29
  */
 public class InfomationServiceImpl extends AbstractService implements InfomationService {
-
     @Override
-    public OpenPage<Infomation> loadLatestInfomation() {
+    public OpenPage<Infomation> loadLatestInfomation(OpenPage<Infomation> page) {
         return null;
     }
 }

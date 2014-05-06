@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_appoint">我要预约</string>
+    <string-array name="appoint_search_text">
+        <item>@string/course_category</item>
+        <item>@string/teach_location</item>
+        <item>@string/teach_method</item>
+        <item>@string/teacher_sex</item>
+        <item>@string/appoint_date</item>
+    </string-array>
+    <array name="appoint_search_icon">
+        <item>@drawable/course_category</item>
+        <item>@drawable/teach_location</item>
+        <item>@drawable/teach_method</item>
+        <item>@drawable/teacher_sex</item>
+        <item>@drawable/appoint_date</item>
+    </array>
+    <string name="course_category">课程分类</string>
+    <string name="teach_location">教学地点</string>
+    <string name="teach_method">教学方式</string>
+    <string name="teacher_sex">教师性别</string>
+    <string name="appoint_date">预约日期</string>
+    <string name="search_no_limit">不限</string>
+    <string name="action_search">搜索</string>
+</resources>

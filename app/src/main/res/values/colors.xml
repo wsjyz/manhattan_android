@@ -12,4 +12,5 @@
 
     <color name="label_text_color">#AFAFAF</color>
     <color name="common_text_color">#707070</color>
+    <color name="search_condition_text_color">#3578CB</color>
 </resources>

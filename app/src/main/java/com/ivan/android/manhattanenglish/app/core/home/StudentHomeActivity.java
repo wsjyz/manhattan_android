@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.appoint.AppointActivity;
+import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
 import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
@@ -47,6 +49,12 @@ public class StudentHomeActivity extends ActionBarActivity {
         mTitleBar = (TitleBar) findViewById(R.id.title_bar);
 
         mAppointBtn = (Button) findViewById(R.id.appoint_button);
+        mAppointBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigate(AppointActivity.class);
+            }
+        });
 
         mCourseBtn = (Button) findViewById(R.id.course_button);
 
@@ -55,6 +63,12 @@ public class StudentHomeActivity extends ActionBarActivity {
         mHomeworkBtn = (Button) findViewById(R.id.homework_button);
 
         mInfoBtn = (Button) findViewById(R.id.infomation_button);
+        mInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigate(InfomationActivity.class);
+            }
+        });
 
         mAskQuestionBtn = (Button) findViewById(R.id.ask_qustion_button);
 

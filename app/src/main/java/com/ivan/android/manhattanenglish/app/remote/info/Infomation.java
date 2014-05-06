@@ -1,5 +1,7 @@
 package com.ivan.android.manhattanenglish.app.remote.info;
 
+import android.text.format.DateFormat;
+
 import java.util.Date;
 
 /**
@@ -47,5 +49,9 @@ public class Infomation {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getCreateTimeString() {
+        return DateFormat.format("yyyy-MM-dd HH:mm", createTime).toString();
     }
 }

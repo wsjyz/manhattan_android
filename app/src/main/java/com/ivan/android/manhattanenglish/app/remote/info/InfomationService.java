@@ -9,5 +9,5 @@ import com.ivan.android.manhattanenglish.app.utils.OpenPage;
  */
 public interface InfomationService {
 
-    OpenPage<Infomation> loadLatestInfomation();
+    OpenPage<Infomation> loadLatestInfomation(OpenPage<Infomation> page);
 }
