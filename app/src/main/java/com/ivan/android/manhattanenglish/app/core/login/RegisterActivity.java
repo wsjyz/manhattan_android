@@ -11,9 +11,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
-public class RegisterActivity extends ActionBarActivity implements StudentRegisterFragment.RegisterListener {
+public class RegisterActivity extends BaseActivity implements StudentRegisterFragment.RegisterListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide

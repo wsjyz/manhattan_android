@@ -6,6 +6,17 @@
     android:background="@drawable/login_form_border">
 
     <TextView
+        android:id="@+id/create_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/common_text_color"
+        android:textSize="@dimen/infomation_content_text_size"
+        android:text="2014-01-01 15:30"
+        android:layout_toLeftOf="@+id/more_expand"
+        android:gravity="center_vertical"
+        android:layout_marginTop="14dp" />
+
+    <TextView
         android:id="@+id/infomation_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,17 +29,6 @@
         android:gravity="center_vertical"
         android:ellipsize="end"
         android:layout_margin="@dimen/common_margin"/>
-
-    <TextView
-        android:id="@+id/create_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/common_text_color"
-        android:textSize="@dimen/infomation_content_text_size"
-        android:text="2014-01-01 15:30"
-        android:layout_toLeftOf="@+id/more_expand"
-        android:gravity="center_vertical"
-        android:layout_marginTop="14dp" />
 
     <TextView
         android:id="@+id/infomation_content"

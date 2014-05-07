@@ -12,16 +12,16 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 
     public final static String LOGIN_SETTING_NAME = "login_setting";
     public final static String AUTO_LOGIN_KEY = "auto_login";
@@ -37,8 +37,6 @@ public class LoginActivity extends Activity {
 
     private TextView mForgetPsw;
 
-    private TitleBar mTitleBar;
-
     private Button mLoginButton;
 
     private boolean autoLogin;
@@ -50,12 +48,11 @@ public class LoginActivity extends Activity {
 
         autoLogin = getSharedPreferences(LOGIN_SETTING_NAME, MODE_PRIVATE).getBoolean(AUTO_LOGIN_KEY, false);
 
-        mTitleBar = (TitleBar) findViewById(R.id.login_title_bar);
-        mTitleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+        titleBar = (TitleBar) findViewById(R.id.login_title_bar);
+        titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent register = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(register);
+                navigate(RegisterActivity.class);
             }
         });
 
@@ -80,8 +77,7 @@ public class LoginActivity extends Activity {
         mForgetPsw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent findPassword = new Intent(LoginActivity.this, FindPasswordActivity.class);
-                startActivity(findPassword);
+                navigate(FindPasswordActivity.class);
             }
         });
 
@@ -167,8 +163,7 @@ public class LoginActivity extends Activity {
             mAuthTask = null;
 
             if (success) {
-                Intent intent = new Intent(LoginActivity.this, StudentHomeActivity.class);
-                startActivity(intent);
+                navigate(StudentHomeActivity.class);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

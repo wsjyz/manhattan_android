@@ -1,19 +1,16 @@
 package com.ivan.android.manhattanenglish.app.core.more;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
-public class MoreInfoActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public class MoreInfoActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
-    TitleBar titleBar;
 
     ListView menuListView;
 
@@ -54,10 +51,5 @@ public class MoreInfoActivity extends ActionBarActivity implements AdapterView.O
             default:
                 break;
         }
-    }
-
-    private void navigate(Class<? extends Activity> activity) {
-        Intent intent = new Intent(this, activity);
-        startActivity(intent);
     }
 }

@@ -7,7 +7,7 @@ package com.ivan.android.manhattanenglish.app.remote.login;
  */
 public interface LoginService {
 
-    void login(String tel, String password);
+    User login(String tel, String password);
 
     void sendSms(String tel);
 

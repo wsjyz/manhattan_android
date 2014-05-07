@@ -73,6 +73,10 @@
             android:name="com.ivan.android.manhattanenglish.app.core.homework.HomeworkActivity"
             android:label="@string/title_activity_homework" >
         </activity>
+        <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity"
+            android:label="@string/title_activity_student_info" >
+        </activity>
     </application>
 
 </manifest>

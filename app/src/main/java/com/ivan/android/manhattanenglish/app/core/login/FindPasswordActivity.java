@@ -7,10 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.utils.FormValidator;
 
-public class FindPasswordActivity extends ActionBarActivity {
+public class FindPasswordActivity extends BaseActivity {
 
     private EditText mTelView;
 
@@ -22,7 +23,6 @@ public class FindPasswordActivity extends ActionBarActivity {
 
     private Button mCompleteBtn;
 
-    private TitleBar mTitleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,8 @@ public class FindPasswordActivity extends ActionBarActivity {
         mPasswordView = (EditText) findViewById(R.id.password);
         mAuthCodeView = (EditText) findViewById(R.id.auth_code);
 
-        mTitleBar = (TitleBar) findViewById(R.id.title_bar);
-        mTitleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
+        titleBar = (TitleBar) findViewById(R.id.title_bar);
+        titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

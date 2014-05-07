@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.info.Infomation;
@@ -19,9 +20,7 @@ import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.ArrayList;
 
-public class InfomationActivity extends ActionBarActivity {
-
-    TitleBar titleBar;
+public class InfomationActivity extends BaseActivity {
 
     PullToRefreshListView infoListView;
 
@@ -47,12 +46,11 @@ public class InfomationActivity extends ActionBarActivity {
             }
         });
 
-        View emptyView = LayoutInflater.from(this).inflate(R.layout.empty_view, null);
 
         infoListView = (PullToRefreshListView) findViewById(R.id.info_list);
         mAdapter = new InfomationListAdapter(this, new ArrayList<Infomation>());
         infoListView.setAdapter(mAdapter);
-        infoListView.setEmptyView(emptyView);
+        infoListView.setEmptyView(getEmptyView());
 
         infoListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override

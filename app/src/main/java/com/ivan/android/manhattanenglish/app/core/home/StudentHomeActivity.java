@@ -1,24 +1,17 @@
 package com.ivan.android.manhattanenglish.app.core.home;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
 import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
-public class StudentHomeActivity extends ActionBarActivity {
-
-    //custom views
-    private TitleBar mTitleBar;
+public class StudentHomeActivity extends BaseActivity {
     //我要预约
     private Button mAppointBtn;
     //精品课程
@@ -46,7 +39,7 @@ public class StudentHomeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_home);
 
-        mTitleBar = (TitleBar) findViewById(R.id.title_bar);
+        titleBar = (TitleBar) findViewById(R.id.title_bar);
 
         mAppointBtn = (Button) findViewById(R.id.appoint_button);
         mAppointBtn.setOnClickListener(new View.OnClickListener() {
@@ -87,9 +80,5 @@ public class StudentHomeActivity extends ActionBarActivity {
         });
     }
 
-    private void navigate(Class<? extends Activity> activity) {
-        Intent intent = new Intent(this, activity);
-        startActivity(intent);
-    }
 
 }

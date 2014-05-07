@@ -1,17 +1,14 @@
 package com.ivan.android.manhattanenglish.app.core.more;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
-public class ContactUsActivity extends ActionBarActivity {
+public class ContactUsActivity extends BaseActivity {
 
-    TitleBar titleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

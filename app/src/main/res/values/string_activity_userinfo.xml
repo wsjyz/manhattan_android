@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_user_info">个人资料</string>
+    <string name="title_base_info">基本资料</string>
+    <string name="title_other_info">其他信息</string>
+    <string name="label_tel">手机号：</string>
+    <string name="label_email">邮箱：</string>
+    <string name="label_address">地址：</string>
+    <string name="label_credits">积分：</string>
+    <string name="label_vip_expired">VIP到期时间：</string>
+</resources>

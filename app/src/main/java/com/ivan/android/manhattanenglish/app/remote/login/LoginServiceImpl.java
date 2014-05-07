@@ -1,6 +1,10 @@
 package com.ivan.android.manhattanenglish.app.remote.login;
 
 import com.ivan.android.manhattanenglish.app.remote.AbstractService;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @author: Ivan Vigoss
@@ -10,8 +14,24 @@ import com.ivan.android.manhattanenglish.app.remote.AbstractService;
 public class LoginServiceImpl extends AbstractService implements LoginService {
 
     @Override
-    public void login(String tel, String password) {
+    public User login(String tel, String password) {
+        User user = new User();
 
+        user.setUserId("test");
+        user.setNickName("Ivan Vigoss");
+        user.setMobile("18616905120");
+        user.setEmail("ivan_vigoss@qq.com");
+        user.setCredits(200);
+        user.setSex("Male");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.YEAR, 2);
+        user.setVipExpiredTime(calendar.getTime());
+
+        UserCache.currentUser = user;
+
+        return user;
     }
 
     @Override

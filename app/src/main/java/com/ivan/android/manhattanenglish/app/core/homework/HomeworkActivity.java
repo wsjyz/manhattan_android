@@ -6,13 +6,12 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 import java.util.ArrayList;
 
-public class HomeworkActivity extends ActionBarActivity {
-
-    TitleBar titleBar;
+public class HomeworkActivity extends BaseActivity {
 
     ListView homeworkListView;
 
@@ -30,6 +29,7 @@ public class HomeworkActivity extends ActionBarActivity {
         });
 
         homeworkListView = (ListView) findViewById(R.id.homework_list);
+        //todo load from server
         homeworkListView.setAdapter(new HomeworkListAdapter(this, new ArrayList<String>()));
 
     }
