@@ -22,5 +22,6 @@
     <string name="no_more_data">没有更多数据了！</string>
     <string name="title_activity_student_info">StudentInfoActivity</string>
     <string name="title_activity_course">精品课程</string>
+    <string name="title_activity_course_detail">CourseDetailActivity</string>
 
 </resources>

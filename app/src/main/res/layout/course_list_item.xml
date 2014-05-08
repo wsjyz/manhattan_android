@@ -20,7 +20,7 @@
         app:is_oval="false" />
 
     <TextView
-        android:id="@+id/class_num_label"
+        android:id="@+id/class_num"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/label_text_height"
         android:drawableLeft="@drawable/class_num"
@@ -31,18 +31,7 @@
         android:gravity="center_vertical" />
 
     <TextView
-        android:id="@+id/class_num_text"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/label_text_height"
-        android:singleLine="true"
-        android:layout_toRightOf="@id/class_num_label"
-        android:textColor="@color/common_text_color"
-        android:textSize="@dimen/course_list_item_text_size"
-        android:gravity="center_vertical"
-        android:text="SH041A" />
-
-    <TextView
-        android:id="@+id/cost_label"
+        android:id="@+id/cost"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/label_text_height"
         android:drawableLeft="@drawable/rmb"
@@ -51,22 +40,10 @@
         android:textSize="@dimen/course_list_item_text_size"
         android:text="@string/label_fee"
         android:gravity="center_vertical"
-        android:layout_below="@id/class_num_label" />
+        android:layout_below="@id/class_num" />
 
     <TextView
-        android:id="@+id/cost_text"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/label_text_height"
-        android:singleLine="true"
-        android:layout_toRightOf="@id/cost_label"
-        android:textColor="@color/common_text_color"
-        android:textSize="@dimen/course_list_item_text_size"
-        android:gravity="center_vertical"
-        android:text="9000RMB"
-        android:layout_below="@id/class_num_label" />
-
-    <TextView
-        android:id="@+id/location_label"
+        android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/location"
@@ -75,20 +52,7 @@
         android:textSize="@dimen/course_list_item_text_size"
         android:text="@string/label_teach_location"
         android:gravity="center_vertical"
-        android:layout_below="@id/cost_label" />
-
-    <TextView
-        android:id="@+id/location_text"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/label_text_height"
-        android:singleLine="true"
-        android:layout_toRightOf="@id/location_label"
-        android:textColor="@color/common_text_color"
-        android:textSize="@dimen/course_list_item_text_size"
-        android:gravity="center_vertical"
-        android:text="静安寺"
-        android:ellipsize="end"
-        android:layout_below="@id/cost_label" />
+        android:layout_below="@id/cost" />
 
     <ImageView
         android:layout_width="wrap_content"

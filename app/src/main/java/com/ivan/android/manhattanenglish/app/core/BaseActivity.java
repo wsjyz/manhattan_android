@@ -27,4 +27,8 @@ public class BaseActivity extends ActionBarActivity {
         return LayoutInflater.from(this).inflate(R.layout.empty_view, null);
     }
 
+    protected String getTextFromFormat(int resId, String... params) {
+        return String.format(getText(resId).toString(), params);
+    }
+
 }

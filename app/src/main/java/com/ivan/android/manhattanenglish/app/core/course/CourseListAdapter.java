@@ -78,11 +78,15 @@ public class CourseListAdapter extends BaseAdapter {
                 .load(course.getImageUrl())
                 .fit()
                 .into(holder.icon);
-        holder.classNum.setText(course.getClassNum());
-        holder.cost.setText(course.getMoneyCost() + "RMB");
-        holder.location.setText(course.getLocation());
 
+        holder.classNum.setText(getText(R.string.label_class_num, course.getClassNum()));
+        holder.cost.setText(getText(R.string.label_fee, String.valueOf(course.getMoneyCost())));
+        holder.location.setText(getText(R.string.label_teach_location, course.getLocation()));
         return convertView;
+    }
+
+    public String getText(int stringResId, String... params) {
+        return String.format(context.getResources().getString(stringResId), params);
     }
 
     class ViewHolder {

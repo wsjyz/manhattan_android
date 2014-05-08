@@ -1,5 +1,7 @@
 package com.ivan.android.manhattanenglish.app.remote.course;
 
+import android.text.format.DateFormat;
+
 import java.util.Date;
 
 /**
@@ -96,5 +98,13 @@ public class Course {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getStartTimeString() {
+        return DateFormat.format("yyyy-MM-dd", startTime).toString();
+    }
+
+    public String getEndTimeString() {
+        return DateFormat.format("yyyy-MM-dd", endTime).toString();
     }
 }
