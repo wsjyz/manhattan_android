@@ -21,5 +21,6 @@
     <string name="empty_text">什么都没有哦！</string>
     <string name="no_more_data">没有更多数据了！</string>
     <string name="title_activity_student_info">StudentInfoActivity</string>
+    <string name="title_activity_course">精品课程</string>
 
 </resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:padding="@dimen/common_margin">
+
+    <com.makeramen.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:id="@+id/course_image"
+        android:src="@drawable/avatar"
+        android:scaleType="centerCrop"
+        app:corner_radius="20dip"
+        app:border_width="2dip"
+        app:border_color="@android:color/white"
+        app:round_background="true"
+        android:layout_marginRight="5dp"
+        app:is_oval="false" />
+
+    <TextView
+        android:id="@+id/class_num_label"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/label_text_height"
+        android:drawableLeft="@drawable/class_num"
+        android:layout_toRightOf="@id/course_image"
+        android:textColor="@color/common_text_color"
+        android:textSize="@dimen/course_list_item_text_size"
+        android:text="@string/label_class_num"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/class_num_text"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/label_text_height"
+        android:singleLine="true"
+        android:layout_toRightOf="@id/class_num_label"
+        android:textColor="@color/common_text_color"
+        android:textSize="@dimen/course_list_item_text_size"
+        android:gravity="center_vertical"
+        android:text="SH041A" />
+
+    <TextView
+        android:id="@+id/cost_label"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/label_text_height"
+        android:drawableLeft="@drawable/rmb"
+        android:layout_toRightOf="@id/course_image"
+        android:textColor="@color/common_text_color"
+        android:textSize="@dimen/course_list_item_text_size"
+        android:text="@string/label_fee"
+        android:gravity="center_vertical"
+        android:layout_below="@id/class_num_label" />
+
+    <TextView
+        android:id="@+id/cost_text"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/label_text_height"
+        android:singleLine="true"
+        android:layout_toRightOf="@id/cost_label"
+        android:textColor="@color/common_text_color"
+        android:textSize="@dimen/course_list_item_text_size"
+        android:gravity="center_vertical"
+        android:text="9000RMB"
+        android:layout_below="@id/class_num_label" />
+
+    <TextView
+        android:id="@+id/location_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/location"
+        android:layout_toRightOf="@id/course_image"
+        android:textColor="@color/common_text_color"
+        android:textSize="@dimen/course_list_item_text_size"
+        android:text="@string/label_teach_location"
+        android:gravity="center_vertical"
+        android:layout_below="@id/cost_label" />
+
+    <TextView
+        android:id="@+id/location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/label_text_height"
+        android:singleLine="true"
+        android:layout_toRightOf="@id/location_label"
+        android:textColor="@color/common_text_color"
+        android:textSize="@dimen/course_list_item_text_size"
+        android:gravity="center_vertical"
+        android:text="静安寺"
+        android:ellipsize="end"
+        android:layout_below="@id/cost_label" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/blue_expand" />
+
+</RelativeLayout>

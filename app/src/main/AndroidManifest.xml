@@ -27,7 +27,7 @@
             android:name="com.ivan.android.manhattanenglish.app.core.login.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name="com.ivan.android.manhattanenglish.app.core.login.RegisterActivity"
@@ -76,6 +76,10 @@
         <activity
             android:name="com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity"
             android:label="@string/title_activity_student_info" >
+        </activity>
+        <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.course.CourseActivity"
+            android:label="@string/title_activity_course" >
         </activity>
     </application>
 

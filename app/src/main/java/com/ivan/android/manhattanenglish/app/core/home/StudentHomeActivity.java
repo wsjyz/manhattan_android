@@ -7,6 +7,7 @@ import android.widget.Button;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointActivity;
+import com.ivan.android.manhattanenglish.app.core.course.CourseActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
 import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
@@ -50,6 +51,12 @@ public class StudentHomeActivity extends BaseActivity {
         });
 
         mCourseBtn = (Button) findViewById(R.id.course_button);
+        mCourseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigate(CourseActivity.class);
+            }
+        });
 
         mTeacherBtn = (Button) findViewById(R.id.teacher_button);
 

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:id="@+id/container"
     tools:context="com.ivan.android.manhattanenglish.app.core.login.LoginActivity">
 
     <com.ivan.android.manhattanenglish.app.customviews.TitleBar
@@ -110,7 +111,6 @@
         android:text="@string/title_activity_login"
         android:textSize="@dimen/form_login_button_text_size"
         android:textColor="@android:color/white" />
-
 
 </LinearLayout>
 

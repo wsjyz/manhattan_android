@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_class_num">班号：</string>
+    <string name="label_fee">费用：</string>
+    <string name="label_teach_location">上课地点：</string>
+</resources>

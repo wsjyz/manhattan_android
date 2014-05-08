@@ -21,6 +21,14 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
 
     Button searchButton;
 
+    int[] icons = {
+            R.drawable.course_category,
+            R.drawable.teach_location,
+            R.drawable.teach_method,
+            R.drawable.teacher_sex,
+            R.drawable.appoint_date
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +43,6 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
         });
 
         String[] searchTexts = getResources().getStringArray(R.array.appoint_search_text);
-        int[] icons = getResources().getIntArray(R.array.appoint_search_icon);
         conditions = SearchCondition.createFromArray(searchTexts, icons, getResources().getString(R.string.search_no_limit));
 
         searchListView = (ListView) findViewById(R.id.search_condition_list);
@@ -46,7 +53,7 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //todo
+                //todo
             }
         });
     }

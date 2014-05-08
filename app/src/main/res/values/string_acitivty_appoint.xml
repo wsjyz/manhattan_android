@@ -8,13 +8,7 @@
         <item>@string/teacher_sex</item>
         <item>@string/appoint_date</item>
     </string-array>
-    <array name="appoint_search_icon">
-        <item>@drawable/course_category</item>
-        <item>@drawable/teach_location</item>
-        <item>@drawable/teach_method</item>
-        <item>@drawable/teacher_sex</item>
-        <item>@drawable/appoint_date</item>
-    </array>
+
     <string name="course_category">课程分类</string>
     <string name="teach_location">教学地点</string>
     <string name="teach_method">教学方式</string>

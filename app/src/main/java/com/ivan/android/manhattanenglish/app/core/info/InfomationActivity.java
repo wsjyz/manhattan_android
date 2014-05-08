@@ -2,8 +2,8 @@ package com.ivan.android.manhattanenglish.app.core.info;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -19,6 +19,7 @@ import com.ivan.android.manhattanenglish.app.remote.info.InfomationService;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class InfomationActivity extends BaseActivity {
 
@@ -30,6 +31,8 @@ public class InfomationActivity extends BaseActivity {
 
     InfomationListAdapter mAdapter;
 
+    Date refreshDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,7 @@ public class InfomationActivity extends BaseActivity {
 
         page = new OpenPage<Infomation>();
         infomationService = ServiceFactory.getService(InfomationService.class);
+
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
@@ -57,20 +61,26 @@ public class InfomationActivity extends BaseActivity {
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page.setPageNo(1);
                 mAdapter.clear();
+                if (refreshDate != null) {
+                    CharSequence label = DateUtils.getRelativeTimeSpanString(refreshDate.getTime());
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+                }
                 new InfomationLoadTask().execute(page);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                if (page.getPageNo() >= page.getPageSize()) {
-                    refreshView.onRefreshComplete();
-                    Toast.makeText(InfomationActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
-                } else {
+                if (page.hasNext()) {
                     page.setPageNo(page.getPageNo() + 1);
                     new InfomationLoadTask().execute(page);
+                } else {
+                    infoListView.onRefreshComplete();
+                    Toast.makeText(InfomationActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        new InfomationLoadTask().execute(page);
 
     }
 
@@ -80,9 +90,10 @@ public class InfomationActivity extends BaseActivity {
             OpenPage<Infomation> param = params[0];
             param.setRows(null);//empty data
             try {
+                Thread.sleep(2000);
                 return infomationService.loadLatestInfomation(param);
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e(getClass().getName(), "load latestinfomation error", e);
             }
             return null;
         }
@@ -90,11 +101,13 @@ public class InfomationActivity extends BaseActivity {
         @Override
         protected void onPostExecute(OpenPage<Infomation> infomationOpenPage) {
             if (infomationOpenPage != null) {
+                Log.i(getClass().getName(), "load latestinfomation finished. load rows " + page.getRows().size());
                 page = infomationOpenPage;
                 mAdapter.addAll(page.getRows());
                 mAdapter.notifyDataSetChanged();
             }
             infoListView.onRefreshComplete();
+            refreshDate = new Date();
         }
     }
 }

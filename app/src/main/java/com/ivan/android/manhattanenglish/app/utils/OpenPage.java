@@ -139,7 +139,7 @@ public class OpenPage<T> {
     /**
      * 是否还有下一页.
      */
-    public boolean isHasNext() {
+    public boolean hasNext() {
         return (pageNo + 1 <= getTotalPages());
     }
 
@@ -148,7 +148,7 @@ public class OpenPage<T> {
      * 当前页为尾页时仍返回尾页序号.
      */
     public int getNextPage() {
-        if (isHasNext()) {
+        if (hasNext()) {
             return pageNo + 1;
         } else {
             return pageNo;
