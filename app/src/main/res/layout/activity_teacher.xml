@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity">
+
+
+    <com.ivan.android.manhattanenglish.app.customviews.TitleBar xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_default_height"
+        custom:titleText="@string/title_activity_teacher"
+        custom:showRight="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/common_margin"
+        android:paddingLeft="@dimen/common_margin"
+        android:paddingRight="@dimen/common_margin"
+        android:layout_marginBottom="@dimen/common_margin">
+
+        <EditText
+            android:id="@+id/teacher_search"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_form_border"
+            android:textSize="@dimen/dimen_16sp"
+            android:textColor="@color/common_text_color"
+            android:textColorHint="@color/hint_text_color"
+            android:hint="@string/hint_teacher_name"
+            android:paddingLeft="@dimen/common_margin"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:paddingRight="@dimen/common_margin" />
+
+        <ImageView
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/search"
+            android:layout_margin="@dimen/common_margin" />
+
+    </LinearLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/teacher_detail_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/border_color"
+        android:dividerHeight="1dp"
+        android:scrollbars="none"
+        android:background="@drawable/login_form_border"
+        ptr:ptrMode="both" />
+
+</LinearLayout>

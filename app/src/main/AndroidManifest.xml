@@ -85,6 +85,14 @@
             android:name="com.ivan.android.manhattanenglish.app.core.course.CourseDetailActivity"
             android:label="@string/title_activity_course_detail" >
         </activity>
+        <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity"
+            android:label="@string/title_activity_teacher" >
+        </activity>
+        <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.teacher.TeacherDetailInfoActivity"
+            android:label="@string/title_activity_teacher_detail_info" >
+        </activity>
     </application>
 
 </manifest>

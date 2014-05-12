@@ -65,9 +65,9 @@ public class CourseListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.course_list_item, null);
             holder.icon = (RoundedImageView) convertView.findViewById(R.id.course_image);
-            holder.classNum = (TextView) convertView.findViewById(R.id.class_num_text);
-            holder.cost = (TextView) convertView.findViewById(R.id.cost_text);
-            holder.location = (TextView) convertView.findViewById(R.id.location_text);
+            holder.classNum = (TextView) convertView.findViewById(R.id.class_num);
+            holder.cost = (TextView) convertView.findViewById(R.id.cost);
+            holder.location = (TextView) convertView.findViewById(R.id.location);
 
             convertView.setTag(holder);
         } else {

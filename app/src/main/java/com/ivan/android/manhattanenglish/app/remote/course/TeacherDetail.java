@@ -9,8 +9,15 @@ public class TeacherDetail {
 
     private String teacherId;
 
+    private String avatarUrl;
+
     private String name;
 
+    /**
+     * 性别：
+     * MALE
+     * FEMALE
+     */
     private String sex;
 
     private String college;
@@ -155,5 +162,13 @@ public class TeacherDetail {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

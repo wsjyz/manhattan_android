@@ -8,5 +8,4 @@ package com.ivan.android.manhattanenglish.app.remote.course;
 public interface CourseService {
 
 
-
 }

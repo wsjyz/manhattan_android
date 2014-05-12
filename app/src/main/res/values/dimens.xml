@@ -1,8 +1,12 @@
 <resources>
 
+    <dimen name="dimen_1sp">1sp</dimen>
+    <dimen name="dimen_5sp">5sp</dimen>
     <dimen name="dimen_16sp">16sp</dimen>
     <dimen name="dimen_18sp">18sp</dimen>
     <dimen name="dimen_20sp">20sp</dimen>
+
+    <dimen name="dimen_85dp">85dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -44,4 +48,7 @@
     <dimen name="course_list_item_text_size">18sp</dimen>
     <dimen name="label_text_height">30dp</dimen>
 
+    <!--teacher setting-->
+    
+    <dimen name="teacher_charge_text_width">85dp</dimen>
 </resources>

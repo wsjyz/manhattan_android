@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_teacher_name">请输入名师姓名</string>
+    <string name="label_main_subject">教授科目：%s</string>
+    <string name="label_expert_comment">专家点评</string>
+    <string name="label_base_info">基本信息</string>
+    <string name="label_teach_schedule">授课时间</string>
+    <string name="label_charge">课时收费</string>
+    <string name="label_teach_way">授课方式</string>
+    <string name="label_required_level">学员程度</string>
+    <string name="label_cost">费用</string>
+    <string name="label_self_introduce">自我介绍</string>
+
+    
+    <string name="pattern_grade">评分：%s分</string>
+    <string name="pattern_evaluate">评价：%s</string>
+    <string name="pattern_available_location">可授课区域：%s</string>
+    <string name="pattern_teach_way">辅导方式：%s</string>
+    <string name="pattern_rmb">%s元</string>
+    <string name="pattern_focus_count">关注 %s</string>
+    <string name="pattern_comment_count">点评 %s</string>
+    <string name="pattern_collect_count">收藏 %s</string>
+</resources>

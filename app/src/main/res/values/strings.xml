@@ -23,5 +23,7 @@
     <string name="title_activity_student_info">StudentInfoActivity</string>
     <string name="title_activity_course">精品课程</string>
     <string name="title_activity_course_detail">CourseDetailActivity</string>
+    <string name="title_activity_teacher">名师列表</string>
+    <string name="title_activity_teacher_detail_info">名师资料</string>
 
 </resources>
