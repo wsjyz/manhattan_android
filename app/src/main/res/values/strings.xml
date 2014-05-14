@@ -25,5 +25,7 @@
     <string name="title_activity_course_detail">CourseDetailActivity</string>
     <string name="title_activity_teacher">名师列表</string>
     <string name="title_activity_teacher_detail_info">名师资料</string>
+    <string name="title_activity_student_collect">我的收藏</string>
+    <string name="title_activity_student_appoint">我的预约</string>
 
 </resources>

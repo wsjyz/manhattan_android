@@ -7,6 +7,8 @@ import android.widget.Button;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointActivity;
+import com.ivan.android.manhattanenglish.app.core.appoint.StudentAppointActivity;
+import com.ivan.android.manhattanenglish.app.core.collect.StudentCollectActivity;
 import com.ivan.android.manhattanenglish.app.core.course.CourseActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
 import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
@@ -73,8 +75,20 @@ public class StudentHomeActivity extends BaseActivity {
         mAskQuestionBtn = (Button) findViewById(R.id.ask_qustion_button);
 
         mCollectBtn = (Button) findViewById(R.id.collect_btn);
+        mCollectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigate(StudentCollectActivity.class);
+            }
+        });
 
         mAppointQueryBtn = (Button) findViewById(R.id.appoint_query_btn);
+        mAppointQueryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigate(StudentAppointActivity.class);
+            }
+        });
 
         mAuditionBtn = (Button) findViewById(R.id.audition_btn);
 

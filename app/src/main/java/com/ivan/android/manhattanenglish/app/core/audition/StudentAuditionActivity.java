@@ -1,4 +1,4 @@
-package com.ivan.android.manhattanenglish.app.core.login;
+package com.ivan.android.manhattanenglish.app.core.audition;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -6,32 +6,30 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.collect.CourseListFragment;
+import com.ivan.android.manhattanenglish.app.core.collect.TeacherListFragment;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
-public class RegisterActivity extends BaseActivity implements StudentRegisterFragment.RegisterListener {
+/**
+ * @author: Ivan Vigoss
+ * Date: 14-5-13
+ * Time: PM10:17
+ */
+public class StudentAuditionActivity extends BaseActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
-     * The {@link ViewPager} that will host the section contents.
+     * The {@link android.support.v4.view.ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
 
-    TextView studentTab;
+    TextView courseTab;
 
     TextView teacherTab;
 
@@ -40,12 +38,12 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_student_appoint);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        studentTab = (TextView) findViewById(R.id.student_tab);
-        studentTab.setOnClickListener(new View.OnClickListener() {
+        courseTab = (TextView) findViewById(R.id.student_tab);
+        courseTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectItem(0);
@@ -101,14 +99,14 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
 
     private void markTab(int position) {
         if (position == 0) {
-            if (!hasBottomDrawable(studentTab)) {
+            if (!hasBottomDrawable(courseTab)) {
                 teacherTab.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-                studentTab.setCompoundDrawablesWithIntrinsicBounds(null, null, null, selectedPointer);
+                courseTab.setCompoundDrawablesWithIntrinsicBounds(null, null, null, selectedPointer);
             }
 
         } else {
             if (!hasBottomDrawable(teacherTab)) {
-                studentTab.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                courseTab.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 teacherTab.setCompoundDrawablesWithIntrinsicBounds(null, null, null, selectedPointer);
             }
         }
@@ -121,7 +119,7 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
 
 
     /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -132,7 +130,7 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
 
         @Override
         public Fragment getItem(int position) {
-            return new StudentRegisterFragment();
+            return position == 0 ? CourseListFragment.newInstance(CourseListFragment.TYPE_APPOINT) : TeacherListFragment.newInstance(TeacherListFragment.TYPE_APPOINT);
         }
 
         @Override
@@ -140,21 +138,5 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
             return 2;
         }
 
-    }
-
-
-    @Override
-    public void sendAuthCode(String tel) {
-        //todo
-    }
-
-    @Override
-    public void register(String tel, String password, String authCode) {
-        //todo
-    }
-
-    @Override
-    public void beVip(String tel, String password, String authCode) {
-        //todo
     }
 }

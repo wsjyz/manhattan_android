@@ -1,5 +1,7 @@
 package com.ivan.android.manhattanenglish.app.remote.course;
 
+import com.ivan.android.manhattanenglish.app.R;
+
 /**
  * @author: Ivan Vigoss
  * Date: 14-5-8
@@ -24,12 +26,18 @@ public class TeacherDetail {
 
     private String mainSubject;
 
+    /**
+     * 评分
+     */
     private int rating;
 
     private String evaluation;
 
     private String availableLocation;
 
+    /**
+     * 辅导方式
+     */
     private String teachWay;
 
     private int focusCount;
@@ -41,6 +49,11 @@ public class TeacherDetail {
     private String introduction;
 
     private String requiredLevel;
+
+    /**
+     * 授课方式
+     */
+    private String teachMethod;
 
     private int cost;
 
@@ -170,5 +183,17 @@ public class TeacherDetail {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public String getTeachMethod() {
+        return teachMethod;
+    }
+
+    public void setTeachMethod(String teachMethod) {
+        this.teachMethod = teachMethod;
+    }
+
+    public int getSexDrawableResource() {
+        return "FEMALE".equals(sex) ? R.drawable.female : R.drawable.male;
     }
 }
