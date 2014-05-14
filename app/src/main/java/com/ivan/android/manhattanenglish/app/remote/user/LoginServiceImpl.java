@@ -1,4 +1,4 @@
-package com.ivan.android.manhattanenglish.app.remote.login;
+package com.ivan.android.manhattanenglish.app.remote.user;
 
 import com.ivan.android.manhattanenglish.app.remote.AbstractService;
 import com.ivan.android.manhattanenglish.app.utils.UserCache;

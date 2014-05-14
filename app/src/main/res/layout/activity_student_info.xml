@@ -44,9 +44,11 @@
                 android:textSize="@dimen/info_title_text_size"
                 android:textColor="@color/common_text_color"
                 android:layout_marginRight="@dimen/common_margin"
+                android:gravity="center"
                 android:layout_centerInParent="true" />
 
             <ImageView
+                android:id="@+id/sex_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/male"
@@ -87,6 +89,7 @@
                     android:paddingLeft="@dimen/common_margin" />
 
                 <TextView
+                    android:id="@+id/mobile_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="7"
@@ -114,6 +117,7 @@
                     android:paddingLeft="@dimen/common_margin" />
 
                 <TextView
+                    android:id="@+id/email_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="7"
@@ -141,6 +145,7 @@
                     android:paddingLeft="@dimen/common_margin" />
 
                 <TextView
+                    android:id="@+id/address_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="7"
@@ -188,6 +193,7 @@
                     android:paddingLeft="@dimen/common_margin" />
 
                 <TextView
+                    android:id="@+id/credits_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="7"
@@ -215,6 +221,7 @@
                     android:paddingLeft="@dimen/common_margin" />
 
                 <TextView
+                    android:id="@+id/vip_expired_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="7"

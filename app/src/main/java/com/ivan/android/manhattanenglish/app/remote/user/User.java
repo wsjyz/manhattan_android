@@ -1,4 +1,6 @@
-package com.ivan.android.manhattanenglish.app.remote.login;
+package com.ivan.android.manhattanenglish.app.remote.user;
+
+import com.ivan.android.manhattanenglish.app.R;
 
 import java.util.Date;
 
@@ -25,7 +27,19 @@ public class User {
 
     private long credits;
 
+    private Boolean vip;
+
     private Date vipExpiredTime;
+
+    /**
+     * 评分
+     */
+    private int rating;
+
+    /**
+     * 评价
+     */
+    private String evaluation;
 
     public String getUserId() {
         return userId;
@@ -97,5 +111,33 @@ public class User {
 
     public void setVipExpiredTime(Date vipExpiredTime) {
         this.vipExpiredTime = vipExpiredTime;
+    }
+
+    public Boolean getVip() {
+        return vip;
+    }
+
+    public void setVip(Boolean vip) {
+        this.vip = vip;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getEvaluation() {
+        return evaluation;
+    }
+
+    public void setEvaluation(String evaluation) {
+        this.evaluation = evaluation;
+    }
+
+    public int getSexDrawableResource() {
+        return "FEMALE".equals(sex) ? R.drawable.female : R.drawable.male;
     }
 }

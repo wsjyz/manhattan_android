@@ -1,8 +1,8 @@
 package com.ivan.android.manhattanenglish.app.core.appoint;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
 
+import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
 import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 14-5-13
  * Time: PM11:34
  */
-public class AppointTeacherListLoader extends AsyncTaskLoader<List<TeacherDetail>> {
+public class AppointTeacherListLoader extends CommonDataLoader<List<TeacherDetail>> {
 
     public AppointTeacherListLoader(Context context) {
         super(context);

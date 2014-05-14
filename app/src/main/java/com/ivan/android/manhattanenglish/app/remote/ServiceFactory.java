@@ -2,8 +2,8 @@ package com.ivan.android.manhattanenglish.app.remote;
 
 import com.ivan.android.manhattanenglish.app.remote.info.InfomationService;
 import com.ivan.android.manhattanenglish.app.remote.info.InfomationServiceImpl;
-import com.ivan.android.manhattanenglish.app.remote.login.LoginService;
-import com.ivan.android.manhattanenglish.app.remote.login.LoginServiceImpl;
+import com.ivan.android.manhattanenglish.app.remote.user.LoginService;
+import com.ivan.android.manhattanenglish.app.remote.user.LoginServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -12,6 +12,7 @@ import com.ivan.android.manhattanenglish.app.core.collect.StudentCollectActivity
 import com.ivan.android.manhattanenglish.app.core.course.CourseActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
 import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
+import com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 public class StudentHomeActivity extends BaseActivity {
@@ -43,6 +44,12 @@ public class StudentHomeActivity extends BaseActivity {
         setContentView(R.layout.activity_student_home);
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
+        titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigate(StudentInfoActivity.class);
+            }
+        });
 
         mAppointBtn = (Button) findViewById(R.id.appoint_button);
         mAppointBtn.setOnClickListener(new View.OnClickListener() {

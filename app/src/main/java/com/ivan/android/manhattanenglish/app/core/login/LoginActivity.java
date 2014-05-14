@@ -1,6 +1,5 @@
 package com.ivan.android.manhattanenglish.app.core.login;
 
-import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,7 +39,6 @@ public class LoginActivity extends BaseActivity {
 
     private boolean autoLogin;
 
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +54,6 @@ public class LoginActivity extends BaseActivity {
                 navigate(RegisterActivity.class);
             }
         });
-
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("请求中...");
-        progressDialog.setCanceledOnTouchOutside(false);
 
         mTelView = (EditText) findViewById(R.id.user_name);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -158,7 +151,7 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         protected void onPreExecute() {
-            progressDialog.show();
+            showLoadingDialog();
         }
 
         @Override
@@ -175,7 +168,7 @@ public class LoginActivity extends BaseActivity {
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            progressDialog.dismiss();
+            hideLoadingDialog();
             if (success) {
                 navigate(StudentHomeActivity.class);
                 finish();

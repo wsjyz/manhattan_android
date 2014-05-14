@@ -1,4 +1,4 @@
-package com.ivan.android.manhattanenglish.app.remote.login;
+package com.ivan.android.manhattanenglish.app.remote.user;
 
 /**
  * @author: Ivan Vigoss

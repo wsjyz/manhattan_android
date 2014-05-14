@@ -19,6 +19,8 @@
     <string name="title_activity_homework">HomeworkActivity</string>
     <string name="title_homework">我的作业</string>
     <string name="empty_text">什么都没有哦！</string>
+    <string name="loading_text">加载中......</string>
+
     <string name="no_more_data">没有更多数据了！</string>
     <string name="title_activity_student_info">StudentInfoActivity</string>
     <string name="title_activity_course">精品课程</string>
@@ -27,5 +29,6 @@
     <string name="title_activity_teacher_detail_info">名师资料</string>
     <string name="title_activity_student_collect">我的收藏</string>
     <string name="title_activity_student_appoint">我的预约</string>
+
 
 </resources>

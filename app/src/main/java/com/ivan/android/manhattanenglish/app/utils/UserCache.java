@@ -1,6 +1,6 @@
 package com.ivan.android.manhattanenglish.app.utils;
 
-import com.ivan.android.manhattanenglish.app.remote.login.User;
+import com.ivan.android.manhattanenglish.app.remote.user.User;
 
 /**
  * @author: Ivan Vigoss
