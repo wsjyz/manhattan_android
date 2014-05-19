@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
 import org.apache.commons.collections.MapUtils;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class AbstractService {
     public final static Type STRING_MAP = new TypeReference<Map<String, String>>() {
     }.getType();
 
-    private static RestTemplate restTemplate = new RestTemplate(true);
+    protected static RestTemplate restTemplate = new RestTemplate(true);
 
     static {
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
@@ -125,6 +126,20 @@ public class AbstractService {
         return restTemplate.postForEntity(url, request, String.class);
     }
 
+    protected String upload(String url, Resource fileResource, Map<String, String> variables) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Connection", "Close");//avoid EOFException
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<String, Object>();
+        body.set("file", fileResource);
+        if (MapUtils.isNotEmpty(variables)) {
+            for (String key : variables.keySet()) {
+                body.set(key, variables.get(key));
+            }
+        }
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<MultiValueMap<String, Object>>(body, headers);
+        return restTemplate.postForLocation(url, request).toString();
+    }
 
 
 }

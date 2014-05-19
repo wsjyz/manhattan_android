@@ -1,17 +1,19 @@
 package com.ivan.android.manhattanenglish.app.core.appoint;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.customviews.PickLocationDialog;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 import java.util.List;
+import java.util.Set;
 
 public class AppointActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
@@ -28,6 +30,10 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
             R.drawable.teacher_sex,
             R.drawable.appoint_date
     };
+
+    PickLocationDialog pickLocationDialog;
+
+    Set<String> selectedLocations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +67,34 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        switch (view.getId()) {
-            case R.drawable.course_category:
-                Log.e("appointActivity", "course_category pressed");
+        switch (position) {
+            case 0://course category
+                Toast.makeText(this, "course_category pressed", Toast.LENGTH_SHORT).show();
+                break;
+            case 1: //teach location
+                getPickLocationDialog().show();
+                break;
+            case 2: //teach_method
+                break;
+            case 3: //teacher_sex
+                break;
+            default: //appoint_date
                 break;
         }
     }
+
+    private PickLocationDialog getPickLocationDialog() {
+        if (pickLocationDialog == null) {
+            pickLocationDialog = new PickLocationDialog(this);
+            pickLocationDialog.setOnLocationPicked(new PickLocationDialog.LocationPickEvent() {
+                @Override
+                public void onLocationPicked(Set<String> locations) {
+                    selectedLocations = locations;
+                }
+            });
+        }
+        pickLocationDialog.setSelectedLocationSet(selectedLocations);
+        return pickLocationDialog;
+    }
+
 }

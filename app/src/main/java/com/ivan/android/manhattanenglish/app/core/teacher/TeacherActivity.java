@@ -1,5 +1,6 @@
 package com.ivan.android.manhattanenglish.app.core.teacher;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -37,6 +38,8 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
+
+
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
@@ -80,8 +83,18 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         TeacherDetail item = (TeacherDetail) mAdapter.getItem(position);
-        //todo navigation to detail page
+        if(Intent.ACTION_PICK.equals(getIntent().getAction())){
+            Intent result = new Intent();
+            result.putExtra("teacherId",item.getTeacherId());
+            result.putExtra("teacherName",item.getName());
+            setResult(0,result);
+        }else{
+            //todo navigation to detail page
+
+        }
     }
+
+
 
     class TeacherLoadTask extends AsyncTask<OpenPage<TeacherDetail>, Void, OpenPage<TeacherDetail>> {
         @Override

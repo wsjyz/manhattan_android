@@ -16,4 +16,25 @@
     <string name="appoint_date">预约日期</string>
     <string name="search_no_limit">不限</string>
     <string name="action_search">搜索</string>
+
+    <string-array name="locations">
+        <item>崇明县</item>
+        <item>黄浦区</item>
+        <item>卢湾区</item>
+        <item>杨浦区</item>
+        <item>闵行区</item>
+        <item>宝山区</item>
+        <item>奉贤区</item>
+        <item>普陀区</item>
+        <item>闸北区</item>
+        <item>松江区</item>
+        <item>静安区</item>
+        <item>金山区</item>
+        <item>徐汇区</item>
+        <item>虹口区</item>
+        <item>长宁区</item>
+        <item>嘉定区</item>
+        <item>南汇区</item>
+        <item>青浦区</item>
+    </string-array>
 </resources>

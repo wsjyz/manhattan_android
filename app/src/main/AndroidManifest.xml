@@ -100,6 +100,10 @@
             android:label="@string/title_activity_teacher_detail_info"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.question.AskQuestionActivity"
+            android:label="@string/title_activity_ask_question" >
+        </activity>
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
+import com.ivan.android.manhattanenglish.app.customviews.PickLocationDialog;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
@@ -84,7 +85,8 @@ public class LoginActivity extends BaseActivity {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptLogin();
+                new PickLocationDialog(LoginActivity.this).show();
+//                attemptLogin();
             }
         });
 
@@ -156,12 +158,6 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
             return true;
         }
 
@@ -170,8 +166,8 @@ public class LoginActivity extends BaseActivity {
             mAuthTask = null;
             hideLoadingDialog();
             if (success) {
-                navigate(StudentHomeActivity.class);
                 finish();
+                navigate(StudentHomeActivity.class);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
