@@ -19,4 +19,6 @@
     <color name="background_orange">#FDAF56</color>
     <color name="border_dark_orange">#BD782E</color>
 
+    <color name="red">#FF0000</color>
+
 </resources>

@@ -36,8 +36,6 @@ dependencies {
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.makeramen:roundedimageview:1.2.4@aar'
 
-    compile 'com.j256.ormlite:ormlite-core:4.48'
-    compile 'com.j256.ormlite:ormlite-android:4.48'
     compile 'com.alibaba:fastjson:1.1.36'
     compile 'com.viewpagerindicator:library:2.4.1@aar'
     compile 'commons-collections:commons-collections:3.2.1'

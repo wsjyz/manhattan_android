@@ -48,6 +48,9 @@ public class MoreInfoActivity extends BaseActivity implements AdapterView.OnItem
             case 2:
                 navigate(ContactUsActivity.class);
                 break;
+            case 3://我的钱包
+
+                break;
             default:
                 break;
         }

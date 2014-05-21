@@ -4,12 +4,16 @@
         <item>@string/title_about_us</item>
         <item>@string/title_app_update</item>
         <item>@string/title_contact_us</item>
+        <item>@string/title_my_purchase</item>
     </string-array>
 
     <string name="title_more">更多</string>
+
     <string name="title_contact_us">联系我们</string>
     <string name="title_about_us">关于我们</string>
     <string name="title_app_update">软件更新</string>
+    <string name="title_my_purchase">我的钱包</string>
+
     <string name="label_sh">上海分公司</string>
     <string name="label_phone">电话：</string>
     <string name="detail_phone">400-021-6168\n\n021-62146128\n\n021-60525749</string>
