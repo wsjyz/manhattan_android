@@ -19,9 +19,9 @@ import com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity;
 import com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
-public class StudentHomeActivity extends BaseActivity {
+public class TeacherHomeActivity extends BaseActivity {
     //我要预约
-    private Button mAppointBtn;
+    private Button mPublishCourse;
     //精品课程
     private Button mCourseBtn;
     //名师教学
@@ -30,10 +30,10 @@ public class StudentHomeActivity extends BaseActivity {
     private Button mHomeworkBtn;
     //资讯
     private Button mInfoBtn;
-    //我要提问
-    private Button mAskQuestionBtn;
-    //收藏
-    private Button mCollectBtn;
+    //我要回答
+    private Button mAnswerQuestion;
+    //我的学生
+    private Button mStudent;
     //我的预约
     private Button mAppointQueryBtn;
     //我的试听
@@ -45,7 +45,7 @@ public class StudentHomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_home);
+        setContentView(R.layout.activity_teacher_home);
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
@@ -55,8 +55,8 @@ public class StudentHomeActivity extends BaseActivity {
             }
         });
 
-        mAppointBtn = (Button) findViewById(R.id.appoint_button);
-        mAppointBtn.setOnClickListener(new View.OnClickListener() {
+        mPublishCourse = (Button) findViewById(R.id.publish_course);
+        mPublishCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navigate(AppointActivity.class);
@@ -95,16 +95,16 @@ public class StudentHomeActivity extends BaseActivity {
             }
         });
 
-        mAskQuestionBtn = (Button) findViewById(R.id.ask_qustion_button);
-        mAskQuestionBtn.setOnClickListener(new View.OnClickListener() {
+        mAnswerQuestion = (Button) findViewById(R.id.answer_question);
+        mAnswerQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navigate(QuestionActivity.class);
             }
         });
 
-        mCollectBtn = (Button) findViewById(R.id.collect_btn);
-        mCollectBtn.setOnClickListener(new View.OnClickListener() {
+        mStudent = (Button) findViewById(R.id.student_btn);
+        mStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navigate(StudentCollectActivity.class);

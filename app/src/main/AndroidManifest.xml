@@ -46,6 +46,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.home.TeacherHomeActivity"
+            android:label="@string/title_activity_student_home"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity"
             android:label="@string/title_activity_more_info"
             android:screenOrientation="portrait" >
