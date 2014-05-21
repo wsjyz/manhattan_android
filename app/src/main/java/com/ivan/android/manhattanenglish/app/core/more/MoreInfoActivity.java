@@ -51,6 +51,9 @@ public class MoreInfoActivity extends BaseActivity implements AdapterView.OnItem
             case 3://我的钱包
 
                 break;
+            case 4:
+                navigate(CalendarActivity.class);
+                break;
             default:
                 break;
         }

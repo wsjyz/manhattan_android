@@ -55,6 +55,13 @@ public class StudentHomeActivity extends BaseActivity {
             }
         });
 
+        titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigate(StudentInfoActivity.class);
+            }
+        });
+
         mAppointBtn = (Button) findViewById(R.id.appoint_button);
         mAppointBtn.setOnClickListener(new View.OnClickListener() {
             @Override

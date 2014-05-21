@@ -125,6 +125,10 @@
             android:label="@string/title_activity_student_purchase"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.more.CalendarActivity"
+            android:label="@string/title_activity_calendar" >
+        </activity>
     </application>
 
 </manifest>

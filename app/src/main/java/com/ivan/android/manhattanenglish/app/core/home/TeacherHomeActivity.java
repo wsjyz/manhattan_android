@@ -20,7 +20,7 @@ import com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 public class TeacherHomeActivity extends BaseActivity {
-    //我要预约
+    //发布课程
     private Button mPublishCourse;
     //精品课程
     private Button mCourseBtn;
@@ -51,7 +51,14 @@ public class TeacherHomeActivity extends BaseActivity {
         titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(StudentInfoActivity.class);
+                //todo 发布课程
+            }
+        });
+
+        titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //todo 教师个人信息
             }
         });
 
@@ -99,7 +106,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mAnswerQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(QuestionActivity.class);
+                //todo 回答问题
             }
         });
 
@@ -107,7 +114,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(StudentCollectActivity.class);
+               //todo 我的学生
             }
         });
 
@@ -115,7 +122,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mAppointQueryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(StudentAppointActivity.class);
+                //todo 教师的预约
             }
         });
 
@@ -123,7 +130,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mAuditionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(StudentAuditionActivity.class);
+                //todo 教师的收听
             }
         });
 

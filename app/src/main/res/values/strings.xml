@@ -39,5 +39,6 @@
     <string name="title_activity_question">我的问题</string>
     <string name="title_activity_question_detail">QuestionDetailActivity</string>
     <string name="title_activity_student_purchase">我的钱包</string>
+    <string name="title_activity_calendar">我的日历</string>
 
 </resources>
