@@ -12,9 +12,7 @@ import android.widget.TextView;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
-import com.ivan.android.manhattanenglish.app.remote.AbstractService;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
-import com.j256.ormlite.field.types.IntegerObjectType;
 
 public class AskQuestionActivity extends BaseActivity {
 

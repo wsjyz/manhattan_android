@@ -199,7 +199,7 @@ public class QuestionDetailActivity extends BaseActivity {
 
         @Override
         public List<Answer> loadInBackground() {
-
+            //todo load answer list from server
             return null;
         }
     }

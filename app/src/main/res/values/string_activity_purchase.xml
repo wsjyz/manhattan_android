@@ -5,5 +5,7 @@
 
     <string name="pattern_balance">%5.2f 元</string>
 
+    <string name="history_empty_text">您还没有任何消费记录哦！</string>
+
     <string name="pattern_resume_history_item">您消费了<font color="#FF0000">%5.2f元</font></string>
 </resources>
