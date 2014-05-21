@@ -127,7 +127,8 @@
         </activity>
         <activity
             android:name="com.ivan.android.manhattanenglish.app.core.more.CalendarActivity"
-            android:label="@string/title_activity_calendar" >
+            android:label="@string/title_activity_calendar"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

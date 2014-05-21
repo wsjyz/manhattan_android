@@ -1,6 +1,5 @@
 package com.ivan.android.manhattanenglish.app.core.more;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +10,8 @@ import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.WeekdayArrayAdapter;
+
+import java.text.ParseException;
 
 public class CalendarActivity extends BaseActivity {
 
@@ -31,13 +32,18 @@ public class CalendarActivity extends BaseActivity {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
 
-        CaldroidCustomFragment caldroidFragment = new CaldroidCustomFragment();
-        CaldroidFragment.selectedBackgroundDrawable = R.drawable.drawable_light_blue_circle_bg;
-        //设置周日、周六label的字体
+        CaldroidFragment.selectedBackgroundDrawable = R.drawable.drawable_light_yellow_circle_bg;
         WeekdayArrayAdapter.weekendTextColor = R.color.weekend_text_color;
 
-        caldroidFragment.setSixWeeksInCalendar(false);//让日历自适应高度
-        CaldroidFragment.selectedTextColor = Color.WHITE;
+        CaldroidCustomFragment caldroidFragment = new CaldroidCustomFragment();
+        //设置周日、周六label的字体
+
+        try {
+            caldroidFragment.setSelectedDateStrings("2014-05-05","2014-05-20","yyyy-MM-dd");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         transaction.replace(R.id.calendar_container, caldroidFragment).commit();
     }

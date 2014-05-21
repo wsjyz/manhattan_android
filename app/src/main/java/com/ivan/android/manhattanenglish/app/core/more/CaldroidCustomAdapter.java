@@ -60,16 +60,17 @@ public class CaldroidCustomAdapter extends CaldroidGridAdapter {
         TextView text = (TextView) cellView;
         text.setTextColor(Color.BLACK);
 
+        if (dateTime.getWeekDay() == CaldroidFragment.SATURDAY || dateTime.getWeekDay() == CaldroidFragment.SUNDAY) {
+            text.setTextColor(resources
+                    .getColor(R.color.weekend_text_color));
+        }
+
         // Set color of the dates in previous / next month
         if (dateTime.getMonth() != month) {
             text.setTextColor(resources
                     .getColor(com.caldroid.R.color.caldroid_darker_gray));
         }
 
-        if (dateTime.getWeekDay() == CaldroidFragment.SATURDAY || dateTime.getWeekDay() == CaldroidFragment.SUNDAY) {
-            text.setTextColor(resources
-                    .getColor(R.color.weekend_text_color));
-        }
 
         boolean shouldResetDiabledView = false;
         boolean shouldResetSelectedView = false;
@@ -99,8 +100,7 @@ public class CaldroidCustomAdapter extends CaldroidGridAdapter {
             if (CaldroidFragment.selectedBackgroundDrawable != -1) {
                 cellView.setBackgroundResource(CaldroidFragment.selectedBackgroundDrawable);
             } else {
-                cellView.setBackgroundColor(resources
-                        .getColor(com.caldroid.R.color.caldroid_sky_blue));
+                cellView.setBackgroundResource(R.drawable.drawable_light_yellow_circle_bg);
             }
 
             text.setTextColor(CaldroidFragment.selectedTextColor);
@@ -114,7 +114,7 @@ public class CaldroidCustomAdapter extends CaldroidGridAdapter {
             if (dateTime.equals(getToday())) {
                 cellView.setBackgroundResource(R.drawable.drawable_light_blue_circle_bg);
             } else {
-                cellView.setBackgroundResource(com.caldroid.R.drawable.cell_bg);
+                cellView.setBackgroundResource(R.drawable.calendar_cell_bg);
             }
         }
 

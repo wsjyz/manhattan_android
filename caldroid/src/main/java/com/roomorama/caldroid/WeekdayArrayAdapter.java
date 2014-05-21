@@ -47,9 +47,9 @@ public class WeekdayArrayAdapter extends ArrayAdapter<String> {
         // Show smaller text if the size of the text is 4 or more in some
         // locale
         if (item.length() <= 3) {
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         } else {
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         }
 
         if (position == 0 || position == 6) {

@@ -14,4 +14,5 @@ public class CaldroidCustomFragment extends CaldroidFragment {
     public CaldroidGridAdapter getNewDatesGridAdapter(int month, int year) {
         return new CaldroidCustomAdapter(getActivity(), month, year, getCaldroidData(), extraData);
     }
+
 }
