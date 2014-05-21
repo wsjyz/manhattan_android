@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
-import com.ivan.android.manhattanenglish.app.customviews.PickLocationDialog;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
@@ -85,8 +84,7 @@ public class LoginActivity extends BaseActivity {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new PickLocationDialog(LoginActivity.this).show();
-//                attemptLogin();
+                attemptLogin();
             }
         });
 

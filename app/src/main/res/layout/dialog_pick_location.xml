@@ -16,7 +16,7 @@
         android:textSize="@dimen/dimen_18sp"
         android:textColor="@color/common_text_color"
         android:gravity="center"
-        android:text="@string/title_teach_location" />
+        android:text="@string/course_category" />
 
     <GridView
         android:id="@+id/location_grid"
@@ -25,8 +25,7 @@
         android:scrollbars="none"
         android:numColumns="3"
         android:stretchMode="columnWidth"
-        android:horizontalSpacing="5dp"
-        android:verticalSpacing="@dimen/common_margin"
+        android:verticalSpacing="15dp"
         android:padding="@dimen/common_margin"
         android:background="@drawable/drawable_border_light_gray"
         android:gravity="center"

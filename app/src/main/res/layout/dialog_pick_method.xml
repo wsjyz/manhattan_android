@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/login_form_border">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textSize="@dimen/dimen_18sp"
+        android:textColor="@color/common_text_color"
+        android:gravity="center"
+        android:text="@string/teach_method" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/drawable_border_light_gray"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/teacher_way"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dimen_18sp"
+            android:text="@string/teach_method_for_teacher"
+            android:gravity="center"
+            android:background="@drawable/text_border_blue"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            />
+
+        <TextView
+            android:id="@+id/student_way"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/common_text_color"
+            android:textSize="@dimen/dimen_18sp"
+            android:text="@string/teach_method_for_student"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/login_form_border"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/positiveBtn"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@android:color/white"
+        android:text="@string/positive_text"
+        android:background="@drawable/drawable_orange_button" />
+
+</LinearLayout>

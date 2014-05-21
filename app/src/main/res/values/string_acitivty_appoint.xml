@@ -17,6 +17,12 @@
     <string name="search_no_limit">不限</string>
     <string name="action_search">搜索</string>
 
+    <string name="teach_method_for_teacher">教师上门</string>
+    <string name="teach_method_for_student">学生上门</string>
+
+    <string name="sex_male">男</string>
+    <string name="sex_female">女</string>
+
     <string-array name="locations">
         <item>崇明县</item>
         <item>黄浦区</item>
@@ -36,5 +42,16 @@
         <item>嘉定区</item>
         <item>南汇区</item>
         <item>青浦区</item>
+    </string-array>
+
+    <string-array name="course_categories">
+        <item>TOEFL</item>
+        <item>IELTS</item>
+        <item>SSAT</item>
+        <item>SAT</item>
+        <item>ACT</item>
+        <item>GRE</item>
+        <item>GMAT</item>
+        <item>LSAT</item>
     </string-array>
 </resources>

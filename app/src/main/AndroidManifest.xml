@@ -104,6 +104,14 @@
             android:name="com.ivan.android.manhattanenglish.app.core.question.AskQuestionActivity"
             android:label="@string/title_activity_ask_question" >
         </activity>
+        <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.question.QuestionActivity"
+            android:label="@string/title_activity_question" >
+        </activity>
+        <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.question.QuestionDetailActivity"
+            android:label="@string/title_activity_question_detail" >
+        </activity>
     </application>
 
 </manifest>
