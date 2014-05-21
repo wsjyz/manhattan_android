@@ -1,12 +1,18 @@
 package com.ivan.android.manhattanenglish.app.core.question;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
@@ -14,9 +20,13 @@ import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
 
-public class QuestionActivity extends BaseActivity implements AdapterView.OnItemClickListener {
+import java.util.List;
+
+public class QuestionActivity extends BaseActivity implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<List<Question>> {
 
     ListView mQuestionList;
+
+    TextView mAddQuestion;
 
     QuestionListAdapter mAdapter;
 
@@ -33,6 +43,14 @@ public class QuestionActivity extends BaseActivity implements AdapterView.OnItem
             }
         });
 
+        mAddQuestion = (TextView) findViewById(R.id.add_question_btn);
+        mAddQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigate(AskQuestionActivity.class);
+            }
+        });
+
         mQuestionList = (ListView) findViewById(R.id.question_list);
         mQuestionList.setOnItemClickListener(this);
         mQuestionList.setEmptyView(getEmptyView());
@@ -41,12 +59,21 @@ public class QuestionActivity extends BaseActivity implements AdapterView.OnItem
 
         mAdapter = new QuestionListAdapter(this);
         mQuestionList.setAdapter(mAdapter);
+
+        getSupportLoaderManager().initLoader(0, null, this);
+        showLoadingDialog();
+
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Question question = (Question) mAdapter.getItem(position);
-        //todo show question answer detail
+
+        Intent questionDetail = new Intent(this, QuestionDetailActivity.class);
+        questionDetail.putExtra("questionId", question.getQuestionId());
+        questionDetail.putExtra("content", question.getContent());
+        questionDetail.putExtra("createTime", question.getCreateTimeString());
+        startActivity(questionDetail);
 
     }
 
@@ -59,9 +86,42 @@ public class QuestionActivity extends BaseActivity implements AdapterView.OnItem
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        //todo delete
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Toast.makeText(this,"item "+ menuInfo.position+" delete.",Toast.LENGTH_SHORT).show();
+        mAdapter.removeItem(menuInfo.position);
         return true;
     }
+
+    @Override
+    public Loader<List<Question>> onCreateLoader(int id, Bundle args) {
+        return new QuestionListLoader(this);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Question>> loader, List<Question> data) {
+        hideLoadingDialog();
+        mAdapter.setData(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Question>> loader) {
+        mAdapter.clear();
+    }
+
+
+    public static class QuestionListLoader extends AsyncTaskLoader<List<Question>> {
+
+        public QuestionListLoader(Context context) {
+            super(context);
+        }
+
+        @Override
+        public List<Question> loadInBackground() {
+            //todo load question list from server
+            return null;
+        }
+    }
+
+
+    //todo load questionList from server
+
 }

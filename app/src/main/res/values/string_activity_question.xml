@@ -9,5 +9,7 @@
     <string name="choose_teacher">选择要指定的教师</string>
     <string name="submit">提交</string>
 
+    <string name="action_add_question">发布问题</string>
+
     <string name="answer_empty_text">还没有人回答哦~！</string>
 </resources>

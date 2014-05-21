@@ -1,5 +1,9 @@
 package com.ivan.android.manhattanenglish.app.remote.question;
 
+import android.text.format.DateFormat;
+
+import java.util.Date;
+
 /**
  * @author: Ivan Vigoss
  * Date: 14-5-15
@@ -20,6 +24,8 @@ public class Question {
      * 问题发起人
      */
     private String createBy;
+
+    private Date createTime;
 
     public String getQuestionId() {
         return questionId;
@@ -67,5 +73,20 @@ public class Question {
 
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public CharSequence getCreateTimeString() {
+        if (createTime != null) {
+            return DateFormat.format("yyyy-MM-dd HH:mm", createTime);
+        }
+        return null;
     }
 }

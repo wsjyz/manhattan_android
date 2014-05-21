@@ -14,6 +14,23 @@
         custom:titleText="@string/title_activity_question"
         custom:showRight="false" />
 
+    <TextView
+        android:id="@+id/add_question_btn"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@drawable/drawable_border_light_gray"
+        android:textColor="@color/common_text_color"
+        android:textSize="@dimen/dimen_18sp"
+        android:text="@string/action_add_question"
+        android:drawableRight="@drawable/more_expand"
+        android:drawableLeft="@drawable/add_orange"
+        android:drawablePadding="@dimen/common_margin"
+        android:paddingLeft="@dimen/common_margin"
+        android:paddingRight="@dimen/common_margin"
+        android:layout_margin="@dimen/common_margin"
+        android:gravity="center_vertical"/>
+
+
     <ListView
         android:id="@+id/question_list"
         android:layout_width="match_parent"

@@ -33,8 +33,17 @@ public class QuestionListAdapter extends BaseAdapter {
         return mData.size();
     }
 
-    public void addAll(List<Question> questions) {
-        mData.addAll(questions);
+    public void setData(List<Question> data) {
+        if (data != null) {
+            clear();
+            mData.addAll(data);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void removeItem(int position) {
+        mData.remove(position);
+        notifyDataSetChanged();
     }
 
     public void clear() {

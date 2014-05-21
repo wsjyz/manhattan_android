@@ -41,7 +41,7 @@ public class QuestionDetailActivity extends BaseActivity {
         questionId = getIntent().getStringExtra("questionId");
 
         String content = getIntent().getStringExtra("content");
-        String createTime = getIntent().getStringExtra("creatTime");
+        String createTime = getIntent().getStringExtra("createTime");
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
@@ -131,9 +131,11 @@ public class QuestionDetailActivity extends BaseActivity {
         }
 
         public void setData(List<Answer> data) {
-            clear();
-            mData.addAll(data);
-            notifyDataSetChanged();
+            if (data != null) {
+                clear();
+                mData.addAll(data);
+                notifyDataSetChanged();
+            }
         }
 
         @Override
