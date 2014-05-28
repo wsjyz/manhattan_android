@@ -9,7 +9,7 @@ import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
- * 课程预约
+ * 课程详情----点击预约之后的界面
  */
 public class AppointCourseActivity extends BaseActivity {
 

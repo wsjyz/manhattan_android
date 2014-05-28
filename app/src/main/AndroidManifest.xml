@@ -137,17 +137,17 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.collect.StudentCollectActivity"
+            android:name=".core.collect.MyCollectForStudentActivity"
             android:label="@string/title_activity_student_collect"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.appoint.StudentAppointActivity"
+            android:name="com.ivan.android.manhattanenglish.app.core.appoint.MyAppointForStudentActivity"
             android:label="@string/title_activity_student_appoint"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.audition.StudentAuditionActivity"
+            android:name="com.ivan.android.manhattanenglish.app.core.audition.MyAuditionForStudentActivity"
             android:label="@string/title_activity_student_audition"
             android:screenOrientation="portrait" >
         </activity>
@@ -157,19 +157,28 @@
 
         <activity
             android:name="com.ivan.android.manhattanenglish.app.core.appoint.AppointTeacherActivity"
-            android:label="@string/title_activity_appoint_teacher" >
+            android:label="@string/title_activity_appoint_teacher"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.ivan.android.manhattanenglish.app.core.appoint.AppointCourseActivity"
-            android:label="@string/title_activity_appoint_course" >
+            android:label="@string/title_activity_appoint_course"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.ivan.android.manhattanenglish.app.core.course.PublishCourseActivity"
-            android:label="@string/title_activity_publish_course" >
+            android:label="@string/title_activity_publish_course"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.ivan.android.manhattanenglish.app.core.userinfo.TeacherInfoActivity"
-            android:label="@string/title_activity_teacher_info" >
+            android:label="@string/title_activity_teacher_info"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".core.appoint.StudentListActivity"
+            android:label="@string/title_activity_my_appoint_for_teacher"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

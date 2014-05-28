@@ -20,7 +20,7 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
  * Date: 14-5-13
  * Time: PM10:17
  */
-public class StudentCollectActivity extends BaseActivity {
+public class MyCollectForStudentActivity extends BaseActivity {
 
     SectionsPagerAdapter mSectionsPagerAdapter;
 

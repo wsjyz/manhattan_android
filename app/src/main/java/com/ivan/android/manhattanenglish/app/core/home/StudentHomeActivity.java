@@ -7,9 +7,9 @@ import android.widget.Button;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointActivity;
-import com.ivan.android.manhattanenglish.app.core.appoint.StudentAppointActivity;
-import com.ivan.android.manhattanenglish.app.core.audition.StudentAuditionActivity;
-import com.ivan.android.manhattanenglish.app.core.collect.StudentCollectActivity;
+import com.ivan.android.manhattanenglish.app.core.appoint.MyAppointForStudentActivity;
+import com.ivan.android.manhattanenglish.app.core.audition.MyAuditionForStudentActivity;
+import com.ivan.android.manhattanenglish.app.core.collect.MyCollectForStudentActivity;
 import com.ivan.android.manhattanenglish.app.core.course.CourseActivity;
 import com.ivan.android.manhattanenglish.app.core.homework.HomeworkActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
@@ -48,13 +48,6 @@ public class StudentHomeActivity extends BaseActivity {
         setContentView(R.layout.activity_student_home);
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigate(StudentInfoActivity.class);
-            }
-        });
-
         titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +107,7 @@ public class StudentHomeActivity extends BaseActivity {
         mCollectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(StudentCollectActivity.class);
+                navigate(MyCollectForStudentActivity.class);
             }
         });
 
@@ -122,7 +115,7 @@ public class StudentHomeActivity extends BaseActivity {
         mAppointQueryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(StudentAppointActivity.class);
+                navigate(MyAppointForStudentActivity.class);
             }
         });
 
@@ -130,7 +123,7 @@ public class StudentHomeActivity extends BaseActivity {
         mAuditionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(StudentAuditionActivity.class);
+                navigate(MyAuditionForStudentActivity.class);
             }
         });
 

@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.ivan.android.manhattanenglish.app.core.info.InfomationActivity">
+
+    <com.ivan.android.manhattanenglish.app.customviews.TitleBar xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_default_height"
+        custom:titleText="@string/title_activity_appoint_teacher"
+        custom:showRight="false" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawable_border_light_gray"
+        android:layout_margin="@dimen/common_margin" />
+
+</LinearLayout>

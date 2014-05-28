@@ -45,5 +45,10 @@
     <string name="title_activity_appoint_course">预约</string>
     <string name="title_activity_publish_course">发布课程</string>
     <string name="title_activity_teacher_info">TeacherInfoActivity</string>
+    <string name="title_activity_my_appoint_for_teacher">预约的学生</string>
+
+    <string name="title_my_student">我的学生</string>
+    <string name="title_my_appoint_student">我的预约</string>
+    <string name="title_my_audition_student">我的试听</string>
 
 </resources>

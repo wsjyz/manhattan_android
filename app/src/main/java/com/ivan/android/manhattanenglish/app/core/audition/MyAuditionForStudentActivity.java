@@ -1,4 +1,4 @@
-package com.ivan.android.manhattanenglish.app.core.appoint;
+package com.ivan.android.manhattanenglish.app.core.audition;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,13 +16,13 @@ import com.ivan.android.manhattanenglish.app.core.collect.TeacherListFragment;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
- * 学生---我的预约界面
+ * 学生 ----我的试听
  *
  * @author: Ivan Vigoss
  * Date: 14-5-13
  * Time: PM10:17
  */
-public class StudentAppointActivity extends BaseActivity {
+public class MyAuditionForStudentActivity extends BaseActivity {
 
     SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -40,7 +40,7 @@ public class StudentAppointActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_appoint);
+        setContentView(R.layout.activity_student_audition);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 

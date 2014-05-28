@@ -17,6 +17,9 @@ import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.ArrayList;
 
+/**
+ * 精品课程
+ */
 public class CourseActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     PullToRefreshListView courseListView;
 

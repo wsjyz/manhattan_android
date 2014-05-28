@@ -1,23 +1,21 @@
 package com.ivan.android.manhattanenglish.app.core.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
-import com.ivan.android.manhattanenglish.app.core.appoint.AppointActivity;
-import com.ivan.android.manhattanenglish.app.core.appoint.StudentAppointActivity;
-import com.ivan.android.manhattanenglish.app.core.audition.StudentAuditionActivity;
-import com.ivan.android.manhattanenglish.app.core.collect.StudentCollectActivity;
+import com.ivan.android.manhattanenglish.app.core.appoint.StudentListActivity;
+import com.ivan.android.manhattanenglish.app.core.collect.StudentListAdapter;
+import com.ivan.android.manhattanenglish.app.core.collect.StudentListFragment;
 import com.ivan.android.manhattanenglish.app.core.course.CourseActivity;
 import com.ivan.android.manhattanenglish.app.core.course.PublishCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.homework.HomeworkActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
 import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
-import com.ivan.android.manhattanenglish.app.core.question.QuestionActivity;
 import com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity;
-import com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity;
 import com.ivan.android.manhattanenglish.app.core.userinfo.TeacherInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
@@ -101,7 +99,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mAnswerQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo 回答问题
+
             }
         });
 
@@ -109,7 +107,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo 我的学生
+                navigateToStudentList(R.string.title_my_student, StudentListFragment.TYPE_ALL);
             }
         });
 
@@ -117,7 +115,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mAppointQueryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo 教师的预约
+                navigateToStudentList(R.string.title_my_appoint_student, StudentListFragment.TYPE_APPOINT);
             }
         });
 
@@ -125,7 +123,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mAuditionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo 教师的收听
+                navigateToStudentList(R.string.title_my_audition_student, StudentListFragment.TYPE_AUDITION);
             }
         });
 
@@ -138,5 +136,12 @@ public class TeacherHomeActivity extends BaseActivity {
         });
     }
 
+
+    private void navigateToStudentList(int titleResId, String type) {
+        Intent intent = new Intent(TeacherHomeActivity.this, StudentListActivity.class);
+        intent.putExtra(StudentListActivity.TITLE_KEY, getResources().getString(titleResId));
+        intent.putExtra(StudentListActivity.LOAD_TYPE, type);
+        startActivity(intent);
+    }
 
 }

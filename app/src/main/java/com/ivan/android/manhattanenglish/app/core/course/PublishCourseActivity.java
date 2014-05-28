@@ -13,6 +13,7 @@ import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.teacher.ScheduleGridAdapter;
 import com.ivan.android.manhattanenglish.app.customviews.PickLocationGridAdapter;
+import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 public class PublishCourseActivity extends BaseActivity {
 
@@ -37,6 +38,15 @@ public class PublishCourseActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish_course);
+
+
+        titleBar = (TitleBar) findViewById(R.id.title_bar);
+        titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mLocationGrid = (GridView) findViewById(R.id.location_grid);
         mLocationAdapter = new PickLocationGridAdapter(this);

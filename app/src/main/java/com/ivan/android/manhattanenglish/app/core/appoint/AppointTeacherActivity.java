@@ -11,7 +11,7 @@ import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
- * 教师界面表单
+ * 教师详情 ---点击预约之后的界面
  */
 public class AppointTeacherActivity extends BaseActivity {
 

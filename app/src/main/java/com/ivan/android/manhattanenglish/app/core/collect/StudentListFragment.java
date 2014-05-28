@@ -1,13 +1,10 @@
 package com.ivan.android.manhattanenglish.app.core.collect;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.view.View;
-import android.widget.ListView;
 
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
 import com.ivan.android.manhattanenglish.app.remote.user.User;
@@ -23,12 +20,11 @@ import java.util.List;
  */
 public class StudentListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<User>> {
     public static final String LOAD_TYPE = "TYPE";
+    public static final String TYPE_ALL = "ALL";
     public static final String TYPE_APPOINT = "APPOINT";
     public static final String TYPE_AUDITION = "AUDITION";
 
     StudentListAdapter mAdapter;
-
-    OnStudentItemClickListener mListener;
 
     public static StudentListFragment newInstance(String type) {
         StudentListFragment fragment = new StudentListFragment();
@@ -52,16 +48,6 @@ public class StudentListFragment extends ListFragment implements LoaderManager.L
 
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnStudentItemClickListener) activity;
-        } catch (Exception e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnStudentItemClickListener");
-        }
-    }
 
     @Override
     public Loader<List<User>> onCreateLoader(int id, Bundle args) {
@@ -69,18 +55,11 @@ public class StudentListFragment extends ListFragment implements LoaderManager.L
             String type = args.getString(LOAD_TYPE);
             if (TYPE_APPOINT.equals(type)) {
                 return new AppointStudentListLoader(getActivity());
+            }else if(TYPE_AUDITION.equals(type)){
+                return new AuditionStudentListLoader(getActivity());
             }
         }
-        return new AuditionStudentListLoader(getActivity());
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        if (mListener != null) {
-            User user = (User) mAdapter.getItem(position);
-            mListener.onItemClick(user.getUserId());
-        }
-
+        return new AllStudentListLoader(getActivity());
     }
 
     @Override
@@ -124,5 +103,16 @@ public class StudentListFragment extends ListFragment implements LoaderManager.L
         }
     }
 
+    public class AllStudentListLoader extends CommonDataLoader<List<User>> {
+
+        public AllStudentListLoader(Context context) {
+            super(context);
+        }
+
+        @Override
+        public List<User> loadInBackground() {
+            return null;
+        }
+    }
 
 }
