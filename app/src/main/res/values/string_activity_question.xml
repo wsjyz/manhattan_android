@@ -12,4 +12,8 @@
     <string name="action_add_question">发布问题</string>
 
     <string name="answer_empty_text">还没有人回答哦~！</string>
+
+    <string name="tab_assigned">指定回答</string>
+    <string name="tab_answered">已回答</string>
+    <string name="tab_not_answered">未回答</string>
 </resources>

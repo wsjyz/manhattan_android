@@ -112,12 +112,12 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.question.QuestionActivity"
+            android:name="com.ivan.android.manhattanenglish.app.core.question.QuestionForStudentActivity"
             android:label="@string/title_activity_question"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.question.QuestionDetailActivity"
+            android:name=".core.question.QuestionDetailActivity"
             android:label="@string/title_activity_question_detail"
             android:screenOrientation="portrait" >
         </activity>
@@ -137,7 +137,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".core.collect.MyCollectForStudentActivity"
+            android:name="com.ivan.android.manhattanenglish.app.core.collect.MyCollectForStudentActivity"
             android:label="@string/title_activity_student_collect"
             android:screenOrientation="portrait" >
         </activity>
@@ -176,8 +176,13 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".core.appoint.StudentListActivity"
+            android:name="com.ivan.android.manhattanenglish.app.core.appoint.StudentListActivity"
             android:label="@string/title_activity_my_appoint_for_teacher"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.ivan.android.manhattanenglish.app.core.question.QuestionForTeacherActivity"
+            android:label="@string/title_activity_question_for_teacher"
             android:screenOrientation="portrait" >
         </activity>
     </application>

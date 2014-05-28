@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.ivan.android.manhattanenglish.app.core.question.QuestionActivity">
+    tools:context="com.ivan.android.manhattanenglish.app.core.question.QuestionForStudentActivity">
 
     <com.ivan.android.manhattanenglish.app.customviews.TitleBar
         android:id="@+id/title_bar"

@@ -39,7 +39,18 @@ public class TeacherListAdapter extends BaseAdapter {
     }
 
     public void addAll(List<TeacherDetail> newData) {
-        data.addAll(newData);
+        if (newData != null) {
+            data.addAll(newData);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void setData(List<TeacherDetail> newData) {
+        clear();
+        if (newData != null) {
+            data.addAll(newData);
+        }
+        notifyDataSetChanged();
     }
 
     @Override

@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
@@ -22,7 +21,10 @@ import com.ivan.android.manhattanenglish.app.remote.question.Question;
 
 import java.util.List;
 
-public class QuestionActivity extends BaseActivity implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<List<Question>> {
+/**
+ * 学生--- 我的问题列表
+ */
+public class QuestionForStudentActivity extends BaseActivity implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<List<Question>> {
 
     ListView mQuestionList;
 

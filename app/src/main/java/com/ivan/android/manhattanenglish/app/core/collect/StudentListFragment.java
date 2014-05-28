@@ -65,16 +65,17 @@ public class StudentListFragment extends ListFragment implements LoaderManager.L
     @Override
     public void onLoadFinished(Loader<List<User>> loader, List<User> data) {
         mAdapter.setData(data);
+        // The list should now be shown.
+        if (isResumed()) {
+            setListShown(true);
+        } else {
+            setListShownNoAnimation(true);
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<List<User>> loader) {
         mAdapter.clear();
-    }
-
-
-    public static interface OnStudentItemClickListener {
-        void onItemClick(String studentId);
     }
 
     public class AppointStudentListLoader extends CommonDataLoader<List<User>> {

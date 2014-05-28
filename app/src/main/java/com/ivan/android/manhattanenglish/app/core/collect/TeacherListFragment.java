@@ -90,9 +90,7 @@ public class TeacherListFragment extends ListFragment implements LoaderManager.L
 
     @Override
     public void onLoadFinished(Loader<List<TeacherDetail>> loader, List<TeacherDetail> data) {
-        mAdapter.clear();
-        mAdapter.addAll(data);
-        mAdapter.notifyDataSetChanged();
+        mAdapter.setData(data);
 
         if (isResumed()) {
             setListShown(true);

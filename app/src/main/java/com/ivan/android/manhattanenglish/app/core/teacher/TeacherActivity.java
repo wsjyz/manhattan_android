@@ -115,7 +115,6 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
             if (teacherPage != null) {
                 page = teacherPage;
                 mAdapter.addAll(page.getRows());
-                mAdapter.notifyDataSetChanged();
             }
             teacherList.onRefreshComplete();
         }

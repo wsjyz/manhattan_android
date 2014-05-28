@@ -14,7 +14,7 @@ import com.ivan.android.manhattanenglish.app.core.course.CourseActivity;
 import com.ivan.android.manhattanenglish.app.core.homework.HomeworkActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
 import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
-import com.ivan.android.manhattanenglish.app.core.question.QuestionActivity;
+import com.ivan.android.manhattanenglish.app.core.question.QuestionForStudentActivity;
 import com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity;
 import com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
@@ -99,7 +99,7 @@ public class StudentHomeActivity extends BaseActivity {
         mAskQuestionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(QuestionActivity.class);
+                navigate(QuestionForStudentActivity.class);
             }
         });
 
