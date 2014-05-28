@@ -41,5 +41,9 @@
     <string name="title_activity_question_detail">QuestionDetailActivity</string>
     <string name="title_activity_student_purchase">我的钱包</string>
     <string name="title_activity_calendar">我的日历</string>
+    <string name="title_activity_appoint_teacher">预约</string>
+    <string name="title_activity_appoint_course">预约</string>
+    <string name="title_activity_publish_course">发布课程</string>
+    <string name="title_activity_teacher_info">TeacherInfoActivity</string>
 
 </resources>

@@ -41,7 +41,7 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
     TextView mCollectCount;
 
     GridView mTeacherScheduleGrid;
-    ListAdapter mAdapter;
+    ScheduleGridAdapter mAdapter;
 
     TextView mTeachMethod;
     TextView mRequiredLevel;
@@ -83,7 +83,7 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         mCollectBtn = (ImageView) findViewById(R.id.collect_image_btn);
 
         mTeacherScheduleGrid = (GridView) findViewById(R.id.schedule_grid);
-        //todo create grid adapter
+        mAdapter = new ScheduleGridAdapter(this, false);
         mTeacherScheduleGrid.setAdapter(mAdapter);
 
         mTeachMethod = (TextView) findViewById(R.id.teach_method);

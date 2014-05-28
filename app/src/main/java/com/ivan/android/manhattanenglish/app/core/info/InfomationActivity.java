@@ -56,6 +56,7 @@ public class InfomationActivity extends BaseActivity {
         infoListView.setAdapter(mAdapter);
         infoListView.setEmptyView(getEmptyView());
 
+
         infoListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -86,6 +87,12 @@ public class InfomationActivity extends BaseActivity {
 
     class InfomationLoadTask extends AsyncTask<OpenPage<Infomation>, Void, OpenPage<Infomation>> {
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showLoadingDialog();
+        }
+
+        @Override
         protected OpenPage<Infomation> doInBackground(OpenPage<Infomation>... params) {
             OpenPage<Infomation> param = params[0];
             param.setRows(null);//empty data
@@ -93,18 +100,18 @@ public class InfomationActivity extends BaseActivity {
                 Thread.sleep(2000);
                 return infomationService.loadLatestInfomation(param);
             } catch (Exception e) {
-                Log.e(getClass().getName(), "load latestinfomation error", e);
+                Log.e(getClass().getName(), "load loadLatestInfomation error", e);
             }
             return null;
         }
 
         @Override
         protected void onPostExecute(OpenPage<Infomation> infomationOpenPage) {
+            hideLoadingDialog();
             if (infomationOpenPage != null) {
                 Log.i(getClass().getName(), "load latestinfomation finished. load rows " + page.getRows().size());
                 page = infomationOpenPage;
                 mAdapter.addAll(page.getRows());
-                mAdapter.notifyDataSetChanged();
             }
             infoListView.onRefreshComplete();
             refreshDate = new Date();

@@ -49,7 +49,7 @@ public class TeacherListFragment extends ListFragment implements LoaderManager.L
         super.onAttach(activity);
         try {
             mListener = (OnTeacherItemClickListener) activity;
-        } catch (ClassCastException e) {
+        } catch (Exception e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnTeacherItemClickListener");
         }

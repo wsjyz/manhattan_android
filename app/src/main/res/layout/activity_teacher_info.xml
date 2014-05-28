@@ -3,7 +3,7 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity">
+    tools:context="com.ivan.android.manhattanenglish.app.core.userinfo.TeacherInfoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -214,14 +214,42 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
-                    android:text="@string/label_vip_expired"
+                    android:text="@string/label_grade"
                     android:textSize="@dimen/info_content_text_size"
                     android:textColor="@color/label_text_color"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/common_margin" />
 
                 <TextView
-                    android:id="@+id/vip_expired_text"
+                    android:id="@+id/grade_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/info_content_text_size"
+                    android:textColor="@color/common_text_color"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/info_label_height"
+                android:orientation="horizontal"
+                android:background="@drawable/login_form_border"
+                android:layout_marginTop="-2dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:text="@string/label_comment"
+                    android:textSize="@dimen/info_content_text_size"
+                    android:textColor="@color/label_text_color"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/common_margin" />
+
+                <TextView
+                    android:id="@+id/comment_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="7"

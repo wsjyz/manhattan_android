@@ -34,7 +34,10 @@ public class InfomationListAdapter extends BaseAdapter {
     }
 
     public void addAll(List<Infomation> newData) {
-        data.addAll(newData);
+        if (newData != null && newData.size() > 0) {
+            data.addAll(newData);
+            notifyDataSetChanged();
+        }
     }
 
     @Override

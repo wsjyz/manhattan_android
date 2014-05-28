@@ -1,0 +1,293 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ivan.android.manhattanenglish.app.core.teacher.TeacherDetailInfoActivity">
+
+    <com.ivan.android.manhattanenglish.app.customviews.TitleBar xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_default_height"
+        custom:titleText="@string/title_activity_publish_course"
+        custom:showRight="false" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_form_border">
+
+                <TextView
+                    android:id="@+id/label_base_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/info_title_height"
+                    android:background="@drawable/login_form_border"
+                    android:textSize="@dimen/dimen_18sp"
+                    android:textColor="@color/common_text_color"
+                    android:text="@string/label_base_info"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/common_margin" />
+
+                <TextView
+                    android:id="@+id/label_available_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_18sp"
+                    android:textColor="@color/common_text_color"
+                    android:text="@string/label_available_location"
+                    android:layout_below="@id/label_base_info"
+                    android:layout_margin="@dimen/common_margin" />
+
+                <GridView
+                    android:id="@+id/location_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/label_available_location"
+                    android:numColumns="4"
+                    android:stretchMode="columnWidth" />
+
+                <TextView
+                    android:id="@+id/label_teach_way1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_18sp"
+                    android:textColor="@color/common_text_color"
+                    android:text="@string/label_teach_way1"
+                    android:layout_below="@id/location_grid"
+                    android:layout_margin="@dimen/common_margin" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/label_teach_way1"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:layout_marginRight="@dimen/common_margin"
+                    android:layout_marginBottom="@dimen/common_margin">
+
+                    <RadioButton
+                        android:id="@+id/method_for_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/dimen_16sp"
+                        android:textColor="@color/common_text_color"
+                        android:layout_marginRight="@dimen/common_margin"
+                        android:checked="true"
+                        android:text="全部"
+                        android:onClick="onTeachMethodClicked" />
+
+                    <RadioButton
+                        android:id="@+id/method_for_student"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/dimen_16sp"
+                        android:textColor="@color/common_text_color"
+                        android:text="@string/teach_method_for_student"
+                        android:onClick="onTeachMethodClicked" />
+
+                    <RadioButton
+                        android:id="@+id/method_for_teacher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/dimen_16sp"
+                        android:textColor="@color/common_text_color"
+                        android:layout_marginRight="@dimen/common_margin"
+                        android:text="@string/teach_method_for_teacher"
+                        android:onClick="onTeachMethodClicked" />
+                </RadioGroup>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/login_form_border"
+                android:layout_marginTop="@dimen/common_margin"
+                android:layout_marginBottom="@dimen/common_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/info_title_height"
+                    android:background="@drawable/login_form_border"
+                    android:textSize="@dimen/dimen_18sp"
+                    android:textColor="@color/common_text_color"
+                    android:text="@string/label_teach_schedule"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/common_margin" />
+
+                <GridView
+                    android:id="@+id/schedule_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/schedule_grid_background"
+                    android:paddingLeft="52dp"
+                    android:paddingTop="62dp"
+                    android:columnWidth="52dp"
+                    android:numColumns="7"
+                    android:scrollbars="none"
+                    android:gravity="center"
+                    android:stretchMode="columnWidth" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/drawable_border_light_gray"
+                android:layout_marginBottom="@dimen/common_margin">
+
+                <TextView
+                    android:id="@+id/label_charge"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/info_title_height"
+                    android:textSize="@dimen/dimen_18sp"
+                    android:textColor="@color/common_text_color"
+                    android:text="@string/label_charge"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/common_margin"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/drawable_border_light_gray" />
+
+                <TextView
+                    android:id="@+id/label_teach_way"
+                    android:layout_width="@dimen/teacher_charge_text_width"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/common_text_color"
+                    android:text="@string/label_teach_way"
+                    android:layout_below="@id/label_charge"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/common_margin" />
+
+
+                <TextView
+                    android:layout_width="@dimen/teacher_charge_text_width"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/common_text_color"
+                    android:text="@string/label_required_level"
+                    android:layout_alignBaseline="@id/label_teach_way"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_width="@dimen/teacher_charge_text_width"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/common_text_color"
+                    android:text="@string/label_cost"
+                    android:layout_alignBaseline="@id/label_teach_way"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/common_margin"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/teach_method_for_student"
+                    android:layout_width="@dimen/teacher_charge_text_width"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/common_margin"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/common_text_color"
+                    android:layout_below="@id/label_teach_way"
+                    android:background="@drawable/text_border_gray"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:gravity="center"
+                    android:text="@string/teach_method_for_student" />
+
+                <Spinner
+                    android:id="@+id/required_level_spinner_for_student"
+                    android:layout_width="@dimen/teacher_charge_text_width"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/common_margin"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/common_text_color"
+                    android:layout_alignBaseline="@id/teach_method_for_student"
+                    android:layout_centerHorizontal="true"
+
+                    android:gravity="center" />
+
+                <EditText
+                    android:id="@+id/cost_for_student"
+                    android:layout_width="@dimen/teacher_charge_text_width"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/common_margin"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/common_text_color"
+                    android:background="@drawable/login_form_border"
+                    android:layout_alignBaseline="@id/teach_method_for_student"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/common_margin"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/teach_method_for_teacher"
+                    android:layout_width="@dimen/teacher_charge_text_width"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/common_margin"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/common_text_color"
+                    android:layout_below="@id/teach_method_for_student"
+                    android:background="@drawable/text_border_gray"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:text="@string/teach_method_for_teacher" />
+
+                <Spinner
+                    android:id="@+id/required_level_spinner_for_teaher"
+                    android:layout_width="@dimen/teacher_charge_text_width"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/common_margin"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/common_text_color"
+                    android:layout_alignBaseline="@id/teach_method_for_teacher"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center" />
+
+                <EditText
+                    android:id="@+id/cost_for_teacher"
+                    android:layout_width="@dimen/teacher_charge_text_width"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/common_margin"
+                    android:textSize="@dimen/dimen_16sp"
+                    android:textColor="@color/common_text_color"
+                    android:background="@drawable/login_form_border"
+                    android:layout_alignBaseline="@id/teach_method_for_teacher"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/common_margin"
+                    android:gravity="center" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/form_login_button_height"
+                android:layout_marginTop="@dimen/common_margin"
+                android:layout_marginLeft="@dimen/form_login_button_horizontal_margin"
+                android:layout_marginRight="@dimen/form_login_button_horizontal_margin"
+                android:background="@drawable/drawable_login_button"
+                android:text="@string/submit"
+                android:textSize="@dimen/form_login_button_text_size"
+                android:textColor="@android:color/white" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
+

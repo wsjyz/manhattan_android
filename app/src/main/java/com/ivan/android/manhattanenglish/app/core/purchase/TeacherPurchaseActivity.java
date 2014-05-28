@@ -14,7 +14,7 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 import java.math.BigDecimal;
 
-public class StudentPurchaseActivity extends BaseActivity {
+public class TeacherPurchaseActivity extends BaseActivity {
 
     TextView mRecharge;
 
@@ -62,7 +62,7 @@ public class StudentPurchaseActivity extends BaseActivity {
         @Override
         protected void onPostExecute(BigDecimal bigDecimal) {
             if (bigDecimal == null) {
-                Toast.makeText(StudentPurchaseActivity.this, R.string.load_failed, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TeacherPurchaseActivity.this, R.string.load_failed, Toast.LENGTH_SHORT).show();
             } else {
                 String rechargeText = String.format(getResources().getString(R.string.pattern_balance), bigDecimal.floatValue());
                 mRecharge.setText(rechargeText);

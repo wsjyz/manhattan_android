@@ -1,5 +1,6 @@
 package com.ivan.android.manhattanenglish.app.alarm;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
@@ -39,7 +40,7 @@ public class NoticeService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("LocalService", "Received start id " + startId + ": " + intent);
-        if(intent.getBooleanExtra(INTENT_NOTIFY,false)){
+        if (intent.getBooleanExtra(INTENT_NOTIFY, false)) {
             showNotification();
         }
 
@@ -55,10 +56,11 @@ public class NoticeService extends Service {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setContentTitle("Hello,World!").setContentText("This is just a test")
                 .setSmallIcon(R.drawable.ic_launcher)
+                .setDefaults(Notification.DEFAULT_ALL )
                 .setAutoCancel(true);
         //todo pending Intent
 
-        nm.notify(NOTIFICATION_ID,builder.build());
+        nm.notify(NOTIFICATION_ID, builder.build());
         stopSelf();
     }
 }

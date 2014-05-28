@@ -26,6 +26,8 @@ import java.util.Map;
  * Time: AM9:59
  */
 public class AbstractService {
+    public final static String HOST = "http://1.manhattandev.sinaapp.com/";
+
 
     public final static Type STRING_MAP = new TypeReference<Map<String, String>>() {
     }.getType();
@@ -141,5 +143,8 @@ public class AbstractService {
         return restTemplate.postForLocation(url, request).toString();
     }
 
+    protected String getUrl(String action) {
+        return HOST + action;
+    }
 
 }

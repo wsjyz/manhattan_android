@@ -11,12 +11,14 @@ import com.ivan.android.manhattanenglish.app.core.appoint.StudentAppointActivity
 import com.ivan.android.manhattanenglish.app.core.audition.StudentAuditionActivity;
 import com.ivan.android.manhattanenglish.app.core.collect.StudentCollectActivity;
 import com.ivan.android.manhattanenglish.app.core.course.CourseActivity;
+import com.ivan.android.manhattanenglish.app.core.course.PublishCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.homework.HomeworkActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
 import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
 import com.ivan.android.manhattanenglish.app.core.question.QuestionActivity;
 import com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity;
 import com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity;
+import com.ivan.android.manhattanenglish.app.core.userinfo.TeacherInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 public class TeacherHomeActivity extends BaseActivity {
@@ -51,14 +53,7 @@ public class TeacherHomeActivity extends BaseActivity {
         titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo 发布课程
-            }
-        });
-
-        titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //todo 教师个人信息
+                navigate(TeacherInfoActivity.class);
             }
         });
 
@@ -66,7 +61,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mPublishCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(AppointActivity.class);
+                navigate(PublishCourseActivity.class);
             }
         });
 
@@ -114,7 +109,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //todo 我的学生
+                //todo 我的学生
             }
         });
 

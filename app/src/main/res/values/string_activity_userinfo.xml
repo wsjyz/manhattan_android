@@ -7,5 +7,9 @@
     <string name="label_email">邮箱：</string>
     <string name="label_address">地址：</string>
     <string name="label_credits">积分：</string>
+    <string name="label_grade">评分：</string>
+    <string name="label_comment">评价：</string>
     <string name="label_vip_expired">VIP到期时间：</string>
+
+    <string name="pattern_address">地址：%s</string>
 </resources>

@@ -10,4 +10,10 @@
     
     <string name="label_teacher">主讲教师</string>
     <string name="label_course_content">授课内容</string>
+
+    <string-array name="required_level">
+        <item>初级</item>
+        <item>中级</item>
+        <item>高级</item>
+    </string-array>
 </resources>

@@ -8,8 +8,10 @@
     <string name="label_charge">课时收费</string>
     <string name="label_teach_way">授课方式</string>
     <string name="label_required_level">学员程度</string>
-    <string name="label_cost">费用</string>
+    <string name="label_cost">费用/元</string>
     <string name="label_self_introduce">自我介绍</string>
+    <string name="label_available_location">可授课区域：</string>
+    <string name="label_teach_way1">辅导方式：</string>
 
     
     <string name="pattern_grade">评分：%s分</string>

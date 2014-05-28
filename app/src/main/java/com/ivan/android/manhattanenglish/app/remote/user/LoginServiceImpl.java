@@ -15,6 +15,9 @@ public class LoginServiceImpl extends AbstractService implements LoginService {
 
     @Override
     public User login(String tel, String password) {
+        String action = "/user/login";
+
+
         User user = new User();
 
         user.setUserId("test");

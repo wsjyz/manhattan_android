@@ -24,7 +24,7 @@ public class PickLocationGridAdapter extends BaseAdapter {
     private String[] allLocations;
     private Set<String> selectedLocationSet;
 
-    PickLocationGridAdapter(Context context) {
+    public PickLocationGridAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
         this.allLocations = context.getResources().getStringArray(R.array.locations);
         this.selectedLocationSet = new HashSet<String>();

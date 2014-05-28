@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_top_up">充值</string>
+    <string name="action_top_down">提现</string>
     <string name="label_current_recharge">当前余额</string>
 
     <string name="pattern_balance">%5.2f 元</string>

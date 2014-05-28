@@ -14,6 +14,8 @@ import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
+ * 学生----我的收藏
+ *
  * @author: Ivan Vigoss
  * Date: 14-5-13
  * Time: PM10:17

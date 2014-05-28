@@ -16,6 +16,8 @@ import com.ivan.android.manhattanenglish.app.core.collect.TeacherListFragment;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
+ * 学生---我的预约界面
+ *
  * @author: Ivan Vigoss
  * Date: 14-5-13
  * Time: PM10:17
