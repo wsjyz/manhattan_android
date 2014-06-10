@@ -1,7 +1,7 @@
 <resources>
 
-    <dimen name="dimen_1sp">1sp</dimen>
-    <dimen name="dimen_5sp">5sp</dimen>
+    <dimen name="dimen_5dp">5dp</dimen>
+
     <dimen name="dimen_16sp">16sp</dimen>
     <dimen name="dimen_18sp">18sp</dimen>
     <dimen name="dimen_20sp">20sp</dimen>

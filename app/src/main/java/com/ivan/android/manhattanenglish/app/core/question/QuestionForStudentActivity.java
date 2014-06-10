@@ -73,7 +73,7 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
 
         Intent questionDetail = new Intent(this, QuestionDetailActivity.class);
         questionDetail.putExtra("questionId", question.getQuestionId());
-        questionDetail.putExtra("content", question.getContent());
+        questionDetail.putExtra("content", question.getQuestionContent());
         questionDetail.putExtra("createTime", question.getCreateTimeString());
         startActivity(questionDetail);
 

@@ -133,13 +133,13 @@ public class AskQuestionActivity extends BaseActivity {
         }
 
         private void collectParams() {
-            question.setTitle(mTitle.getText().toString());
-            question.setContent(mQuestion.getText().toString());
+            question.setQuestionTitle(mTitle.getText().toString());
+            question.setQuestionContent(mQuestion.getText().toString());
             String imageUrl = (String) mChoosePic.getTag();
-            question.setImageUrl(imageUrl);
+            question.setQuestionPic(imageUrl);
 
             String teacherId = (String) mChooseTeacher.getTag();
-            question.setSpecifyTeacherId(teacherId);
+            question.setAssignTeacher(teacherId);
 
         }
 

@@ -84,7 +84,7 @@ public class LoginActivity extends BaseActivity {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                attemptLogin();
+                attemptLogin();
                 finish();
                 navigate(StudentHomeActivity.class);
             }
@@ -158,6 +158,7 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
+
             return true;
         }
 

@@ -86,7 +86,7 @@ public class StudentListAdapter extends BaseAdapter {
                 .fit()
                 .into(holder.avatar);
 
-        holder.name.setText(getText(R.string.label_class_num, user.getNickName()));
+        holder.name.setText(getText(R.string.label_class_num, user.getUserName()));
         holder.phone.setText(user.getMobile());
         holder.address.setText(getText(R.string.pattern_address, user.getAddress()));
         holder.sex.setImageResource(user.getSexDrawableResource());

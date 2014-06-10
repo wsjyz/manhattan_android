@@ -26,7 +26,8 @@ import java.util.Map;
  * Time: AM9:59
  */
 public class AbstractService {
-    public final static String HOST = "http://1.manhattandev.sinaapp.com/";
+//    public final static String HOST = "http://1.manhattandev.sinaapp.com/";
+    public final static String HOST = "http://203.195.131.34:8080/mhd/";
 
 
     public final static Type STRING_MAP = new TypeReference<Map<String, String>>() {

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -106,7 +105,7 @@ public class TeacherInfoActivity extends BaseActivity implements LoaderManager.L
                     .into(mAvatar);
         }
 
-        mUserName.setText(mUser.getNickName());
+        mUserName.setText(mUser.getUserName());
         mSex.setImageResource(mUser.getSexDrawableResource());
 
         mMobile.setText(mUser.getMobile());

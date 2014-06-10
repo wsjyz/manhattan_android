@@ -5,6 +5,8 @@ import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: Ivan Vigoss
@@ -16,34 +18,21 @@ public class LoginServiceImpl extends AbstractService implements LoginService {
     @Override
     public User login(String tel, String password) {
         String action = "/user/login";
-
-
-        User user = new User();
-
-        user.setUserId("test");
-        user.setNickName("Ivan Vigoss");
-        user.setMobile("18616905120");
-        user.setEmail("ivan_vigoss@qq.com");
-        user.setCredits(200);
-        user.setSex("Male");
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.YEAR, 2);
-        user.setVipExpiredTime(calendar.getTime());
-
-        UserCache.currentUser = user;
-
-        return user;
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("mobile", tel);
+        params.put("password", password);
+        return postForObject(User.class, getUrl(action), params);
     }
 
     @Override
-    public void sendSms(String tel) {
-
+    public String getAuthCode(String tel) {
+        String action = "/user/getAuthCode";
+        return postForObject(String.class, getUrl(action), null);
     }
 
     @Override
     public void register(String tel, String password, String authCode, String type) {
+        String action = "";
 
     }
 

@@ -97,7 +97,7 @@ public class StudentInfoActivity extends BaseActivity implements LoaderManager.L
                     .into(mAvatar);
         }
 
-        mUserName.setText(mUser.getNickName());
+        mUserName.setText(mUser.getUserName());
         mSex.setImageResource(mUser.getSexDrawableResource());
 
         mMobile.setText(mUser.getMobile());

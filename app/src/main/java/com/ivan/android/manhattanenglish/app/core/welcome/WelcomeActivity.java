@@ -1,6 +1,5 @@
 package com.ivan.android.manhattanenglish.app.core.welcome;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
 import com.ivan.android.manhattanenglish.app.core.login.LoginActivity;
 import com.viewpagerindicator.PageIndicator;
 
@@ -31,7 +31,7 @@ public class WelcomeActivity extends FragmentActivity {
 
     private PagerAdapter adapter;
 
-    private int[] imageRecourseIds = {R.drawable.girl, R.drawable.girl, R.drawable.girl};
+    private static int[] imageRecourseIds = {R.drawable.girl, R.drawable.girl, R.drawable.girl};
 
     private Handler handler = new Handler();
 
@@ -43,7 +43,7 @@ public class WelcomeActivity extends FragmentActivity {
         mPager = (ViewPager) findViewById(R.id.pager);
         mIndicator = (PageIndicator) findViewById(R.id.indicator);
 
-        adapter = new WelcomePagerAdapter(getSupportFragmentManager(), this);
+        adapter = new WelcomePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(adapter);
 
         mIndicator.setViewPager(mPager);
@@ -51,7 +51,7 @@ public class WelcomeActivity extends FragmentActivity {
         final Runnable toLoginJob = new Runnable() {
             @Override
             public void run() {
-                toLogin();
+                toFirstPage();
             }
         };
 
@@ -60,7 +60,7 @@ public class WelcomeActivity extends FragmentActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position == imageRecourseIds.length - 1 && positionOffsetPixels == 0) {
                     //try to drag the last one
-                    toLogin();
+                    toFirstPage();
                     handler.removeCallbacks(toLoginJob);
                 }
             }
@@ -81,24 +81,22 @@ public class WelcomeActivity extends FragmentActivity {
     }
 
 
-    public void toLogin() {
-        Intent login = new Intent(this, LoginActivity.class);
-        startActivity(login);
+    public void toFirstPage() {
+        Intent home = new Intent(this, StudentHomeActivity.class);
+        startActivity(home);
         finish();
     }
 
 
     class WelcomePagerAdapter extends FragmentPagerAdapter {
-        private Context mContext;
 
-        public WelcomePagerAdapter(FragmentManager fm, Context context) {
+        public WelcomePagerAdapter(FragmentManager fm) {
             super(fm);
-            this.mContext = context;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return new ImageFragment(mContext, position);
+            return ImageFragment.newInstance(position);
         }
 
         @Override
@@ -107,19 +105,20 @@ public class WelcomeActivity extends FragmentActivity {
         }
     }
 
-    class ImageFragment extends Fragment {
-        private Context context;
-        private int position;
+    public static class ImageFragment extends Fragment {
 
-        ImageFragment(Context context, int position) {
-            this.context = context;
-            this.position = position;
+        public static ImageFragment newInstance(int position) {
+            ImageFragment fragment = new ImageFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("position", position);
+            fragment.setArguments(bundle);
+            return fragment;
         }
-
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            ImageView imageView = new ImageView(context);
+            ImageView imageView = new ImageView(getActivity());
+            int position = getArguments().getInt("position");
             imageView.setImageResource(imageRecourseIds[position]);
 
             LinearLayout layout = new LinearLayout(getActivity());

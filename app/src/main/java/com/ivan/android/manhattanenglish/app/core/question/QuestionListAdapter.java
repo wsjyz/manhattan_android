@@ -73,7 +73,7 @@ public class QuestionListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.content.setText(question.getContent());
+        holder.content.setText(question.getQuestionContent());
         return convertView;
     }
 

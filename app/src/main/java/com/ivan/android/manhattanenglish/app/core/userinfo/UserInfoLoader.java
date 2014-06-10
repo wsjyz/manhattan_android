@@ -26,7 +26,7 @@ public class UserInfoLoader extends CommonDataLoader<User> {
 
         User user = new User();
         user.setUserId("test");
-        user.setNickName("Ivan");
+        user.setUserName("Ivan");
         user.setSex("MALE");
         user.setMobile("18616905120");
         user.setEmail("ivan.vigoss88@gmail.com");

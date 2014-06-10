@@ -15,6 +15,7 @@ import com.ivan.android.manhattanenglish.app.core.course.PublishCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.homework.HomeworkActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
 import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
+import com.ivan.android.manhattanenglish.app.core.question.QuestionForTeacherActivity;
 import com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity;
 import com.ivan.android.manhattanenglish.app.core.userinfo.TeacherInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
@@ -40,7 +41,6 @@ public class TeacherHomeActivity extends BaseActivity {
     private Button mAuditionBtn;
     //更多
     private Button mMoreInfoBtn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mAnswerQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                navigate(QuestionForTeacherActivity.class);
             }
         });
 

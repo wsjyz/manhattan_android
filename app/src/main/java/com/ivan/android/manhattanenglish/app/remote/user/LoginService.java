@@ -9,7 +9,7 @@ public interface LoginService {
 
     User login(String tel, String password);
 
-    void sendSms(String tel);
+    String getAuthCode(String tel);
 
     void register(String tel, String password, String authCode, String type);
 

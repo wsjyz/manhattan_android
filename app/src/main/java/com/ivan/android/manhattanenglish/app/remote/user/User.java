@@ -11,11 +11,26 @@ import java.util.Date;
  */
 public class User {
 
+    public final static String USER_TYPE_TEACHER = "TEACHER";
+    public final static String USER_TYPE_STUDENT = "STUDENT";
+    public final static String USER_TYPE_VIP_STUDENT = "VIPSTUDENT";
+
+    public final static String SEX_FEMALE = "FEMALE";
+    public final static String SEX_MALE = "MALE";
+
     private String userId;
 
-    private String nickName;
+    private String userName;
 
+    /**
+     * 用户头像
+     */
     private String avatar;
+
+    /**
+     * 人员类型
+     */
+    private String type;
 
     private String sex;
 
@@ -25,7 +40,12 @@ public class User {
 
     private String address;
 
-    private long credits;
+    private Integer credits;
+
+    /**
+     * 钱包余额
+     */
+    private Integer wallet;
 
     private Boolean vip;
 
@@ -49,12 +69,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getAvatar() {
@@ -97,14 +117,6 @@ public class User {
         this.address = address;
     }
 
-    public long getCredits() {
-        return credits;
-    }
-
-    public void setCredits(long credits) {
-        this.credits = credits;
-    }
-
     public Date getVipExpiredTime() {
         return vipExpiredTime;
     }
@@ -138,6 +150,30 @@ public class User {
     }
 
     public int getSexDrawableResource() {
-        return "FEMALE".equals(sex) ? R.drawable.female : R.drawable.male;
+        return SEX_FEMALE.equals(sex) ? R.drawable.female : R.drawable.male;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Integer getCredits() {
+        return credits;
+    }
+
+    public void setCredits(Integer credits) {
+        this.credits = credits;
+    }
+
+    public Integer getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Integer wallet) {
+        this.wallet = wallet;
     }
 }
