@@ -1,6 +1,7 @@
 package com.ivan.android.manhattanenglish.app.remote.course;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.remote.user.User;
 
 /**
  * @author: Ivan Vigoss
@@ -194,6 +195,6 @@ public class TeacherDetail {
     }
 
     public int getSexDrawableResource() {
-        return "FEMALE".equals(sex) ? R.drawable.female : R.drawable.male;
+        return User.SEX_FEMALE.equals(sex) ? R.drawable.female : R.drawable.male;
     }
 }

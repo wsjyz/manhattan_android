@@ -1,10 +1,8 @@
 package com.ivan.android.manhattanenglish.app.core.welcome;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
@@ -18,12 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
-import com.ivan.android.manhattanenglish.app.core.login.LoginActivity;
 import com.viewpagerindicator.PageIndicator;
 
 
-public class WelcomeActivity extends FragmentActivity {
+public class WelcomeActivity extends BaseActivity {
 
     private ViewPager mPager;
 
@@ -82,9 +80,8 @@ public class WelcomeActivity extends FragmentActivity {
 
 
     public void toFirstPage() {
-        Intent home = new Intent(this, StudentHomeActivity.class);
-        startActivity(home);
         finish();
+        navigate(StudentHomeActivity.class);
     }
 
 

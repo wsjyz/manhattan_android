@@ -1,6 +1,7 @@
 package com.ivan.android.manhattanenglish.app.core.login;
 
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
+import com.ivan.android.manhattanenglish.app.remote.user.LoginService;
+import com.ivan.android.manhattanenglish.app.remote.user.User;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 
 public class RegisterActivity extends BaseActivity implements StudentRegisterFragment.RegisterListener {
 
@@ -36,6 +41,8 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
     TextView teacherTab;
 
     Drawable selectedPointer;
+
+    LoginService loginService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +96,8 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
                 finish();
             }
         });
+
+        loginService = ServiceFactory.getService(LoginService.class);
 
     }
 
@@ -145,16 +154,41 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
 
     @Override
     public void sendAuthCode(String tel) {
-        //todo
+        new CommonAsyncTask<String, Void, String>(this) {
+            @Override
+            protected String getResultInBackground(String... params) {
+                String mobile = params[0];
+                return loginService.getAuthCode(mobile);
+            }
+        }.execute(tel);
     }
 
     @Override
-    public void register(String tel, String password, String authCode) {
-        //todo
+    public void register(String tel, final String password, String authCode) {
+        new CommonAsyncTask<String, Void, Void>(this) {
+            @Override
+            protected Void getResultInBackground(String... params) {
+                String tel = params[0];
+                String psw = params[1];
+                String authCode = params[2];
+                loginService.register(tel, psw, authCode, User.USER_TYPE_STUDENT);
+                return null;
+            }
+
+        }.execute(tel, password, authCode);
     }
 
     @Override
     public void beVip(String tel, String password, String authCode) {
-        //todo
+        new CommonAsyncTask<String, Void, Void>(this) {
+            @Override
+            protected Void getResultInBackground(String... params) {
+                String tel = params[0];
+                String psw = params[1];
+                String authCode = params[2];
+                loginService.register(tel, psw, authCode, User.USER_TYPE_VIP_STUDENT);
+                return null;
+            }
+        }.execute(tel, password, authCode);
     }
 }

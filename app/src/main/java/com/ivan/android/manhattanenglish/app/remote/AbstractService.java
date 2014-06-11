@@ -2,6 +2,7 @@ package com.ivan.android.manhattanenglish.app.remote;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
 import org.apache.commons.collections.MapUtils;
 import org.springframework.core.io.Resource;
@@ -26,7 +27,7 @@ import java.util.Map;
  * Time: AM9:59
  */
 public class AbstractService {
-//    public final static String HOST = "http://1.manhattandev.sinaapp.com/";
+    //    public final static String HOST = "http://1.manhattandev.sinaapp.com/";
     public final static String HOST = "http://203.195.131.34:8080/mhd/";
 
 
@@ -119,11 +120,13 @@ public class AbstractService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Connection", "Close");//avoid EOFException
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+        body.set("userId", UserCache.getCurrentUser().getUserId());
         if (MapUtils.isNotEmpty(uriVariables)) {
             for (String key : uriVariables.keySet()) {
                 body.set(key, uriVariables.get(key));
             }
         }
+
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(body, headers);
 
         return restTemplate.postForEntity(url, request, String.class);
@@ -134,6 +137,7 @@ public class AbstractService {
         headers.set("Connection", "Close");//avoid EOFException
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<String, Object>();
         body.set("file", fileResource);
+        body.set("userId", UserCache.getCurrentUser().getUserId());
         if (MapUtils.isNotEmpty(variables)) {
             for (String key : variables.keySet()) {
                 body.set(key, variables.get(key));

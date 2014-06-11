@@ -15,6 +15,10 @@ import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
+import com.ivan.android.manhattanenglish.app.remote.user.LoginService;
+import com.ivan.android.manhattanenglish.app.remote.user.User;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
 /**
  * A login screen that offers login via email/password.
@@ -141,14 +145,16 @@ public class LoginActivity extends BaseActivity {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, User> {
 
         private final String mTel;
         private final String mPassword;
+        private LoginService loginService;
 
         UserLoginTask(String tel, String password) {
             mTel = tel;
             mPassword = password;
+            loginService = ServiceFactory.getService(LoginService.class);
         }
 
         @Override
@@ -157,16 +163,22 @@ public class LoginActivity extends BaseActivity {
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-
-            return true;
+        protected User doInBackground(Void... params) {
+            User user = null;
+            try {
+                user = loginService.login(mTel, mPassword);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return user;
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final User user) {
             mAuthTask = null;
             hideLoadingDialog();
-            if (success) {
+            if (user != null) {
+                UserCache.setCurrentUser(user);
                 finish();
                 navigate(StudentHomeActivity.class);
             } else {

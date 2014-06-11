@@ -2,8 +2,12 @@ package com.ivan.android.manhattanenglish.app.remote;
 
 import com.ivan.android.manhattanenglish.app.remote.info.InfomationService;
 import com.ivan.android.manhattanenglish.app.remote.info.InfomationServiceImpl;
+import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
+import com.ivan.android.manhattanenglish.app.remote.question.QuestionServiceImpl;
 import com.ivan.android.manhattanenglish.app.remote.user.LoginService;
 import com.ivan.android.manhattanenglish.app.remote.user.LoginServiceImpl;
+import com.ivan.android.manhattanenglish.app.remote.user.UserService;
+import com.ivan.android.manhattanenglish.app.remote.user.UserServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +28,8 @@ public class ServiceFactory {
     static {
         register(LoginService.class, new LoginServiceImpl());
         register(InfomationService.class, new InfomationServiceImpl());
+        register(QuestionService.class, new QuestionServiceImpl());
+        register(UserService.class, new UserServiceImpl());
     }
 
 

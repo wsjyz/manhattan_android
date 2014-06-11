@@ -5,10 +5,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.user.LoginService;
+import com.ivan.android.manhattanenglish.app.remote.user.User;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.ivan.android.manhattanenglish.app.utils.FormValidator;
 
 public class FindPasswordActivity extends BaseActivity {
@@ -23,6 +27,7 @@ public class FindPasswordActivity extends BaseActivity {
 
     private Button mCompleteBtn;
 
+    LoginService loginService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,14 @@ public class FindPasswordActivity extends BaseActivity {
             public void onClick(View v) {
                 if (checkTel()) {
                     String tel = mTelView.getText().toString();
-                    //todo send
+
+                    new CommonAsyncTask<String, Void, String>(FindPasswordActivity.this) {
+                        @Override
+                        protected String getResultInBackground(String... params) {
+                            String mobile = params[0];
+                            return loginService.getAuthCode(mobile);
+                        }
+                    }.execute(tel);
                 }
             }
         });
@@ -60,7 +72,24 @@ public class FindPasswordActivity extends BaseActivity {
                     String tel = mTelView.getText().toString();
                     String psw = mPasswordView.getText().toString();
                     String authCode = mAuthCodeView.getText().toString();
-                    //todo
+
+                    new CommonAsyncTask<String, Void, Void>(FindPasswordActivity.this) {
+                        @Override
+                        protected Void getResultInBackground(String... params) {
+                            String tel = params[0];
+                            String psw = params[1];
+                            String authCode = params[2];
+                            loginService.resetPassword(tel, psw, authCode);
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Void aVoid) {
+                            super.onPostExecute(aVoid);
+                            Toast.makeText(FindPasswordActivity.this, R.string.password_reset_success, Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }.execute(tel, psw, authCode);
                 }
 
             }

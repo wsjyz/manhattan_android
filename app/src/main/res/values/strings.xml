@@ -23,6 +23,9 @@
     <string name="loading_text">加载中......</string>
     <string name="load_failed">加载失败</string>
     <string name="no_more_data">没有更多数据了！</string>
+    <string name="password_reset_success">密码充值成功，请用新密码登录</string>
+    
+    
     <string name="title_activity_student_info">个人资料</string>
     <string name="title_activity_course">精品课程</string>
     <string name="title_activity_course_detail">课程详情</string>
