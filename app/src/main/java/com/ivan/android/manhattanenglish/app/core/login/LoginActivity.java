@@ -1,6 +1,5 @@
 package com.ivan.android.manhattanenglish.app.core.login;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,14 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
+import com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.LoginService;
 import com.ivan.android.manhattanenglish.app.remote.user.User;
+import com.ivan.android.manhattanenglish.app.utils.PreferencesUtil;
 import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
 /**
@@ -27,7 +27,6 @@ import com.ivan.android.manhattanenglish.app.utils.UserCache;
  */
 public class LoginActivity extends BaseActivity {
 
-    public final static String LOGIN_SETTING_NAME = "login_setting";
     public final static String AUTO_LOGIN_KEY = "auto_login";
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -51,7 +50,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        autoLogin = getSharedPreferences(LOGIN_SETTING_NAME, MODE_PRIVATE).getBoolean(AUTO_LOGIN_KEY, false);
+        autoLogin = PreferencesUtil.getBoolean(AUTO_LOGIN_KEY, false);
 
         titleBar = (TitleBar) findViewById(R.id.login_title_bar);
         titleBar.setRightButtonOnClickListener(new View.OnClickListener() {
@@ -62,7 +61,10 @@ public class LoginActivity extends BaseActivity {
         });
 
         mTelView = (EditText) findViewById(R.id.user_name);
+        mTelView.setText(UserCache.getLoginName());
+
         mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView.setText(UserCache.getPassword());
 
         //init check box
         mAutoLoginCheckbox = (CheckBox) findViewById(R.id.auto_login);
@@ -71,8 +73,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 autoLogin = isChecked;
-                SharedPreferences.Editor editor = getSharedPreferences(LOGIN_SETTING_NAME, MODE_PRIVATE).edit();
-                editor.putBoolean(AUTO_LOGIN_KEY, isChecked).commit();
+                PreferencesUtil.putBoolean(AUTO_LOGIN_KEY, isChecked);
             }
         });
 
@@ -93,6 +94,10 @@ public class LoginActivity extends BaseActivity {
                 attemptLogin();
             }
         });
+
+        if (autoLogin) {
+            attemptLogin();
+        }
 
     }
 
@@ -179,8 +184,15 @@ public class LoginActivity extends BaseActivity {
             hideLoadingDialog();
             if (user != null) {
                 UserCache.setCurrentUser(user);
+                UserCache.setLoginName(mTel);
+                UserCache.setPassword(mPassword);
+
                 finish();
-                navigate(StudentHomeActivity.class);
+                if (User.USER_TYPE_TEACHER.equals(user.getType())) {
+                    navigate(TeacherActivity.class);
+                } else {
+                    navigate(StudentHomeActivity.class);
+                }
             } else {
                 Toast.makeText(LoginActivity.this, R.string.error_incorrect_login_info, Toast.LENGTH_SHORT).show();
             }

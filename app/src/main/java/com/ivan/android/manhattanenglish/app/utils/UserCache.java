@@ -11,6 +11,8 @@ import com.ivan.android.manhattanenglish.app.remote.user.User;
 public class UserCache {
     private static User currentUser;
     private final static String USER_CACHE = "USER_CACHE";
+    private final static String LOGIN_NAME = "LOGIN_NAME";
+    private final static String PASSWORD = "PASSWORD";
 
     public static void setCurrentUser(User user) {
         currentUser = user;
@@ -29,5 +31,21 @@ public class UserCache {
 
     public static String getUserId() {
         return currentUser == null ? null : currentUser.getUserId();
+    }
+
+    public static void setLoginName(String tel) {
+        PreferencesUtil.putString(LOGIN_NAME, tel);
+    }
+
+    public static void setPassword(String psw) {
+        PreferencesUtil.putString(PASSWORD, psw);
+    }
+
+    public static String getLoginName() {
+        return PreferencesUtil.getString(LOGIN_NAME, "");
+    }
+
+    public static String getPassword() {
+        return PreferencesUtil.getString(PASSWORD, "");
     }
 }

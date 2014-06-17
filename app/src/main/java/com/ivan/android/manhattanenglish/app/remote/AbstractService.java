@@ -62,7 +62,7 @@ public class AbstractService {
             throw new RuntimeException(entity.getStatusCode().getReasonPhrase());
         }
         HttpHeaders headers = entity.getHeaders();
-        String exception = headers.getFirst("midhException");
+        String exception = headers.getFirst("ErrorMsg");
         if (exception != null && !"".equals(exception)) {
             try {
                 exception = URLDecoder.decode(exception, "UTF-8");

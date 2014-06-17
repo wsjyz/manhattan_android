@@ -43,7 +43,7 @@ public class User {
 
     private String address;
 
-    private Integer credits;
+    private int credits;
 
     /**
      * 钱包余额
@@ -164,11 +164,11 @@ public class User {
         this.type = type;
     }
 
-    public Integer getCredits() {
+    public int getCredits() {
         return credits;
     }
 
-    public void setCredits(Integer credits) {
+    public void setCredits(int credits) {
         this.credits = credits;
     }
 

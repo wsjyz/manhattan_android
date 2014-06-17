@@ -3,6 +3,7 @@ package com.ivan.android.manhattanenglish.app.core.course;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -70,7 +71,9 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
                 }
             }
         });
+
         courseListView.setOnItemClickListener(this);
+        new CourseLoadTask().execute(page);
     }
 
     @Override
@@ -90,7 +93,7 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
                 CourseService courseService = ServiceFactory.getService(CourseService.class);
                 return courseService.loadNiceCourse(param);
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e("NiceCourseActivity", "courseService.loadNiceCourse error..", e);
             }
             return null;
         }

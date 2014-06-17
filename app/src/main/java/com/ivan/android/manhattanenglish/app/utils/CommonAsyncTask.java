@@ -23,6 +23,10 @@ public abstract class CommonAsyncTask<Params, Process, Result> extends AsyncTask
         this.context = context;
     }
 
+    private boolean hasError = false;
+
+    private String errorMsg;
+
     protected void showLoadingDialog() {
         CharSequence message = context.getText(R.string.loading_text);
         if (progressDialog == null) {
@@ -47,7 +51,8 @@ public abstract class CommonAsyncTask<Params, Process, Result> extends AsyncTask
             result = getResultInBackground(params);
         } catch (Exception e) {
             Log.e("CommonAsyncTask", "error when doing background job.", e);
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            hasError = true;
+            errorMsg = e.getMessage();
         }
         return result;
     }
@@ -62,5 +67,8 @@ public abstract class CommonAsyncTask<Params, Process, Result> extends AsyncTask
     protected void onPostExecute(Result result) {
         super.onPostExecute(result);
         hideLoadingDialog();
+        if (hasError) {
+            Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show();
+        }
     }
 }

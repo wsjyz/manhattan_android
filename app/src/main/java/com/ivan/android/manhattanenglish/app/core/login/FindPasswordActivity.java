@@ -3,6 +3,7 @@ package com.ivan.android.manhattanenglish.app.core.login;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,10 +12,13 @@ import android.widget.Toast;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.LoginService;
 import com.ivan.android.manhattanenglish.app.remote.user.User;
+import com.ivan.android.manhattanenglish.app.utils.BooleanUtils;
 import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.ivan.android.manhattanenglish.app.utils.FormValidator;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
 public class FindPasswordActivity extends BaseActivity {
 
@@ -34,6 +38,7 @@ public class FindPasswordActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_password);
+        loginService = ServiceFactory.getService(LoginService.class);
 
         mTelView = (EditText) findViewById(R.id.user_name);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -60,6 +65,14 @@ public class FindPasswordActivity extends BaseActivity {
                             String mobile = params[0];
                             return loginService.getAuthCode(mobile);
                         }
+
+                        @Override
+                        protected void onPostExecute(String s) {
+                            super.onPostExecute(s);
+                            if (!TextUtils.isEmpty(s)) {
+                                Toast.makeText(FindPasswordActivity.this, "验证码：" + s, Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }.execute(tel);
                 }
             }
@@ -70,27 +83,31 @@ public class FindPasswordActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (checkTel() && checkPassword() && checkAuthCode()) {
-                    String tel = mTelView.getText().toString();
-                    String psw = mPasswordView.getText().toString();
-                    String authCode = mAuthCodeView.getText().toString();
+                    final String tel = mTelView.getText().toString();
+                    final String psw = mPasswordView.getText().toString();  //new password
+                    final String authCode = mAuthCodeView.getText().toString();
 
-                    new CommonAsyncTask<String, Void, Void>(FindPasswordActivity.this) {
+                    new CommonAsyncTask<String, Void, Boolean>(FindPasswordActivity.this) {
                         @Override
-                        protected Void getResultInBackground(String... params) {
-                            String tel = params[0];
-                            String psw = params[1];
-                            String authCode = params[2];
-                            loginService.resetPassword(tel, psw, authCode);
-                            return null;
+                        protected Boolean getResultInBackground(String... params) {
+                            Log.i("FindPasswordActivity", "reset newpsw " + psw + " for tel " + tel);
+                            return loginService.resetPassword(tel, psw, authCode);
                         }
 
                         @Override
-                        protected void onPostExecute(Void aVoid) {
-                            super.onPostExecute(aVoid);
-                            Toast.makeText(FindPasswordActivity.this, R.string.password_reset_success, Toast.LENGTH_SHORT).show();
-                            finish();
+                        protected void onPostExecute(Boolean aBoolean) {
+                            super.onPostExecute(aBoolean);
+                            if (BooleanUtils.toBoolean(aBoolean)) {
+                                UserCache.setLoginName(tel);
+                                UserCache.setPassword(psw);
+
+                                Toast.makeText(FindPasswordActivity.this, R.string.password_reset_success, Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(FindPasswordActivity.this, "重置密码失败", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }.execute(tel, psw, authCode);
+                    }.execute();
                 }
 
             }
@@ -121,7 +138,7 @@ public class FindPasswordActivity extends BaseActivity {
         boolean valid = false;
         if (TextUtils.isEmpty(psw)) {
             mPasswordView.setError(getString(R.string.error_password_required));
-        } else if (psw.length() < 8) {
+        } else if (psw.length() < 6) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
         } else {
             valid = true;

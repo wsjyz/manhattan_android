@@ -48,7 +48,7 @@ public class LoginServiceImpl extends AbstractService implements LoginService {
     public Boolean resetPassword(String tel, String newPassword, String authCode) {
         String action = "/user/resetPassword";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("mobile", tel);
+        params.put("tel", tel);
         params.put("newPassword", newPassword);
         params.put("authCode", authCode);
 

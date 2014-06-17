@@ -103,7 +103,9 @@ public class StudentInfoActivity extends BaseActivity implements LoaderManager.L
         mAddress.setText(mUser.getAddress());
 
         mCredits.setText(String.valueOf(mUser.getCredits()));
-        mVipExpired.setText(DateFormat.format("yyyy-MM-dd", mUser.getVipExpiredTime()));
+        if (mUser.getVipExpiredTime() != null) {
+            mVipExpired.setText(DateFormat.format("yyyy-MM-dd", mUser.getVipExpiredTime()));
+        }
     }
 
 }

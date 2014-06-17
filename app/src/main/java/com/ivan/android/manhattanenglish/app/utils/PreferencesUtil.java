@@ -45,4 +45,12 @@ public class PreferencesUtil {
     public static float getFloat(String key, float defValue) {
         return sp.getFloat(key, defValue);
     }
+
+    public static void remove(String key) {
+        sp.edit().remove(key).commit();
+    }
+
+    public static void clear() {
+        sp.edit().clear().commit();
+    }
 }
