@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * 精品课程
  */
-public class CourseActivity extends BaseActivity implements AdapterView.OnItemClickListener {
+public class NiceCourseActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     PullToRefreshListView courseListView;
 
     OpenPage<Course> page;
@@ -63,7 +63,7 @@ public class CourseActivity extends BaseActivity implements AdapterView.OnItemCl
                     new CourseLoadTask().execute(page);
                 } else {
                     courseListView.onRefreshComplete();
-                    Toast.makeText(CourseActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NiceCourseActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
                 }
             }
         });

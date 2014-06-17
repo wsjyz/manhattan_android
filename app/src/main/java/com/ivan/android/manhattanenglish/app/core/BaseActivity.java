@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.ivan.android.manhattanenglish.app.R;
-import com.ivan.android.manhattanenglish.app.core.course.CourseActivity;
+import com.ivan.android.manhattanenglish.app.core.course.NiceCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.course.CourseDetailActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
@@ -57,7 +57,7 @@ public class BaseActivity extends FragmentActivity {
             openActivitySet.add(MoreInfoActivity.class);
             openActivitySet.add(WelcomeActivity.class);
 
-            openActivitySet.add(CourseActivity.class);
+            openActivitySet.add(NiceCourseActivity.class);
             openActivitySet.add(CourseDetailActivity.class);
             openActivitySet.add(TeacherActivity.class);
             openActivitySet.add(TeacherDetailInfoActivity.class);

@@ -55,7 +55,7 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
 
     String selectedSex;
 
-    String selecteMethod;
+    String selectedMethod;
 
     Date selectedDate;
 
@@ -183,12 +183,12 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
             pickTeachMethodDialog.setPickMethodEvent(new PickTeachMethodDialog.PickMethodEvent() {
                 @Override
                 public void onMethodPicked(String method) {
-                    selecteMethod = method;
+                    selectedMethod = method;
                 }
             });
         }
 
-        pickTeachMethodDialog.setSelectedMethod(selecteMethod);
+        pickTeachMethodDialog.setSelectedMethod(selectedMethod);
         return pickTeachMethodDialog;
     }
 }

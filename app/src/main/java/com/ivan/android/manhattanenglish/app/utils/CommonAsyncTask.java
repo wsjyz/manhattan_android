@@ -3,6 +3,8 @@ package com.ivan.android.manhattanenglish.app.utils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
 
@@ -44,8 +46,8 @@ public abstract class CommonAsyncTask<Params, Process, Result> extends AsyncTask
         try {
             result = getResultInBackground(params);
         } catch (Exception e) {
-            e.printStackTrace();
-            //todo handle exception
+            Log.e("CommonAsyncTask", "error when doing background job.", e);
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         return result;
     }

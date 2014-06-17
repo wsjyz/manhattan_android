@@ -10,7 +10,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
@@ -89,8 +91,6 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 attemptLogin();
-                finish();
-                navigate(StudentHomeActivity.class);
             }
         });
 
@@ -137,7 +137,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() >= 8;
+        return password.length() >= 6;
     }
 
 
@@ -182,8 +182,7 @@ public class LoginActivity extends BaseActivity {
                 finish();
                 navigate(StudentHomeActivity.class);
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                Toast.makeText(LoginActivity.this, R.string.error_incorrect_login_info, Toast.LENGTH_SHORT).show();
             }
         }
 

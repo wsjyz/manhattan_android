@@ -1,5 +1,7 @@
 package com.ivan.android.manhattanenglish.app.remote;
 
+import android.text.TextUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.ivan.android.manhattanenglish.app.utils.UserCache;
@@ -74,12 +76,18 @@ public class AbstractService {
     private <T> T convertToObject(Class<T> clazz, ResponseEntity<String> entity) {
         checkResponse(entity);
         String body = entity.getBody();
+        if (clazz.equals(String.class)) {
+            body = "\"" + body + "\"";
+        }
         return JSON.parseObject(body, clazz);
     }
 
     private <T> T convertToObject(Type type, ResponseEntity<String> entity) {
         checkResponse(entity);
         String body = entity.getBody();
+        if (type.equals(String.class)) {
+            body = "\"" + body + "\"";
+        }
         return JSON.parseObject(body, type);
     }
 
@@ -120,7 +128,9 @@ public class AbstractService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Connection", "Close");//avoid EOFException
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-        body.set("userId", UserCache.getCurrentUser().getUserId());
+        if (!TextUtils.isEmpty(UserCache.getUserId())) {
+            body.set("userId", UserCache.getUserId());
+        }
         if (MapUtils.isNotEmpty(uriVariables)) {
             for (String key : uriVariables.keySet()) {
                 body.set(key, uriVariables.get(key));
@@ -137,7 +147,9 @@ public class AbstractService {
         headers.set("Connection", "Close");//avoid EOFException
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<String, Object>();
         body.set("file", fileResource);
-        body.set("userId", UserCache.getCurrentUser().getUserId());
+        if (!TextUtils.isEmpty(UserCache.getUserId())) {
+            body.set("userId", UserCache.getUserId());
+        }
         if (MapUtils.isNotEmpty(variables)) {
             for (String key : variables.keySet()) {
                 body.set(key, variables.get(key));

@@ -87,7 +87,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.course.CourseActivity"
+            android:name=".core.course.NiceCourseActivity"
             android:label="@string/title_activity_course"
             android:screenOrientation="portrait" >
         </activity>

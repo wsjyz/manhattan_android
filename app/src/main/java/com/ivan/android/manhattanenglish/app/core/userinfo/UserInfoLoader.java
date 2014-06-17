@@ -4,7 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.User;
+import com.ivan.android.manhattanenglish.app.remote.user.UserService;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
 import java.util.Date;
 
@@ -21,19 +24,16 @@ public class UserInfoLoader extends CommonDataLoader<User> {
 
     @Override
     public User loadInBackground() {
-        //todo load user info from server
-        Log.i("studentInfoActivity", "loadInBackground.");
-
-        User user = new User();
-        user.setUserId("test");
-        user.setUserName("Ivan");
-        user.setSex("MALE");
-        user.setMobile("18616905120");
-        user.setEmail("ivan.vigoss88@gmail.com");
-        user.setCredits(1000);
-        user.setVip(true);
-        user.setVipExpiredTime(new Date());
-
+        UserService userService = ServiceFactory.getService(UserService.class);
+        User user = null;
+        try {
+            user = userService.loadUser(UserCache.getUserId());
+            if (user != null) {
+                UserCache.setCurrentUser(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return user;
     }
 }

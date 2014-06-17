@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.ivan.android.manhattanenglish.app.core.course.CourseActivity">
+    tools:context="com.ivan.android.manhattanenglish.app.core.course.NiceCourseActivity">
 
 
     <com.ivan.android.manhattanenglish.app.customviews.TitleBar

@@ -2,6 +2,7 @@ package com.ivan.android.manhattanenglish.app.remote.course;
 
 import android.text.format.DateFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  * Date: 14-5-7
  * Time: PM9:08
  */
-public class Course {
+public class Course implements Serializable{
     private String courseId;
 
     private String classNum;

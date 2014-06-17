@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,7 +108,7 @@ public class StudentRegisterFragment extends Fragment {
         mTelView.setError(null);
 
         boolean valid = false;
-        if (!FormValidator.isStringNotBlank(tel)) {
+        if (TextUtils.isEmpty(tel)) {
             mTelView.setError(mContext.getString(R.string.error_tel_required));
         } else if (!FormValidator.isMobileNumber(tel)) {
             mTelView.setError(mContext.getString(R.string.error_invalid_tel));
@@ -122,9 +123,9 @@ public class StudentRegisterFragment extends Fragment {
         String psw = mPasswordView.getText().toString();
 
         boolean valid = false;
-        if (!FormValidator.isStringNotBlank(psw)) {
+        if (TextUtils.isEmpty(psw)) {
             mPasswordView.setError(mContext.getString(R.string.error_password_required));
-        } else if (psw.length() < 8) {
+        } else if (psw.length() < 6) {
             mPasswordView.setError(mContext.getString(R.string.error_invalid_password));
         } else {
             valid = true;
@@ -136,7 +137,7 @@ public class StudentRegisterFragment extends Fragment {
         String authCode = mAuthCodeView.getText().toString();
 
         boolean valid = false;
-        if (!FormValidator.isStringNotBlank(authCode)) {
+        if (TextUtils.isEmpty(authCode)) {
             mAuthCodeView.setError(mContext.getString(R.string.error_auth_code_required));
         } else {
             valid = true;

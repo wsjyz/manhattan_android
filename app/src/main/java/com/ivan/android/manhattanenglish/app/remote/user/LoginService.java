@@ -11,8 +11,8 @@ public interface LoginService {
 
     String getAuthCode(String tel);
 
-    void register(String tel, String password, String authCode, String type);
+    Boolean register(String tel, String password, String authCode, String type);
 
-    void resetPassword(String tel, String newPassword, String authCode);
+    Boolean resetPassword(String tel, String newPassword, String authCode);
 
 }

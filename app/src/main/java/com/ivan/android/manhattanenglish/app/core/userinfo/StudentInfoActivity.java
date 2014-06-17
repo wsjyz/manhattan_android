@@ -21,8 +21,6 @@ import com.squareup.picasso.Picasso;
  */
 public class StudentInfoActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<User> {
 
-    public final static String ARG_USER_ID = "USER_ID";
-
     ImageView mAvatar;
 
     TextView mUserName;

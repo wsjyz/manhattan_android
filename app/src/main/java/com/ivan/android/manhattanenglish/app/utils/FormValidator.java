@@ -13,8 +13,4 @@ public class FormValidator {
     public static boolean isMobileNumber(String number) {
         return mobileNumberPattern.matcher(number).matches();
     }
-
-    public static boolean isStringNotBlank(String string) {
-        return string != null && "".equals(string);
-    }
 }

@@ -2,6 +2,7 @@ package com.ivan.android.manhattanenglish.app.core.login;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -103,7 +104,7 @@ public class FindPasswordActivity extends BaseActivity {
         mTelView.setError(null);
 
         boolean valid = false;
-        if (!FormValidator.isStringNotBlank(tel)) {
+        if (TextUtils.isEmpty(tel)) {
             mTelView.setError(getString(R.string.error_tel_required));
         } else if (!FormValidator.isMobileNumber(tel)) {
             mTelView.setError(getString(R.string.error_invalid_tel));
@@ -118,7 +119,7 @@ public class FindPasswordActivity extends BaseActivity {
         String psw = mPasswordView.getText().toString();
 
         boolean valid = false;
-        if (!FormValidator.isStringNotBlank(psw)) {
+        if (TextUtils.isEmpty(psw)) {
             mPasswordView.setError(getString(R.string.error_password_required));
         } else if (psw.length() < 8) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
@@ -132,7 +133,7 @@ public class FindPasswordActivity extends BaseActivity {
         String authCode = mAuthCodeView.getText().toString();
 
         boolean valid = false;
-        if (!FormValidator.isStringNotBlank(authCode)) {
+        if (TextUtils.isEmpty(authCode)) {
             mAuthCodeView.setError(getString(R.string.error_auth_code_required));
         } else {
             valid = true;

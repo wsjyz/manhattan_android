@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
@@ -160,35 +161,59 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
                 String mobile = params[0];
                 return loginService.getAuthCode(mobile);
             }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+            }
         }.execute(tel);
     }
 
     @Override
     public void register(String tel, final String password, String authCode) {
-        new CommonAsyncTask<String, Void, Void>(this) {
+        new CommonAsyncTask<String, Void, Boolean>(this) {
             @Override
-            protected Void getResultInBackground(String... params) {
+            protected Boolean getResultInBackground(String... params) {
                 String tel = params[0];
                 String psw = params[1];
                 String authCode = params[2];
-                loginService.register(tel, psw, authCode, User.USER_TYPE_STUDENT);
-                return null;
+                return loginService.register(tel, psw, authCode, User.USER_TYPE_STUDENT);
             }
 
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                super.onPostExecute(aBoolean);
+                if (aBoolean != null && aBoolean) {
+                    finish();
+                    Toast.makeText(RegisterActivity.this, R.string.register_success, Toast.LENGTH_SHORT).show();
+                }
+            }
         }.execute(tel, password, authCode);
+
+
     }
 
     @Override
     public void beVip(String tel, String password, String authCode) {
-        new CommonAsyncTask<String, Void, Void>(this) {
+        new CommonAsyncTask<String, Void, Boolean>(this) {
             @Override
-            protected Void getResultInBackground(String... params) {
+            protected Boolean getResultInBackground(String... params) {
                 String tel = params[0];
                 String psw = params[1];
                 String authCode = params[2];
-                loginService.register(tel, psw, authCode, User.USER_TYPE_VIP_STUDENT);
-                return null;
+                return loginService.register(tel, psw, authCode, User.USER_TYPE_VIP_STUDENT);
             }
+
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                super.onPostExecute(aBoolean);
+                if (aBoolean != null && aBoolean) {
+                    finish();
+                    Toast.makeText(RegisterActivity.this, R.string.register_success, Toast.LENGTH_SHORT).show();
+                }
+            }
+
         }.execute(tel, password, authCode);
     }
 }

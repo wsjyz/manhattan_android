@@ -40,7 +40,7 @@
                 android:id="@+id/nick_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Ivan Vigoss"
+                android:text=""
                 android:textSize="@dimen/info_title_text_size"
                 android:textColor="@color/common_text_color"
                 android:layout_marginRight="@dimen/common_margin"

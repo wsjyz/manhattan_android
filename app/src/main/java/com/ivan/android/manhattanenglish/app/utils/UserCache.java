@@ -26,4 +26,8 @@ public class UserCache {
         }
         return currentUser;
     }
+
+    public static String getUserId() {
+        return currentUser == null ? null : currentUser.getUserId();
+    }
 }

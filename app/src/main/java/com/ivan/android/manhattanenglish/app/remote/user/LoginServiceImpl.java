@@ -27,17 +27,31 @@ public class LoginServiceImpl extends AbstractService implements LoginService {
     @Override
     public String getAuthCode(String tel) {
         String action = "/user/getAuthCode";
-        return postForObject(String.class, getUrl(action), null);
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("tel", tel);
+        return postForObject(String.class, getUrl(action), params);
     }
 
     @Override
-    public void register(String tel, String password, String authCode, String type) {
-        String action = "";
+    public Boolean register(String tel, String password, String authCode, String type) {
+        String action = "/user/register";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("mobile", tel);
+        params.put("password", password);
+        params.put("authCode", authCode);
+        params.put("type", type);
 
+        return postForObject(Boolean.class, getUrl(action), params);
     }
 
     @Override
-    public void resetPassword(String tel, String newPassword, String authCode) {
+    public Boolean resetPassword(String tel, String newPassword, String authCode) {
+        String action = "/user/resetPassword";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("mobile", tel);
+        params.put("newPassword", newPassword);
+        params.put("authCode", authCode);
 
+        return postForObject(Boolean.class, getUrl(action), params);
     }
 }

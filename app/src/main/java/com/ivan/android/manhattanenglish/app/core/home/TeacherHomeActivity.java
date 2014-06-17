@@ -8,9 +8,8 @@ import android.widget.Button;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.appoint.StudentListActivity;
-import com.ivan.android.manhattanenglish.app.core.collect.StudentListAdapter;
 import com.ivan.android.manhattanenglish.app.core.collect.StudentListFragment;
-import com.ivan.android.manhattanenglish.app.core.course.CourseActivity;
+import com.ivan.android.manhattanenglish.app.core.course.NiceCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.course.PublishCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.homework.HomeworkActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
@@ -67,7 +66,7 @@ public class TeacherHomeActivity extends BaseActivity {
         mCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(CourseActivity.class);
+                navigate(NiceCourseActivity.class);
             }
         });
 
