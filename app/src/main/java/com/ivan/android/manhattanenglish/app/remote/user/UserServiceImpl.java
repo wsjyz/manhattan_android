@@ -7,7 +7,9 @@ import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,7 +56,23 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
     @Override
     public TeacherDetail loadTeacherDetail(String userId) {
+        String action = "";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("teacherId", userId);
 
         return null;
+    }
+
+
+    @Override
+    public List<Date> loadCourseSchedule(Date startTime, Date endTime) {
+        Type type = new TypeReference<List<Date>>() {
+        }.getType();
+        String action = "/course/getSchedule";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("startTime", JSON.toJSONString(startTime));
+        params.put("endTime", JSON.toJSONString(endTime));
+
+        return postForObject(type, getUrl(action), params);
     }
 }

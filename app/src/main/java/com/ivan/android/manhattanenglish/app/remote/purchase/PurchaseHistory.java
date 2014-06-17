@@ -2,6 +2,8 @@ package com.ivan.android.manhattanenglish.app.remote.purchase;
 
 import android.text.format.DateFormat;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,10 +14,15 @@ import java.util.Date;
  */
 public class PurchaseHistory {
 
+    @JSONField(name = "walletId")
     private String historyId;
 
+    @JSONField(name = "money")
     private BigDecimal cost;
 
+    private String payStatus;
+
+    @JSONField(name = "optTime")
     private Date consumeTime;
 
     public String getHistoryId() {
@@ -40,6 +47,14 @@ public class PurchaseHistory {
 
     public void setConsumeTime(Date consumeTime) {
         this.consumeTime = consumeTime;
+    }
+
+    public String getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(String payStatus) {
+        this.payStatus = payStatus;
     }
 
     public CharSequence getConsumeTimeString() {

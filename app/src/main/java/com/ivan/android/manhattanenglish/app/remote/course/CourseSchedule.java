@@ -1,5 +1,7 @@
 package com.ivan.android.manhattanenglish.app.remote.course;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * @author: Ivan Vigoss
  * Date: 14-5-8
@@ -7,10 +9,11 @@ package com.ivan.android.manhattanenglish.app.remote.course;
  */
 public class CourseSchedule {
 
+    @JSONField(name = "forenoon")
     private boolean atMorning;
-
+    @JSONField(name = "afternoon")
     private boolean atAfternoon;
-
+    @JSONField(name = "aftersix")
     private boolean atNight;
 
     public boolean isAtMorning() {

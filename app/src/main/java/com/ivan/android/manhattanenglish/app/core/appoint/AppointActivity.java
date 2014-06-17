@@ -83,7 +83,7 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo
+
             }
         });
     }

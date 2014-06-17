@@ -1,8 +1,9 @@
 package com.ivan.android.manhattanenglish.app.core.course;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -10,10 +11,17 @@ import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.teacher.TeacherListAdapter;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.course.Course;
+import com.ivan.android.manhattanenglish.app.remote.course.CourseService;
+import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.makeramen.RoundedImageView;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class CourseDetailActivity extends BaseActivity {
 
@@ -30,15 +38,18 @@ public class CourseDetailActivity extends BaseActivity {
     ImageView mAppointBtn;
 
     ListView mTeacherList;
+    TeacherListAdapter mTeacherListAdapter;
+
     TextView mDescription;
+    String courseId;
+    Course mCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
 
-        //todo load course info by courseId
-        String courseId = getIntent().getStringExtra(COURSE_ID_KEY);
+        courseId = getIntent().getStringExtra(COURSE_ID_KEY);
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
@@ -67,43 +78,58 @@ public class CourseDetailActivity extends BaseActivity {
         mAppointBtn = (ImageView) findViewById(R.id.appoint_btn);
 
         mTeacherList = (ListView) findViewById(R.id.teacher_list);
-        //todo teacherlist
+        mTeacherListAdapter = new TeacherListAdapter(this, new ArrayList<TeacherDetail>());
 
         mDescription = (TextView) findViewById(R.id.description);
 
+        new CourseDetailLoadTask(this).execute();
     }
 
 
-    class CourseDetailLoadTask extends AsyncTask<String, Void, Course> {
+    /**
+     * 加载课程详情的任务
+     */
+    class CourseDetailLoadTask extends CommonAsyncTask<String, Void, Course> {
 
+        protected CourseDetailLoadTask(Context context) {
+            super(context);
+        }
 
         @Override
-        protected Course doInBackground(String... params) {
-            //todo load course from server
-            String courseId = params[0];
-
-            return null;
+        protected Course getResultInBackground(String... params) {
+            CourseService courseService = ServiceFactory.getService(CourseService.class);
+            return courseService.loadCourse(courseId);
         }
 
         @Override
         protected void onPostExecute(Course course) {
+            super.onPostExecute(course);
+            mCourse = course;
+            refresh();
+
+        }
+    }
+
+    public void refresh() {
+        if (!TextUtils.isEmpty(mCourse.getImageUrl())) {
             Picasso.with(CourseDetailActivity.this)
-                    .load(course.getImageUrl())
+                    .load(mCourse.getImageUrl())
                     .fit()
                     .into(mCourseImage);
-
-            mClassNum.setText(getTextFromFormat(R.string.label_class_num, course.getClassNum()));
-            mCost.setText(getTextFromFormat(R.string.label_fee, String.valueOf(course.getMoneyCost())));
-            mLocation.setText(getTextFromFormat(R.string.label_teach_location, course.getLocation()));
-
-            mStartTime.setText(getTextFromFormat(R.string.label_course_start_time, course.getStartTimeString()));
-            mEndTime.setText(getTextFromFormat(R.string.label_course_end_time, course.getEndTimeString()));
-
-            mPeriod.setText(getTextFromFormat(R.string.label_course_peroid, String.valueOf(course.getPeroid())));
-            mDescription.setText(course.getDescription());
-
-            super.onPostExecute(course);
         }
+
+        mClassNum.setText(getTextFromFormat(R.string.label_class_num, mCourse.getClassNum()));
+        mCost.setText(getTextFromFormat(R.string.label_fee, String.valueOf(mCourse.getMoneyCost())));
+        mLocation.setText(getTextFromFormat(R.string.label_teach_location, mCourse.getLocation()));
+
+        mStartTime.setText(getTextFromFormat(R.string.label_course_start_time, mCourse.getStartTimeString()));
+        mEndTime.setText(getTextFromFormat(R.string.label_course_end_time, mCourse.getEndTimeString()));
+
+        mPeriod.setText(getTextFromFormat(R.string.label_course_peroid, String.valueOf(mCourse.getPeriod())));
+        mDescription.setText(mCourse.getDescription());
+
+        //todo refresh teacherList
+
     }
 
 }

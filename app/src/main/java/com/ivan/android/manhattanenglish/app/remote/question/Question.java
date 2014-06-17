@@ -47,6 +47,8 @@ public class Question {
 
     private Date createTime;
 
+    private String answerPic;
+
     public String getQuestionId() {
         return questionId;
     }
@@ -152,5 +154,13 @@ public class Question {
 
     public void setAnswerTime(Date answerTime) {
         this.answerTime = answerTime;
+    }
+
+    public String getAnswerPic() {
+        return answerPic;
+    }
+
+    public void setAnswerPic(String answerPic) {
+        this.answerPic = answerPic;
     }
 }

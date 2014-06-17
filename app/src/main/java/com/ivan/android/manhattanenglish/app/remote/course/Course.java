@@ -2,7 +2,10 @@ package com.ivan.android.manhattanenglish.app.remote.course;
 
 import android.text.format.DateFormat;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -13,21 +16,42 @@ import java.util.Date;
 public class Course implements Serializable{
     private String courseId;
 
+    private String courseTitle;
+
+    private String courseSubtitle;
+
     private String classNum;
 
+    @JSONField(name = "coursePic")
     private String imageUrl;
 
-    private int moneyCost;
+    @JSONField(name = "expense")
+    private BigDecimal moneyCost;
 
+    /**
+     * 开课地点
+     */
+    @JSONField(name = "place")
     private String location;
 
     private Date startTime;
 
     private Date endTime;
 
-    private int peroid;
+    private BigDecimal period;
 
+    @JSONField(name = "courseIntro")
     private String description;
+
+    /**
+     * 课程分类
+     */
+    private String courseCategory;
+
+    /**
+     * 教师Id，用逗号分隔
+     */
+    private String teachers;
 
     public String getCourseId() {
         return courseId;
@@ -45,11 +69,11 @@ public class Course implements Serializable{
         this.classNum = classNum;
     }
 
-    public int getMoneyCost() {
+    public BigDecimal getMoneyCost() {
         return moneyCost;
     }
 
-    public void setMoneyCost(int moneyCost) {
+    public void setMoneyCost(BigDecimal moneyCost) {
         this.moneyCost = moneyCost;
     }
 
@@ -77,12 +101,28 @@ public class Course implements Serializable{
         this.endTime = endTime;
     }
 
-    public int getPeroid() {
-        return peroid;
+    public String getCourseTitle() {
+        return courseTitle;
     }
 
-    public void setPeroid(int peroid) {
-        this.peroid = peroid;
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
+    }
+
+    public String getCourseSubtitle() {
+        return courseSubtitle;
+    }
+
+    public void setCourseSubtitle(String courseSubtitle) {
+        this.courseSubtitle = courseSubtitle;
+    }
+
+    public BigDecimal getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(BigDecimal period) {
+        this.period = period;
     }
 
     public String getDescription() {
@@ -107,5 +147,21 @@ public class Course implements Serializable{
 
     public String getEndTimeString() {
         return DateFormat.format("yyyy-MM-dd", endTime).toString();
+    }
+
+    public String getCourseCategory() {
+        return courseCategory;
+    }
+
+    public void setCourseCategory(String courseCategory) {
+        this.courseCategory = courseCategory;
+    }
+
+    public String getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(String teachers) {
+        this.teachers = teachers;
     }
 }

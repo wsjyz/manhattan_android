@@ -1,5 +1,6 @@
 package com.ivan.android.manhattanenglish.app.core.course;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.course.Course;
+import com.ivan.android.manhattanenglish.app.remote.course.CourseService;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.ArrayList;
@@ -73,17 +76,19 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Course item = (Course) mAdapter.getItem(position);
-        //todo navigation to detail page
+        Intent intent = new Intent(this, CourseDetailActivity.class);
+        intent.putExtra(CourseDetailActivity.COURSE_ID_KEY, item.getCourseId());
+        startActivity(intent);
+
     }
 
     class CourseLoadTask extends AsyncTask<OpenPage<Course>, Void, OpenPage<Course>> {
         @Override
         protected OpenPage<Course> doInBackground(OpenPage<Course>... params) {
             OpenPage<Course> param = params[0];
-            param.setRows(null);//empty data
             try {
-                //todo
-                return null;
+                CourseService courseService = ServiceFactory.getService(CourseService.class);
+                return courseService.loadNiceCourse(param);
             } catch (Exception e) {
                 e.printStackTrace();
             }

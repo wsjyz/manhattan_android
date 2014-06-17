@@ -1,6 +1,6 @@
 package com.ivan.android.manhattanenglish.app.remote.course;
 
-import com.ivan.android.manhattanenglish.app.R;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.ivan.android.manhattanenglish.app.remote.user.User;
 
 /**
@@ -10,18 +10,8 @@ import com.ivan.android.manhattanenglish.app.remote.user.User;
  */
 public class TeacherDetail {
 
+    @JSONField(name = "userId")
     private String teacherId;
-
-    private String avatarUrl;
-
-    private String name;
-
-    /**
-     * 性别：
-     * MALE
-     * FEMALE
-     */
-    private String sex;
 
     private String college;
 
@@ -32,8 +22,7 @@ public class TeacherDetail {
      */
     private int rating;
 
-    private String evaluation;
-
+    @JSONField(name = "teachingArea")
     private String availableLocation;
 
     /**
@@ -47,6 +36,10 @@ public class TeacherDetail {
 
     private int collectCount;
 
+    /**
+     * 自我介绍
+     */
+    @JSONField(name = "selfIntroduction")
     private String introduction;
 
     private String requiredLevel;
@@ -58,6 +51,12 @@ public class TeacherDetail {
 
     private int cost;
 
+
+    /**
+     * 教师的用户基本信息
+     */
+    private User user;
+
     public String getTeacherId() {
         return teacherId;
     }
@@ -67,19 +66,11 @@ public class TeacherDetail {
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return user == null ? null : user.getUserName();
     }
 
     public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
+        return user == null ? User.SEX_MALE : user.getSex();
     }
 
     public String getCollege() {
@@ -107,11 +98,7 @@ public class TeacherDetail {
     }
 
     public String getEvaluation() {
-        return evaluation;
-    }
-
-    public void setEvaluation(String evaluation) {
-        this.evaluation = evaluation;
+        return user == null ? null : user.getEvaluation();
     }
 
     public String getAvailableLocation() {
@@ -179,11 +166,7 @@ public class TeacherDetail {
     }
 
     public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+        return user == null ? null : user.getAvatar();
     }
 
     public String getTeachMethod() {
@@ -195,6 +178,14 @@ public class TeacherDetail {
     }
 
     public int getSexDrawableResource() {
-        return User.SEX_FEMALE.equals(sex) ? R.drawable.female : R.drawable.male;
+        return user.getSexDrawableResource();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

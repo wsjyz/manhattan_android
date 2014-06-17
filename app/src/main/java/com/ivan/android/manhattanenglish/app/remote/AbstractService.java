@@ -157,7 +157,8 @@ public class AbstractService {
         }
 
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<MultiValueMap<String, Object>>(body, headers);
-        return restTemplate.postForLocation(url, request).toString();
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+        return response.getBody();
     }
 
     protected String getUrl(String action) {

@@ -3,6 +3,9 @@ package com.ivan.android.manhattanenglish.app.remote.user;
 import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * @author: Ivan Vigoss
  * Date: 14-6-11
@@ -48,4 +51,14 @@ public interface UserService {
      * @return
      */
     TeacherDetail loadTeacherDetail(String userId);
+
+
+    /**
+     * 获得用户的课程日程表
+     *
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    List<Date> loadCourseSchedule(Date startTime, Date endTime);
 }

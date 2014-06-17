@@ -2,6 +2,8 @@ package com.ivan.android.manhattanenglish.app.remote.info;
 
 import android.text.format.DateFormat;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 /**
@@ -11,12 +13,14 @@ import java.util.Date;
  */
 public class Infomation {
 
+    @JSONField(name = "informationid")
     private String id;
 
     private String title;
 
     private String content;
 
+    @JSONField(name = "postTime")
     private Date createTime;
 
     public String getId() {

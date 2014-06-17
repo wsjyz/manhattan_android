@@ -1,6 +1,5 @@
 package com.ivan.android.manhattanenglish.app.remote.course;
 
-import com.ivan.android.manhattanenglish.app.core.appoint.SearchCondition;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 /**
@@ -23,10 +22,10 @@ public interface CourseService {
      * 根据条件搜索课程
      *
      * @param page
-     * @param condition
+     * @param param
      * @return
      */
-    OpenPage<Course> search(OpenPage<Course> page, SearchCondition condition);
+    OpenPage<Course> search(OpenPage<Course> page, QueryParam param);
 
 
     /**
@@ -36,5 +35,13 @@ public interface CourseService {
      * @return
      */
     Course loadCourse(String courseId);
+
+
+    /**
+     * 发布课程
+     *
+     * @param course
+     */
+    void postCourse(Course course);
 
 }

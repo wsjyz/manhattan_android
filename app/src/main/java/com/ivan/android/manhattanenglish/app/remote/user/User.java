@@ -32,7 +32,10 @@ public class User {
      */
     private String type;
 
-    private String sex;
+    /**
+     * 性别，默认SEX_MALE
+     */
+    private String sex = SEX_MALE;
 
     private String mobile;
 

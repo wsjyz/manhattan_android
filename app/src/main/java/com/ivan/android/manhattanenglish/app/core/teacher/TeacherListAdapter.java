@@ -1,6 +1,7 @@
 package com.ivan.android.manhattanenglish.app.core.teacher;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,10 +88,12 @@ public class TeacherListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Picasso.with(context)
-                .load(teacher.getAvatarUrl())
-                .fit()
-                .into(holder.avatar);
+        if (!TextUtils.isEmpty(teacher.getAvatarUrl())) {
+            Picasso.with(context)
+                    .load(teacher.getAvatarUrl())
+                    .fit()
+                    .into(holder.avatar);
+        }
 
         holder.name.setText(getText(R.string.label_class_num, teacher.getName()));
         holder.college.setText(getText(R.string.label_fee, String.valueOf(teacher.getCollege())));
