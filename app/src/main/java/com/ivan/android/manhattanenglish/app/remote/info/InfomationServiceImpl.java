@@ -20,7 +20,7 @@ public class InfomationServiceImpl extends AbstractService implements Infomation
     }.getType();
 
     public OpenPage<Infomation> loadLatestInfomation(OpenPage<Infomation> page) {
-        String action = "/course/getInformations";
+        String action = "/info/getInformations";
         if (page == null) page = new OpenPage<Infomation>();
 
         Map<String, String> params = new HashMap<String, String>();

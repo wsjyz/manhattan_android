@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.remote.info.Infomation;
+import com.ivan.android.manhattanenglish.app.utils.DateFormatUtils;
 
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class InfomationListAdapter extends BaseAdapter {
 
         Infomation infomation = data.get(position);
         holder.title.setText(infomation.getTitle());
-        holder.createTime.setText(infomation.getCreateTimeString());
+        holder.createTime.setText(DateFormatUtils.format(infomation.getCreateTime()));
         holder.content.setText(infomation.getContent());
 
         return convertView;

@@ -2,6 +2,8 @@ package com.ivan.android.manhattanenglish.app.remote;
 
 import com.ivan.android.manhattanenglish.app.remote.course.CourseService;
 import com.ivan.android.manhattanenglish.app.remote.course.CourseServiceImpl;
+import com.ivan.android.manhattanenglish.app.remote.homework.HomeworkService;
+import com.ivan.android.manhattanenglish.app.remote.homework.HomeworkServiceImpl;
 import com.ivan.android.manhattanenglish.app.remote.info.InfomationService;
 import com.ivan.android.manhattanenglish.app.remote.info.InfomationServiceImpl;
 import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
@@ -33,6 +35,7 @@ public class ServiceFactory {
         register(QuestionService.class, new QuestionServiceImpl());
         register(UserService.class, new UserServiceImpl());
         register(CourseService.class, new CourseServiceImpl());
+        register(HomeworkService.class, new HomeworkServiceImpl());
     }
 
 

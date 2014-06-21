@@ -30,7 +30,12 @@ public class UserCache {
     }
 
     public static String getUserId() {
-        return currentUser == null ? null : currentUser.getUserId();
+        return "u1";
+//        return getCurrentUser() == null ? null : getCurrentUser().getUserId();
+    }
+
+    public static void clearUserCache() {
+        PreferencesUtil.remove(USER_CACHE);
     }
 
     public static void setLoginName(String tel) {

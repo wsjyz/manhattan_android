@@ -45,11 +45,13 @@ public class ScheduleClient {
         public void onServiceConnected(ComponentName name, IBinder service) {
             mBoundService = ((ScheduleService.ServiceBinder) service).getService();
             mHandler.sendEmptyMessage(1);
+            mIsBound = true;
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             mBoundService = null;
+            mIsBound = false;
         }
     };
 
@@ -59,15 +61,18 @@ public class ScheduleClient {
 
     public void doBindService() {
         mContext.bindService(new Intent(mContext, ScheduleService.class), serviceConnection, Context.BIND_AUTO_CREATE);
-        mIsBound = true;
     }
 
     public void setAlarmNotification(Calendar date) {
-        if (mBoundService != null) {
+        if (mIsBound) {
             mBoundService.setAlarm(date);
         } else { //waiting for service created
             mWorks.add(date);
         }
+    }
+
+    public boolean isBound() {
+        return mIsBound;
     }
 
     public void setAlarmNotification(Date date) {

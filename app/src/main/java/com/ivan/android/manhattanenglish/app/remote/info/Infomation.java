@@ -1,7 +1,5 @@
 package com.ivan.android.manhattanenglish.app.remote.info;
 
-import android.text.format.DateFormat;
-
 import com.alibaba.fastjson.annotation.JSONField;
 
 import java.util.Date;
@@ -55,7 +53,4 @@ public class Infomation {
         this.createTime = createTime;
     }
 
-    public String getCreateTimeString() {
-        return DateFormat.format("yyyy-MM-dd HH:mm", createTime).toString();
-    }
 }

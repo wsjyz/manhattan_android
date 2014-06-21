@@ -14,15 +14,15 @@
         custom:titleText="@string/title_homework"
         custom:showRight="false" />
 
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/homework_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/common_margin"
         android:divider="@color/border_color"
         android:dividerHeight="1dp"
         android:scrollbars="none"
-        android:choiceMode="none"
-        android:background="@drawable/login_form_border" />
+        android:background="@drawable/login_form_border"
+        />
 
 </LinearLayout>

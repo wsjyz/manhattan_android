@@ -13,8 +13,10 @@ public class TeacherDetail {
     @JSONField(name = "userId")
     private String teacherId;
 
+    @JSONField(name = "finalGraduateSchool")
     private String college;
 
+    @JSONField(name = "specialty")
     private String mainSubject;
 
     /**

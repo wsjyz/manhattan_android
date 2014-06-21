@@ -25,8 +25,7 @@ public class UploadServiceImpl extends AbstractService implements UploadService 
     public String upload(File file) {
         try {
             UrlResource resource = new UrlResource(file.toURI());
-            //todo
-            upload("url", resource, null);
+            multiPartPost("url", resource, null);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

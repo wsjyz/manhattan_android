@@ -8,13 +8,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.ivan.android.manhattanenglish.app.core.MainApplication"
+        android:name=".core.MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.welcome.WelcomeActivity"
+            android:name=".core.welcome.WelcomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
@@ -25,64 +25,65 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.login.LoginActivity"
+            android:name=".core.login.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible" >
+            android:windowSoftInputMode="adjustPan|stateVisible"
+            >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.login.RegisterActivity"
+            android:name=".core.login.RegisterActivity"
             android:label="@string/title_activity_register"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.login.FindPasswordActivity"
+            android:name=".core.login.FindPasswordActivity"
             android:label="@string/title_activity_find_password"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity"
+            android:name=".core.home.StudentHomeActivity"
             android:label="@string/title_activity_student_home"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.home.TeacherHomeActivity"
+            android:name=".core.home.TeacherHomeActivity"
             android:label="@string/title_activity_student_home"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity"
+            android:name=".core.more.MoreInfoActivity"
             android:label="@string/title_activity_more_info"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.more.ContactUsActivity"
+            android:name=".core.more.ContactUsActivity"
             android:label="@string/title_activity_contact_us"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.more.AboutUsActivity"
+            android:name=".core.more.AboutUsActivity"
             android:label="@string/title_activity_about_us"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.info.InfomationActivity"
+            android:name=".core.info.InfomationActivity"
             android:label="@string/title_activity_infomation"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.appoint.AppointActivity"
+            android:name=".core.appoint.AppointActivity"
             android:label="@string/title_activity_appoint"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.homework.HomeworkActivity"
+            android:name=".core.homework.HomeworkActivity"
             android:label="@string/title_activity_homework"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity"
+            android:name=".core.userinfo.StudentInfoActivity"
             android:label="@string/title_activity_student_info"
             android:screenOrientation="portrait" >
         </activity>
@@ -92,27 +93,27 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.course.CourseDetailActivity"
+            android:name=".core.course.CourseDetailActivity"
             android:label="@string/title_activity_course_detail"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity"
+            android:name=".core.teacher.TeacherActivity"
             android:label="@string/title_activity_teacher"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.teacher.TeacherDetailInfoActivity"
+            android:name=".core.teacher.TeacherDetailInfoActivity"
             android:label="@string/title_activity_teacher_detail_info"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.question.AskQuestionActivity"
+            android:name=".core.question.AskQuestionActivity"
             android:label="@string/title_activity_ask_question"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.question.QuestionForStudentActivity"
+            android:name=".core.question.QuestionForStudentActivity"
             android:label="@string/title_activity_question"
             android:screenOrientation="portrait" >
         </activity>
@@ -122,68 +123,72 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.purchase.StudentPurchaseActivity"
+            android:name=".core.purchase.StudentPurchaseActivity"
             android:label="@string/title_activity_student_purchase"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.purchase.TeacherPurchaseActivity"
+            android:name=".core.purchase.TeacherPurchaseActivity"
             android:label="@string/title_activity_student_purchase"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.more.CalendarActivity"
+            android:name=".core.more.CalendarActivity"
             android:label="@string/title_activity_calendar"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.collect.MyCollectForStudentActivity"
+            android:name=".core.collect.MyCollectForStudentActivity"
             android:label="@string/title_activity_student_collect"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.appoint.MyAppointForStudentActivity"
+            android:name=".core.appoint.MyAppointForStudentActivity"
             android:label="@string/title_activity_student_appoint"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.audition.MyAuditionForStudentActivity"
+            android:name=".core.audition.MyAuditionForStudentActivity"
             android:label="@string/title_activity_student_audition"
             android:screenOrientation="portrait" >
         </activity>
 
-        <service android:name="com.ivan.android.manhattanenglish.app.alarm.NoticeService" />
-        <service android:name="com.ivan.android.manhattanenglish.app.alarm.ScheduleService" />
+        <service android:name=".alarm.NoticeService" />
+        <service android:name=".alarm.ScheduleService" />
 
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.appoint.AppointTeacherActivity"
+            android:name=".core.appoint.AppointTeacherActivity"
             android:label="@string/title_activity_appoint_teacher"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.appoint.AppointCourseActivity"
+            android:name=".core.appoint.AppointCourseActivity"
             android:label="@string/title_activity_appoint_course"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.course.PublishCourseActivity"
+            android:name=".core.course.PublishCourseActivity"
             android:label="@string/title_activity_publish_course"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.userinfo.TeacherInfoActivity"
+            android:name=".core.userinfo.TeacherInfoActivity"
             android:label="@string/title_activity_teacher_info"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.appoint.StudentListActivity"
+            android:name=".core.appoint.StudentListActivity"
             android:label="@string/title_activity_my_appoint_for_teacher"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.ivan.android.manhattanenglish.app.core.question.QuestionForTeacherActivity"
+            android:name=".core.question.QuestionForTeacherActivity"
             android:label="@string/title_activity_question_for_teacher"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".core.homework.SubmitHomeworkActivity"
+            android:label="@string/title_activity_submit_homework" >
         </activity>
     </application>
 

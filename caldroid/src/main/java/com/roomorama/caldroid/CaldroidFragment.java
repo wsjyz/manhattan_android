@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -670,6 +671,15 @@ public class CaldroidFragment extends DialogFragment {
             dateTime = dateTime.plusDays(1);
         }
         selectedDates.add(toDateTime);
+    }
+
+    public void setSelectedDates(List<Date> dateList) {
+        if (dateList == null || dateList.size() == 0) return;
+        selectedDates.clear();
+        for (Date date : dateList) {
+            DateTime dateTime = CalendarHelper.convertDateToDateTime(date);
+            selectedDates.add(dateTime);
+        }
     }
 
     /**

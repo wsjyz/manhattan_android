@@ -5,6 +5,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_delete">删除</string>
+    <string name="action_unregister">注销</string>
+
+    <string name="submit">提交</string>
+
+
     <string name="back_button">back</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_section1">Section 1</string>
@@ -24,8 +29,6 @@
     <string name="load_failed">加载失败</string>
     <string name="no_more_data">没有更多数据了！</string>
     <string name="password_reset_success">密码充值成功，请用新密码登录</string>
-    
-    
     <string name="title_activity_student_info">个人资料</string>
     <string name="title_activity_course">精品课程</string>
     <string name="title_activity_course_detail">课程详情</string>
@@ -53,5 +56,9 @@
     <string name="title_my_appoint_student">我的预约</string>
     <string name="title_my_audition_student">我的试听</string>
     <string name="title_activity_question_for_teacher">我要回答</string>
+    <string name="title_activity_submit_homework">提交作业</string>
 
+
+    <!--提示信息-->
+    <string name="info_submit_success">提交成功</string>
 </resources>

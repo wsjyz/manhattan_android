@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.remote.homework.Homework;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,23 +20,35 @@ import java.util.List;
  */
 public class HomeworkListAdapter extends BaseAdapter {
 
-    List<String> contentList;
+    List<Homework> mData;
 
     LayoutInflater mInflater;
 
-    public HomeworkListAdapter(Context context, List<String> contentList) {
-        this.contentList = contentList;
+    public HomeworkListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
+        mData = new ArrayList<Homework>();
     }
+
+    public void clear() {
+        mData.clear();
+    }
+
+    public void addAll(List<Homework> newData) {
+        if (newData != null && newData.size() > 0) {
+            mData.addAll(newData);
+            notifyDataSetChanged();
+        }
+    }
+
 
     @Override
     public int getCount() {
-        return contentList.size();
+        return mData.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return contentList.get(position);
+        return mData.get(position);
     }
 
     @Override
@@ -45,6 +59,7 @@ public class HomeworkListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
+        Homework homework = mData.get(position);
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.homework_list_item, null);
             viewHolder = new ViewHolder();
@@ -54,7 +69,7 @@ public class HomeworkListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.text.setText(contentList.get(position));
+        viewHolder.text.setText(homework.getHomeworkTitle());
         return convertView;
     }
 

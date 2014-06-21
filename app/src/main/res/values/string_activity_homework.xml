@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_input_homework">请输入答案</string>
+    <string name="error_homework_content_required">答案不能为空</string>
+</resources>

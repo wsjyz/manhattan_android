@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -24,6 +25,7 @@ import com.ivan.android.manhattanenglish.app.core.welcome.WelcomeActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +41,8 @@ public class BaseActivity extends FragmentActivity {
     private ProgressDialog progressDialog;
 
     private Set<Class<? extends Activity>> openActivitySet;
+
+    protected Date refreshDate;
 
     private Set<Class<? extends Activity>> getOpenActivitySet() {
         if (openActivitySet == null) {
@@ -76,6 +80,10 @@ public class BaseActivity extends FragmentActivity {
         return true;
     }
 
+    protected CharSequence getRefreshTimeString() {
+        if (refreshDate == null) return null;
+        return DateUtils.getRelativeTimeSpanString(refreshDate.getTime());
+    }
 
     protected void navigate(Class<? extends Activity> activity) {
         Intent intent;

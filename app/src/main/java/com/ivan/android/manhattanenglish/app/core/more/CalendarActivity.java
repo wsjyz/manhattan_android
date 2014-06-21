@@ -1,25 +1,31 @@
 package com.ivan.android.manhattanenglish.app.core.more;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Pair;
 import android.view.View;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.alarm.ScheduleClient;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
+import com.ivan.android.manhattanenglish.app.remote.user.UserService;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.WeekdayArrayAdapter;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class CalendarActivity extends BaseActivity {
 
 
     ScheduleClient mScheduleClient;
+    CaldroidCustomFragment caldroidFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,31 +40,67 @@ public class CalendarActivity extends BaseActivity {
             }
         });
 
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-
         CaldroidFragment.selectedBackgroundDrawable = R.drawable.drawable_light_yellow_circle_bg;
         WeekdayArrayAdapter.weekendTextColor = R.color.weekend_text_color;
 
-        CaldroidCustomFragment caldroidFragment = new CaldroidCustomFragment();
-        //设置周日、周六label的字体
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
 
-        try {
-            caldroidFragment.setSelectedDateStrings("2014-05-05", "2014-05-20", "yyyy-MM-dd");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        caldroidFragment = new CaldroidCustomFragment();
+        transaction.replace(R.id.calendar_container, caldroidFragment).commit();
 
         mScheduleClient = new ScheduleClient(this);
         mScheduleClient.doBindService();
 
+        new CourseScheduleLoadTask(this).execute();
+    }
+
+    public class CourseScheduleLoadTask extends CommonAsyncTask<Void, Void, List<Date>> {
+
+        protected CourseScheduleLoadTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected List<Date> getResultInBackground(Void... params) {
+            UserService userService = ServiceFactory.getService(UserService.class);
+            Pair<Date, Date> datePair = getDateRange();
+            return userService.loadCourseSchedule(datePair.first, datePair.second);
+        }
+
+        @Override
+        protected void onPostExecute(List<Date> dates) {
+            super.onPostExecute(dates);
+            if (dates == null) return;
+
+            caldroidFragment.setSelectedDates(dates);
+            caldroidFragment.refreshView();
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.add(Calendar.DAY_OF_MONTH, -1);
+
+            Date date = calendar.getTime();
+            for (Date d : dates) {
+                if (d.after(date)) {
+                    mScheduleClient.setAlarmNotification(d);
+                }
+            }
+        }
+    }
+
+
+    private Pair<Date, Date> getDateRange() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.SECOND, 15);
+        calendar.add(Calendar.MONTH, -1);
+        Date startTime = calendar.getTime();
 
-        mScheduleClient.setAlarmNotification(calendar);
+        calendar.setTime(new Date());
+        calendar.add(Calendar.MONTH, 1);
+        Date endTime = calendar.getTime();
 
-        transaction.replace(R.id.calendar_container, caldroidFragment).commit();
+        return Pair.create(startTime, endTime);
     }
 
     @Override

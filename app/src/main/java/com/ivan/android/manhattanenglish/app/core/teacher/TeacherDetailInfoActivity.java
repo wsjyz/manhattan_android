@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -105,7 +106,7 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
 
         @Override
         public TeacherDetail loadInBackground() {
-            //todo load teacher from remote server
+
             return null;
         }
 
@@ -130,10 +131,12 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
 
     private void refresh() {
         if (mData == null) return;
-        Picasso.with(this)
-                .load(mData.getAvatarUrl())
-                .fit()
-                .into(mAvatar);
+        if (!TextUtils.isEmpty(mData.getAvatarUrl())) {
+            Picasso.with(this)
+                    .load(mData.getAvatarUrl())
+                    .fit()
+                    .into(mAvatar);
+        }
 
         mTeacherName.setText(mData.getName());
         mCollege.setText(mData.getCollege());

@@ -7,6 +7,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: Ivan Vigoss
@@ -20,6 +21,7 @@ public class Course implements Serializable{
 
     private String courseSubtitle;
 
+    @JSONField(name = "classNo")
     private String classNum;
 
     @JSONField(name = "coursePic")
@@ -52,6 +54,8 @@ public class Course implements Serializable{
      * 教师Id，用逗号分隔
      */
     private String teachers;
+
+    private List<TeacherDetail> teacherDetailList;
 
     public String getCourseId() {
         return courseId;
@@ -163,5 +167,13 @@ public class Course implements Serializable{
 
     public void setTeachers(String teachers) {
         this.teachers = teachers;
+    }
+
+    public List<TeacherDetail> getTeacherDetailList() {
+        return teacherDetailList;
+    }
+
+    public void setTeacherDetailList(List<TeacherDetail> teacherDetailList) {
+        this.teacherDetailList = teacherDetailList;
     }
 }

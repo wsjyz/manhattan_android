@@ -3,10 +3,10 @@ package com.ivan.android.manhattanenglish.app.core.teacher;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -16,13 +16,15 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
-import com.ivan.android.manhattanenglish.app.remote.course.Course;
 import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TeacherActivity extends BaseActivity implements AdapterView.OnItemClickListener {
+
+    public final static String ACTION_PICK_TEACHER = "com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity.ACTION_PICK_TEACHER";
 
     PullToRefreshListView teacherList;
 
@@ -30,22 +32,33 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
 
     EditText searchView;
 
-    ImageView searchBtn;
+    ImageButton searchBtn;
 
     TeacherListAdapter mAdapter;
+
+    String keywords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
 
-
-
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        searchView = (EditText) findViewById(R.id.teacher_search);
+
+        searchBtn = (ImageButton) findViewById(R.id.search_img_button);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                keywords = searchView.getText().toString();
+                new TeacherLoadTask().execute(page);
             }
         });
 
@@ -56,21 +69,25 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
 
         teacherList.setAdapter(mAdapter);
 
-        teacherList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+        teacherList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 page.setPageNo(1);
-                mAdapter.clear();
+                if (refreshDate != null) {
+                    CharSequence label = getRefreshTimeString();
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+                }
                 new TeacherLoadTask().execute(page);
             }
+        });
 
+        teacherList.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onLastItemVisible() {
                 if (page.hasNext()) {
                     page.setPageNo(page.getPageNo() + 1);
                     new TeacherLoadTask().execute(page);
                 } else {
-                    teacherList.onRefreshComplete();
                     Toast.makeText(TeacherActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -83,17 +100,16 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         TeacherDetail item = (TeacherDetail) mAdapter.getItem(position);
-        if(Intent.ACTION_PICK.equals(getIntent().getAction())){
+        if (ACTION_PICK_TEACHER.equals(getIntent().getAction())) {
             Intent result = new Intent();
-            result.putExtra("teacherId",item.getTeacherId());
-            result.putExtra("teacherName",item.getName());
-            setResult(0,result);
-        }else{
+            result.putExtra("teacherId", item.getTeacherId());
+            result.putExtra("teacherName", item.getName());
+            setResult(0, result);
+        } else {
             //todo navigation to detail page
 
         }
     }
-
 
 
     class TeacherLoadTask extends AsyncTask<OpenPage<TeacherDetail>, Void, OpenPage<TeacherDetail>> {
@@ -111,12 +127,15 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
         }
 
         @Override
-        protected void onPostExecute(OpenPage<TeacherDetail> teacherPage) {
-            if (teacherPage != null) {
-                page = teacherPage;
-                mAdapter.addAll(page.getRows());
+        protected void onPostExecute(OpenPage<TeacherDetail> openPage) {
+            if (openPage != null) {
+                if (openPage.getPageNo() == 1) {
+                    mAdapter.clear();
+                }
+                mAdapter.addAll(openPage.getRows());
             }
             teacherList.onRefreshComplete();
+            refreshDate = new Date();
         }
     }
 }

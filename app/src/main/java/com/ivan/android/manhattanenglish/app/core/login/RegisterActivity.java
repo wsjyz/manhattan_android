@@ -1,13 +1,11 @@
 package com.ivan.android.manhattanenglish.app.core.login;
 
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,10 +15,9 @@ import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.LoginService;
-import com.ivan.android.manhattanenglish.app.remote.user.User;
 import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 
-public class RegisterActivity extends BaseActivity implements StudentRegisterFragment.RegisterListener {
+public class RegisterActivity extends BaseActivity implements RegisterFragment.RegisterListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -142,7 +139,7 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
 
         @Override
         public Fragment getItem(int position) {
-            return new StudentRegisterFragment();
+            return position == 0 ? new StudentRegisterFragment() : new TeacherRegisterFragment();
         }
 
         @Override
@@ -171,14 +168,15 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
     }
 
     @Override
-    public void register(String tel, final String password, String authCode) {
+    public void register(String tel, final String password, String authCode, String userType) {
         new CommonAsyncTask<String, Void, Boolean>(this) {
             @Override
             protected Boolean getResultInBackground(String... params) {
                 String tel = params[0];
                 String psw = params[1];
                 String authCode = params[2];
-                return loginService.register(tel, psw, authCode, User.USER_TYPE_STUDENT);
+                String userType = params[3];
+                return loginService.register(tel, psw, authCode, userType);
             }
 
             @Override
@@ -189,31 +187,8 @@ public class RegisterActivity extends BaseActivity implements StudentRegisterFra
                     Toast.makeText(RegisterActivity.this, R.string.register_success, Toast.LENGTH_SHORT).show();
                 }
             }
-        }.execute(tel, password, authCode);
+        }.execute(tel, password, authCode, userType);
 
 
-    }
-
-    @Override
-    public void beVip(String tel, String password, String authCode) {
-        new CommonAsyncTask<String, Void, Boolean>(this) {
-            @Override
-            protected Boolean getResultInBackground(String... params) {
-                String tel = params[0];
-                String psw = params[1];
-                String authCode = params[2];
-                return loginService.register(tel, psw, authCode, User.USER_TYPE_VIP_STUDENT);
-            }
-
-            @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                super.onPostExecute(aBoolean);
-                if (aBoolean != null && aBoolean) {
-                    finish();
-                    Toast.makeText(RegisterActivity.this, R.string.register_success, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        }.execute(tel, password, authCode);
     }
 }

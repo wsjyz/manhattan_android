@@ -1,6 +1,7 @@
 package com.ivan.android.manhattanenglish.app.remote;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -30,7 +31,7 @@ import java.util.Map;
  */
 public class AbstractService {
     //    public final static String HOST = "http://1.manhattandev.sinaapp.com/";
-    public final static String HOST = "http://203.195.131.34:8080/mhd/";
+    public final static String HOST = "http://203.195.131.34:8080/mhd";
 
 
     public final static Type STRING_MAP = new TypeReference<Map<String, String>>() {
@@ -138,15 +139,22 @@ public class AbstractService {
         }
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(body, headers);
-
-        return restTemplate.postForEntity(url, request, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+        Log.i("RestTemplate", "request url: " + url
+                + "\n request: " + JSON.toJSONString(uriVariables)
+                + "\n statusCode:" + response.getStatusCode()
+                + "\n userId: " + UserCache.getUserId()
+                + "\n response: " + response.getBody());
+        return response;
     }
 
-    protected String upload(String url, Resource fileResource, Map<String, String> variables) {
+    protected String multiPartPost(String url, Resource fileResource, Map<String, String> variables) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Connection", "Close");//avoid EOFException
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<String, Object>();
-        body.set("file", fileResource);
+        if (fileResource != null) {
+            body.set("file", fileResource);
+        }
         if (!TextUtils.isEmpty(UserCache.getUserId())) {
             body.set("userId", UserCache.getUserId());
         }
@@ -158,6 +166,14 @@ public class AbstractService {
 
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<MultiValueMap<String, Object>>(body, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+        Log.i("RestTemplate", "request url: " + url
+                + "\n request: " + JSON.toJSONString(variables)
+                + "\n statusCode:" + response.getStatusCode()
+                + "\n file: " + (fileResource == null ? "not specified." : fileResource.getFilename())
+                + "\n userId: " + UserCache.getUserId()
+                + "\n response: " + response.getBody());
+
         return response.getBody();
     }
 

@@ -3,11 +3,14 @@ package com.ivan.android.manhattanenglish.app.core.more;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.login.LoginActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
 public class MoreInfoActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
@@ -15,6 +18,8 @@ public class MoreInfoActivity extends BaseActivity implements AdapterView.OnItem
     ListView menuListView;
 
     String[] menuArray;
+
+    Button mUnregisterBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,15 @@ public class MoreInfoActivity extends BaseActivity implements AdapterView.OnItem
         menuListView = (ListView) findViewById(R.id.menu_list);
         menuListView.setAdapter(new MenuListAdapter(this, menuArray));
         menuListView.setOnItemClickListener(this);
+
+        mUnregisterBtn = (Button) findViewById(R.id.unregister_button);
+        mUnregisterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserCache.clearUserCache();
+                finish();
+            }
+        });
     }
 
     @Override

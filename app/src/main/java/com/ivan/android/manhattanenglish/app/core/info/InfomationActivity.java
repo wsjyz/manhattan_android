@@ -31,7 +31,6 @@ public class InfomationActivity extends BaseActivity {
 
     InfomationListAdapter mAdapter;
 
-    Date refreshDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,52 +51,47 @@ public class InfomationActivity extends BaseActivity {
 
 
         infoListView = (PullToRefreshListView) findViewById(R.id.info_list);
-        mAdapter = new InfomationListAdapter(this, new ArrayList<Infomation>());
-        infoListView.setAdapter(mAdapter);
-        infoListView.setEmptyView(getEmptyView());
 
-
-        infoListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+        infoListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 page.setPageNo(1);
-                mAdapter.clear();
                 if (refreshDate != null) {
-                    CharSequence label = DateUtils.getRelativeTimeSpanString(refreshDate.getTime());
+                    CharSequence label = getRefreshTimeString();
                     refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 }
                 new InfomationLoadTask().execute(page);
             }
 
+        });
+
+        infoListView.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onLastItemVisible() {
                 if (page.hasNext()) {
                     page.setPageNo(page.getPageNo() + 1);
                     new InfomationLoadTask().execute(page);
                 } else {
-                    infoListView.onRefreshComplete();
                     Toast.makeText(InfomationActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        mAdapter = new InfomationListAdapter(this, new ArrayList<Infomation>());
+        infoListView.setAdapter(mAdapter);
+        infoListView.setEmptyView(getEmptyView());
 
         new InfomationLoadTask().execute(page);
 
     }
 
     class InfomationLoadTask extends AsyncTask<OpenPage<Infomation>, Void, OpenPage<Infomation>> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            showLoadingDialog();
-        }
 
         @Override
         protected OpenPage<Infomation> doInBackground(OpenPage<Infomation>... params) {
             OpenPage<Infomation> param = params[0];
             param.setRows(null);//empty data
             try {
-                Thread.sleep(2000);
                 return infomationService.loadLatestInfomation(param);
             } catch (Exception e) {
                 Log.e(getClass().getName(), "load loadLatestInfomation error", e);
@@ -106,12 +100,12 @@ public class InfomationActivity extends BaseActivity {
         }
 
         @Override
-        protected void onPostExecute(OpenPage<Infomation> infomationOpenPage) {
-            hideLoadingDialog();
-            if (infomationOpenPage != null) {
-                Log.i(getClass().getName(), "load latestinfomation finished. load rows " + page.getRows().size());
-                page = infomationOpenPage;
-                mAdapter.addAll(page.getRows());
+        protected void onPostExecute(OpenPage<Infomation> openPage) {
+            if (openPage != null) {
+                if (openPage.getPageNo() == 1) {
+                    mAdapter.clear();
+                }
+                mAdapter.addAll(openPage.getRows());
             }
             infoListView.onRefreshComplete();
             refreshDate = new Date();
