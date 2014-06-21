@@ -8,4 +8,6 @@
     android:textColor="@color/common_text_color"
     android:text="@string/detail_address_cn"
     android:textSize="@dimen/more_info_text_size"
+    android:gravity="center_vertical"
+    android:padding="@dimen/common_margin"
     />

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,9 +70,7 @@ public class SubmitHomeworkActivity extends BaseActivity {
         mChoosePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pickPicture = new Intent(Intent.ACTION_PICK);
-                pickPicture.setType("image/*");
-
+                Intent pickPicture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(pickPicture, REQ_CODE_PICK_IMAGE);
             }
         });
@@ -98,19 +97,20 @@ public class SubmitHomeworkActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             Uri selectedImg = data.getData();
-
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
-            Cursor cursor = getContentResolver().query(
-                    selectedImg, filePathColumn, null, null, null);
-            cursor.moveToFirst();
+            Cursor cursor = MediaStore.Images.Media.query(getContentResolver(), selectedImg, filePathColumn);
 
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String filePath = cursor.getString(columnIndex);
-            cursor.close();
+            Log.i("SubmitHomework", "URI: " + selectedImg
+                    + " \n cursor isnull:" + (cursor == null));
+            if (cursor != null && cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String filePath = cursor.getString(columnIndex);
+                cursor.close();
 
-            selectedPic = new File(filePath);
-            mChoosePic.setText(selectedPic.getName());
+                selectedPic = new File(filePath);
+                mChoosePic.setText(selectedPic.getName());
+            }
         }
 
     }
