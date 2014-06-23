@@ -3,7 +3,6 @@ package com.ivan.android.manhattanenglish.app.remote.user;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.ivan.android.manhattanenglish.app.remote.AbstractService;
-import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.lang.reflect.Type;
@@ -18,7 +17,7 @@ import java.util.Map;
  * Time: PM9:24
  */
 public class UserServiceImpl extends AbstractService implements UserService {
-    Type userPageType = new TypeReference<OpenPage<User>>() {
+    Type teacherDetailPage = new TypeReference<OpenPage<TeacherDetail>>() {
     }.getType();
 
     @Override
@@ -46,19 +45,19 @@ public class UserServiceImpl extends AbstractService implements UserService {
     }
 
     @Override
-    public OpenPage<User> search(OpenPage<User> page, String keyword) {
-        String action = "/question/listPage";
+    public OpenPage<TeacherDetail> search(OpenPage<TeacherDetail> page, String keyword) {
+        String action = "/teacher/listPage";
         Map<String, String> params = new HashMap<String, String>();
         params.put("page", JSON.toJSONString(page));
         params.put("searchKey", keyword);
-        return postForObject(userPageType, getUrl(action), params);
+        return postForObject(teacherDetailPage, getUrl(action), params);
     }
 
     @Override
-    public TeacherDetail loadTeacherDetail(String userId) {
+    public TeacherDetail loadTeacherDetail(String teacherId) {
         String action = "";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("teacherId", userId);
+        params.put("teacherId", teacherId);
 
         return null;
     }

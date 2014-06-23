@@ -31,8 +31,8 @@ import java.util.Map;
  */
 public class AbstractService {
 
-//    public final static String HOST = "http://203.195.131.34:8080/mhd";
-    public final static String HOST = "http://192.168.1.111:8090/mhd";
+    public final static String HOST = "http://203.195.131.34:8080/mhd";
+//    public final static String HOST = "http://192.168.1.111:8090/mhd";
 
 
     public final static Type STRING_MAP = new TypeReference<Map<String, String>>() {

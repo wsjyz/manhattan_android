@@ -18,26 +18,26 @@ import java.util.Set;
  * Date: 14-5-19
  * Time: PM4:11
  */
-public class PickLocationGridAdapter extends BaseAdapter {
+public class MultiPickerGridAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private String[] allLocations;
-    private Set<String> selectedLocationSet;
+    private String[] mData;
+    private Set<String> mSelectedItems;
 
-    public PickLocationGridAdapter(Context context) {
+    public MultiPickerGridAdapter(Context context, int dataResId) {
         this.mInflater = LayoutInflater.from(context);
-        this.allLocations = context.getResources().getStringArray(R.array.locations);
-        this.selectedLocationSet = new HashSet<String>();
+        this.mData = context.getResources().getStringArray(dataResId);
+        this.mSelectedItems = new HashSet<String>();
     }
 
     @Override
     public int getCount() {
-        return allLocations.length;
+        return mData.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return allLocations[position];
+        return mData[position];
     }
 
     @Override
@@ -45,12 +45,12 @@ public class PickLocationGridAdapter extends BaseAdapter {
         return 0;
     }
 
-    public Set<String> getSelectedLocationSet() {
-        return selectedLocationSet;
+    public Set<String> getSelectedItems() {
+        return mSelectedItems;
     }
 
-    public void setSelectedLocationSet(Set<String> selectedLocationSet) {
-        this.selectedLocationSet = selectedLocationSet;
+    public void setSelectedItems(Set<String> mSelectedItems) {
+        this.mSelectedItems = mSelectedItems;
     }
 
     @Override
@@ -65,24 +65,24 @@ public class PickLocationGridAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        final String location = allLocations[position];
+        final String location = mData[position];
         viewHolder.checkBox.setText(location);
-        viewHolder.checkBox.setChecked(containsLocation(location));
+        viewHolder.checkBox.setChecked(isItemChecked(location));
         viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    selectedLocationSet.add(location);
+                    mSelectedItems.add(location);
                 } else {
-                    selectedLocationSet.remove(location);
+                    mSelectedItems.remove(location);
                 }
             }
         });
         return convertView;
     }
 
-    private boolean containsLocation(String location) {
-        return selectedLocationSet != null && selectedLocationSet.contains(location);
+    private boolean isItemChecked(String location) {
+        return mSelectedItems != null && mSelectedItems.contains(location);
     }
 
 

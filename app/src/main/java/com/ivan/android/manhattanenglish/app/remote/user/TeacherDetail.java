@@ -1,4 +1,4 @@
-package com.ivan.android.manhattanenglish.app.remote.course;
+package com.ivan.android.manhattanenglish.app.remote.user;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.ivan.android.manhattanenglish.app.remote.user.User;

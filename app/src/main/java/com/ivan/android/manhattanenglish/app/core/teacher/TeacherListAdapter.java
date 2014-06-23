@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
-import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
 import com.makeramen.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +40,7 @@ public class TeacherListAdapter extends BaseAdapter {
     }
 
     public void addAll(List<TeacherDetail> newData) {
-        if (newData != null) {
+        if (newData != null && newData.size() > 0) {
             data.addAll(newData);
             notifyDataSetChanged();
         }

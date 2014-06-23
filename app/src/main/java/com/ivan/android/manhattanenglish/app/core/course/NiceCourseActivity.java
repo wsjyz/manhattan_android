@@ -20,6 +20,7 @@ import com.ivan.android.manhattanenglish.app.remote.course.CourseService;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * 精品课程
@@ -52,21 +53,25 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
         courseListView.setAdapter(mAdapter);
         courseListView.setEmptyView(getEmptyView());
 
-        courseListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+        courseListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 page.setPageNo(1);
-                mAdapter.clear();
+                if (refreshDate != null) {
+                    CharSequence label = getRefreshTimeString();
+                    refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+                }
                 new CourseLoadTask().execute(page);
             }
+        });
 
+        courseListView.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onLastItemVisible() {
                 if (page.hasNext()) {
                     page.setPageNo(page.getPageNo() + 1);
                     new CourseLoadTask().execute(page);
                 } else {
-                    courseListView.onRefreshComplete();
                     Toast.makeText(NiceCourseActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -78,6 +83,7 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.i("CourseActivity", "you clicked position :" + position);
         Course item = (Course) mAdapter.getItem(position);
         Intent intent = new Intent(this, CourseDetailActivity.class);
         intent.putExtra(CourseDetailActivity.COURSE_ID_KEY, item.getCourseId());
@@ -89,6 +95,7 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
         @Override
         protected OpenPage<Course> doInBackground(OpenPage<Course>... params) {
             OpenPage<Course> param = params[0];
+            param.setRows(null);
             try {
                 CourseService courseService = ServiceFactory.getService(CourseService.class);
                 return courseService.loadNiceCourse(param);
@@ -99,13 +106,16 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
         }
 
         @Override
-        protected void onPostExecute(OpenPage<Course> coursePage) {
-            if (coursePage != null) {
-                page = coursePage;
-                mAdapter.addAll(page.getRows());
-                mAdapter.notifyDataSetChanged();
+        protected void onPostExecute(OpenPage<Course> openPage) {
+            if (openPage != null) {
+                if (openPage.getPageNo() == 1) {
+                    mAdapter.clear();
+                }
+                mAdapter.addAll(openPage.getRows());
             }
             courseListView.onRefreshComplete();
+            refreshDate = new Date();
+
         }
     }
 

@@ -5,12 +5,12 @@
     android:layout_height="@dimen/title_bar_height"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:background="@drawable/title_bar">
+    android:background="@drawable/foot_bar">
 
     <Button
         android:id="@+id/left_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:background="@drawable/drawable_navigation_button"
         android:drawableLeft="@drawable/back"
         android:paddingLeft="13dp"
@@ -25,13 +25,13 @@
         android:text="@string/title_activity_login"
         android:gravity="center"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/title_text_size"
+        android:textSize="22sp"
         />
 
     <Button
         android:id="@+id/right_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:background="@drawable/drawable_navigation_button"
         android:textColor="@android:color/white"
         android:textSize="@dimen/title_button_text_size"

@@ -25,7 +25,6 @@
         android:dividerHeight="1dp"
         android:scrollbars="none"
         android:background="@drawable/login_form_border"
-        ptr:ptrMode="both"
         />
 
 </LinearLayout>

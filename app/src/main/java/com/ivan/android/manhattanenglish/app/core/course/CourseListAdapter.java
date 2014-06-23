@@ -38,7 +38,10 @@ public class CourseListAdapter extends BaseAdapter {
     }
 
     public void addAll(List<Course> newData) {
-        data.addAll(newData);
+        if (newData != null && newData.size() > 0) {
+            data.addAll(newData);
+            notifyDataSetChanged();
+        }
     }
 
     @Override

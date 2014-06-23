@@ -44,4 +44,11 @@ public interface CourseService {
      */
     void postCourse(Course course);
 
+    /**
+     * 预约、试听操作
+     *
+     * @param appointment
+     */
+    void submitAppointment(Appointment appointment);
+
 }

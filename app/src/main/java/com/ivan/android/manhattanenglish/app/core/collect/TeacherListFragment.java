@@ -10,9 +10,8 @@ import android.widget.ListView;
 
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointTeacherListLoader;
 import com.ivan.android.manhattanenglish.app.core.audition.AuditionTeacherListLoader;
-import com.ivan.android.manhattanenglish.app.core.collect.CollectTeacherListLoader;
 import com.ivan.android.manhattanenglish.app.core.teacher.TeacherListAdapter;
-import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -48,7 +48,7 @@
                     android:drawableLeft="@drawable/class_num"
                     android:layout_toRightOf="@id/course_image"
                     android:textColor="@color/common_text_color"
-                    android:textSize="@dimen/course_list_item_text_size"
+                    android:textSize="@dimen/dimen_16sp"
                     android:text="@string/label_class_num"
                     android:gravity="center_vertical" />
 
@@ -60,7 +60,7 @@
                     android:drawableLeft="@drawable/rmb"
                     android:layout_toRightOf="@id/course_image"
                     android:textColor="@color/common_text_color"
-                    android:textSize="@dimen/course_list_item_text_size"
+                    android:textSize="@dimen/dimen_16sp"
                     android:text="@string/label_fee"
                     android:gravity="center_vertical"
                     android:layout_below="@id/class_num" />
@@ -72,7 +72,7 @@
                     android:drawableLeft="@drawable/location"
                     android:layout_toRightOf="@id/course_image"
                     android:textColor="@color/common_text_color"
-                    android:textSize="@dimen/course_list_item_text_size"
+                    android:textSize="@dimen/dimen_16sp"
                     android:text="@string/label_teach_location"
                     android:gravity="center_vertical"
                     android:layout_below="@id/cost" />
@@ -110,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:textColor="@color/common_text_color"
-                    android:textSize="@dimen/course_list_item_text_size"
+                    android:textSize="@dimen/dimen_16sp"
                     android:text="@string/label_course_start_time"
                     android:layout_alignParentLeft="true"
                     android:gravity="center_vertical" />
@@ -120,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:textColor="@color/common_text_color"
-                    android:textSize="@dimen/course_list_item_text_size"
+                    android:textSize="@dimen/dimen_16sp"
                     android:text="@string/label_course_end_time"
                     android:layout_alignParentLeft="true"
                     android:gravity="center_vertical"
@@ -131,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:textColor="@color/common_text_color"
-                    android:textSize="@dimen/course_list_item_text_size"
+                    android:textSize="@dimen/dimen_16sp"
                     android:text="@string/label_course_peroid"
                     android:layout_alignParentLeft="true"
                     android:gravity="center_vertical"

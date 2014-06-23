@@ -9,13 +9,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
-import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
 import com.squareup.picasso.Picasso;
 
 public class TeacherDetailInfoActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<TeacherDetail> {

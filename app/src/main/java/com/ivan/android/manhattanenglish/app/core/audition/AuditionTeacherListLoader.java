@@ -3,7 +3,7 @@ package com.ivan.android.manhattanenglish.app.core.audition;
 import android.content.Context;
 
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
-import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
 
 import java.util.List;
 

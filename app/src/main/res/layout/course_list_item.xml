@@ -26,8 +26,9 @@
         android:drawableLeft="@drawable/class_num"
         android:layout_toRightOf="@id/course_image"
         android:textColor="@color/common_text_color"
-        android:textSize="@dimen/course_list_item_text_size"
+        android:textSize="@dimen/dimen_16sp"
         android:text="@string/label_class_num"
+        android:singleLine="true"
         android:gravity="center_vertical" />
 
     <TextView
@@ -37,9 +38,11 @@
         android:drawableLeft="@drawable/rmb"
         android:layout_toRightOf="@id/course_image"
         android:textColor="@color/common_text_color"
-        android:textSize="@dimen/course_list_item_text_size"
+        android:textSize="@dimen/dimen_16sp"
         android:text="@string/label_fee"
         android:gravity="center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:layout_below="@id/class_num" />
 
     <TextView
@@ -49,15 +52,18 @@
         android:drawableLeft="@drawable/location"
         android:layout_toRightOf="@id/course_image"
         android:textColor="@color/common_text_color"
-        android:textSize="@dimen/course_list_item_text_size"
+        android:textSize="@dimen/dimen_16sp"
         android:text="@string/label_teach_location"
+        android:singleLine="true"
         android:gravity="center_vertical"
+        android:ellipsize="end"
         android:layout_below="@id/cost" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:src="@drawable/blue_expand" />
 
 </RelativeLayout>

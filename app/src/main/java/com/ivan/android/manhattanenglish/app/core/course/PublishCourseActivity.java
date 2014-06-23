@@ -12,14 +12,14 @@ import android.widget.Spinner;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.teacher.ScheduleGridAdapter;
-import com.ivan.android.manhattanenglish.app.customviews.PickLocationGridAdapter;
+import com.ivan.android.manhattanenglish.app.customviews.MultiPickerGridAdapter;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 public class PublishCourseActivity extends BaseActivity {
 
     GridView mLocationGrid;
 
-    PickLocationGridAdapter mLocationAdapter;
+    MultiPickerGridAdapter mLocationAdapter;
 
     GridView mScheduleGrid;
     ScheduleGridAdapter mScheduleAdapter;
@@ -49,7 +49,7 @@ public class PublishCourseActivity extends BaseActivity {
         });
 
         mLocationGrid = (GridView) findViewById(R.id.location_grid);
-        mLocationAdapter = new PickLocationGridAdapter(this);
+        mLocationAdapter = new MultiPickerGridAdapter(this, R.array.locations);
         mLocationGrid.setAdapter(mLocationAdapter);
 
         mScheduleGrid = (GridView) findViewById(R.id.schedule_grid);

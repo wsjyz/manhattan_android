@@ -1,6 +1,5 @@
 package com.ivan.android.manhattanenglish.app.remote.user;
 
-import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.Date;
@@ -42,15 +41,15 @@ public interface UserService {
      * @param keyword
      * @return
      */
-    OpenPage<User> search(OpenPage<User> page, String keyword);
+    OpenPage<TeacherDetail> search(OpenPage<TeacherDetail> page, String keyword);
 
     /**
      * 获得教师详情
      *
-     * @param userId
+     * @param teacherId
      * @return
      */
-    TeacherDetail loadTeacherDetail(String userId);
+    TeacherDetail loadTeacherDetail(String teacherId);
 
 
     /**

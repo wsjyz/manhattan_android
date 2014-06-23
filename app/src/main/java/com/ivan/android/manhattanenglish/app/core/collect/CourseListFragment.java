@@ -76,7 +76,6 @@ public class CourseListFragment extends ListFragment implements LoaderManager.Lo
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-
         if (null != mListener) {
             Course course = (Course) mAdapter.getItem(position);
             mListener.onCourseItemClick(course.getCourseId());
@@ -99,8 +98,6 @@ public class CourseListFragment extends ListFragment implements LoaderManager.Lo
     @Override
     public void onLoadFinished(Loader<List<Course>> loader, List<Course> data) {
         mAdapter.addAll(data);
-        mAdapter.notifyDataSetChanged();
-
         if (isResumed()) {
             setListShown(true);
         } else {

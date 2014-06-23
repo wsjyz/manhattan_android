@@ -23,7 +23,7 @@ public abstract class CommonAsyncTask<Params, Process, Result> extends AsyncTask
         this.context = context;
     }
 
-    private boolean hasError = false;
+    protected boolean hasError = false;
 
     private String errorMsg;
 

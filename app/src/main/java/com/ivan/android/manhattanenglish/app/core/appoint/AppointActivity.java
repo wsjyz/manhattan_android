@@ -11,11 +11,10 @@ import android.widget.ListView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
-import com.ivan.android.manhattanenglish.app.customviews.PickCategoryDialog;
-import com.ivan.android.manhattanenglish.app.customviews.PickLocationDialog;
-import com.ivan.android.manhattanenglish.app.customviews.PickSexDialog;
-import com.ivan.android.manhattanenglish.app.customviews.PickTeachMethodDialog;
+import com.ivan.android.manhattanenglish.app.customviews.MultiPickerDialog;
+import com.ivan.android.manhattanenglish.app.customviews.SinglePickerDialog;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.utils.DateFormatUtils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -39,25 +38,27 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
             R.drawable.appoint_date
     };
 
-    PickLocationDialog pickLocationDialog;
+    MultiPickerDialog pickLocationDialog;
 
-    PickCategoryDialog pickCategoryDialog;
+    MultiPickerDialog pickCategoryDialog;
 
-    PickSexDialog pickSexDialog;
+    SinglePickerDialog pickSexDialog;
 
-    PickTeachMethodDialog pickTeachMethodDialog;
+    MultiPickerDialog pickTeachMethodDialog;
 
     DatePickerDialog datePickerDialog;
 
     Set<String> selectedLocations;
 
-    String selectedCategory;
+    Set<String> selectedCategories;
+
+    Set<String> selectedMethods;
 
     String selectedSex;
 
-    String selectedMethod;
-
     Date selectedDate;
+
+    SearchListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,8 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
         conditions = SearchCondition.createFromArray(searchTexts, icons, getResources().getString(R.string.search_no_limit));
 
         searchListView = (ListView) findViewById(R.id.search_condition_list);
-        searchListView.setAdapter(new SearchListAdapter(this, conditions));
+        mAdapter = new SearchListAdapter(this, conditions);
+        searchListView.setAdapter(mAdapter);
         searchListView.setOnItemClickListener(this);
 
         searchButton = (Button) findViewById(R.id.search_button);
@@ -110,47 +112,53 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
         }
     }
 
-    private PickLocationDialog getPickLocationDialog() {
+    private MultiPickerDialog getPickLocationDialog() {
         if (pickLocationDialog == null) {
-            pickLocationDialog = new PickLocationDialog(this);
-            pickLocationDialog.setOnLocationPicked(new PickLocationDialog.LocationPickEvent() {
+            pickLocationDialog = new MultiPickerDialog(this, getString(R.string.course_category), R.array.locations);
+            pickLocationDialog.setOnItemsCheckedListener(new MultiPickerDialog.OnItemsCheckedListener() {
                 @Override
-                public void onLocationPicked(Set<String> locations) {
-                    selectedLocations = locations;
+                public void onItemsChecked(Set<String> items, String itemsForString) {
+                    selectedLocations = items;
+                    conditions.get(1).conditionText = itemsForString;
+                    mAdapter.notifyDataSetChanged();
                 }
             });
         }
-        pickLocationDialog.setSelectedLocationSet(selectedLocations);
+        pickLocationDialog.setSelectedItems(selectedLocations);
         return pickLocationDialog;
     }
 
 
-    private PickCategoryDialog getPickCategoryDialog() {
+    private MultiPickerDialog getPickCategoryDialog() {
         if (pickCategoryDialog == null) {
-            pickCategoryDialog = new PickCategoryDialog(this);
-            pickCategoryDialog.setOnCategoryPicked(new PickCategoryDialog.CategoryPickEvent() {
+            pickCategoryDialog = new MultiPickerDialog(this, getString(R.string.course_category), R.array.course_categories);
+            pickCategoryDialog.setOnItemsCheckedListener(new MultiPickerDialog.OnItemsCheckedListener() {
                 @Override
-                public void onCategoryPicked(String category) {
-                    selectedCategory = category;
+                public void onItemsChecked(Set<String> items, String itemsForString) {
+                    selectedCategories = items;
+                    conditions.get(0).conditionText = itemsForString;
+                    mAdapter.notifyDataSetChanged();
                 }
             });
         }
-        pickCategoryDialog.setSelectedCategory(selectedCategory);
+        pickCategoryDialog.setSelectedItems(selectedCategories);
         return pickCategoryDialog;
     }
 
-    private PickSexDialog getPickSexDialog() {
+    private SinglePickerDialog getPickSexDialog() {
         if (pickSexDialog == null) {
-            pickSexDialog = new PickSexDialog(this);
-            pickSexDialog.setPickSexEvent(new PickSexDialog.PickSexEvent() {
+            pickSexDialog = new SinglePickerDialog(this, getString(R.string.title_teach_sex), R.array.sex_select_arr);
+            pickSexDialog.setOnItemPickedListener(new SinglePickerDialog.OnItemPickedListener() {
                 @Override
-                public void onSexPicked(String sex) {
-                    selectedSex = sex;
+                public void onItemPicked(String item) {
+                    selectedSex = item;
+                    conditions.get(3).conditionText = item;
+                    mAdapter.notifyDataSetChanged();
                 }
             });
         }
 
-        pickSexDialog.setSelectedSex(selectedSex);
+        pickSexDialog.setSelectedItem(selectedSex);
         return pickSexDialog;
     }
 
@@ -163,6 +171,9 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     selectedDate = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
+                    conditions.get(4).conditionText = DateFormatUtils.format(selectedDate);
+                    mAdapter.notifyDataSetChanged();
+
                 }
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
@@ -177,18 +188,22 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
         return datePickerDialog;
     }
 
-    private PickTeachMethodDialog getPickTeachMethodDialog() {
+    private MultiPickerDialog getPickTeachMethodDialog() {
         if (pickTeachMethodDialog == null) {
-            pickTeachMethodDialog = new PickTeachMethodDialog(this);
-            pickTeachMethodDialog.setPickMethodEvent(new PickTeachMethodDialog.PickMethodEvent() {
-                @Override
-                public void onMethodPicked(String method) {
-                    selectedMethod = method;
-                }
-            });
+            pickTeachMethodDialog = new MultiPickerDialog(this, getString(R.string.teach_method), R.array.teach_method_arr);
+            pickTeachMethodDialog.setOnItemsCheckedListener(
+                    new MultiPickerDialog.OnItemsCheckedListener() {
+                        @Override
+                        public void onItemsChecked(Set<String> items, String itemsForString) {
+                            selectedMethods = items;
+                            conditions.get(2).conditionText = itemsForString;
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }
+            );
         }
 
-        pickTeachMethodDialog.setSelectedMethod(selectedMethod);
+        pickTeachMethodDialog.setSelectedItems(selectedMethods);
         return pickTeachMethodDialog;
     }
 }

@@ -55,13 +55,28 @@
         <item>LSAT</item>
     </string-array>
 
+    <string-array name="sex_select_arr">
+        <item>@string/search_no_limit</item>
+        <item>@string/sex_male</item>
+        <item>@string/sex_female</item>
+    </string-array>
+
+    <string-array name="teach_method_arr">
+        <item>@string/teach_method_for_teacher</item>
+        <item>@string/teach_method_for_student</item>
+    </string-array>
+
     <string name="contact_user">联系人</string>
     <string name="contact_address">联系地址</string>
     <string name="contact_phone">联系电话</string>
 
     <string name="action_appoint">立即预约</string>
+    <string name="action_audition">立即试听</string>
 
     <string name="label_study_subject">学习科目：</string>
     <string name="label_location">所在地区：</string>
     <string name="label_study_method">学习方式：</string>
+
+    <string name="payment_online">在线支付</string>
+    <string name="payment_offline">线下预约</string>
 </resources>

@@ -55,4 +55,12 @@ public class CourseServiceImpl extends AbstractService implements CourseService 
         params.put("course",JSON.toJSONString(course));
         post(getUrl(action),params);
     }
+
+    @Override
+    public void submitAppointment(Appointment appointment) {
+        String action = "/course/addAppointment";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("appointment",JSON.toJSONString(appointment));
+        post(getUrl(action),params);
+    }
 }

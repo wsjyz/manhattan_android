@@ -9,58 +9,68 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
-
-import org.springframework.util.StringUtils;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author: Ivan Vigoss
  * Date: 14-5-19
  * Time: PM2:19
  */
-public class PickCategoryDialog extends AlertDialog implements AdapterView.OnItemClickListener {
+public class SinglePickerDialog extends AlertDialog implements AdapterView.OnItemClickListener {
 
     protected TextView mTitle;
 
     protected LayoutInflater mInflater;
 
-    protected GridView mCategoryGrid;
+    protected GridView mGrid;
 
-    protected PickCategoryGridAdapter mAdapter;
+    protected SinglePickerGridAdapter mAdapter;
 
     protected Button mPositiveButton;
 
     protected Context context;
 
-    protected CategoryPickEvent mListener;
+    protected OnItemPickedListener mListener;
 
-    public PickCategoryDialog(Context context) {
+    protected String title;
+
+
+    public SinglePickerDialog(Context context, String title, String[] data) {
         super(context);
         this.context = context;
-        mAdapter = new PickCategoryGridAdapter(context);
+        this.title = title;
+        mAdapter = new SinglePickerGridAdapter(context, data);
     }
+
+    public SinglePickerDialog(Context context, String title, int dataResId) {
+        super(context);
+        this.context = context;
+        this.title = title;
+        mAdapter = new SinglePickerGridAdapter(context, dataResId);
+    }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String category = (String) mAdapter.getItem(position);
-        if (!category.equals(mAdapter.getSelectedCategory())) {
-            mAdapter.setSelectedCategory(category);
-            mAdapter.notifyDataSetChanged();
+        if (!category.equals(mAdapter.getSelectedItem())) {
+            setSelectedItem(category);
+            refreshView();
         }
     }
 
-    public void setSelectedCategory(String category) {
-        if (TextUtils.isEmpty(category)) return;
-        mAdapter.setSelectedCategory(category);
+    public void setSelectedItem(String value) {
+        if (TextUtils.isEmpty(value)) return;
+        mAdapter.setSelectedItem(value);
     }
 
-    public void setOnCategoryPicked(CategoryPickEvent mListener) {
+    public void refreshView() {
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void setOnItemPickedListener(OnItemPickedListener mListener) {
         this.mListener = mListener;
     }
 
@@ -71,10 +81,13 @@ public class PickCategoryDialog extends AlertDialog implements AdapterView.OnIte
         mInflater = LayoutInflater.from(context);
 
         mTitle = (TextView) findViewById(R.id.dialog_title);
+        if (!TextUtils.isEmpty(title)) {
+            mTitle.setText(title);
+        }
 
-        mCategoryGrid = (GridView) findViewById(R.id.location_grid);
-        mCategoryGrid.setAdapter(mAdapter);
-        mCategoryGrid.setOnItemClickListener(this);
+        mGrid = (GridView) findViewById(R.id.location_grid);
+        mGrid.setAdapter(mAdapter);
+        mGrid.setOnItemClickListener(this);
 
         mPositiveButton = (Button) findViewById(R.id.positiveBtn);
         mPositiveButton.setOnClickListener(new View.OnClickListener() {
@@ -82,14 +95,14 @@ public class PickCategoryDialog extends AlertDialog implements AdapterView.OnIte
             public void onClick(View v) {
                 dismiss();
                 if (mListener != null) {
-                    mListener.onCategoryPicked(mAdapter.getSelectedCategory());
+                    mListener.onItemPicked(mAdapter.getSelectedItem());
                 }
             }
         });
     }
 
-    public interface CategoryPickEvent {
-        void onCategoryPicked(String category);
+    public interface OnItemPickedListener {
+        void onItemPicked(String item);
     }
 
 }

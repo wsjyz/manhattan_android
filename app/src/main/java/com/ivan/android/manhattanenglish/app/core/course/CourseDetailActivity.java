@@ -1,7 +1,7 @@
 package com.ivan.android.manhattanenglish.app.core.course;
 
 import android.content.Context;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,12 +11,13 @@ import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.appoint.AppointCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.teacher.TeacherListAdapter;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.course.Course;
 import com.ivan.android.manhattanenglish.app.remote.course.CourseService;
-import com.ivan.android.manhattanenglish.app.remote.course.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
 import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.makeramen.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -74,17 +75,37 @@ public class CourseDetailActivity extends BaseActivity {
         mPeriod = (TextView) findViewById(R.id.course_peroid);
 
         mAuditionBtn = (ImageView) findViewById(R.id.audition_image_btn);
+        mAuditionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToAppoint(AppointCourseActivity.ACTION_TYPE_AUDITION);
+            }
+        });
 
         mAppointBtn = (ImageView) findViewById(R.id.appoint_btn);
+        mAppointBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToAppoint(AppointCourseActivity.ACTION_TYPE_APPOINT);
+            }
+        });
 
         mTeacherList = (ListView) findViewById(R.id.teacher_list);
         mTeacherListAdapter = new TeacherListAdapter(this, new ArrayList<TeacherDetail>());
+        mTeacherList.setEmptyView(getEmptyView());
 
         mDescription = (TextView) findViewById(R.id.description);
 
         new CourseDetailLoadTask(this).execute();
     }
 
+
+    private void navigateToAppoint(int actionType) {
+        Intent intent = new Intent(this, AppointCourseActivity.class);
+        intent.putExtra(AppointCourseActivity.ACTION_TYPE_KEY, actionType);
+        intent.putExtra(AppointCourseActivity.RESOURCE_ID_KEY, courseId);
+        startActivity(intent);
+    }
 
     /**
      * 加载课程详情的任务
@@ -106,7 +127,6 @@ public class CourseDetailActivity extends BaseActivity {
             super.onPostExecute(course);
             mCourse = course;
             refresh();
-
         }
     }
 
@@ -128,8 +148,7 @@ public class CourseDetailActivity extends BaseActivity {
         mPeriod.setText(getTextFromFormat(R.string.label_course_peroid, String.valueOf(mCourse.getPeriod())));
         mDescription.setText(mCourse.getDescription());
 
-        //todo refresh teacherList
-
+        mTeacherListAdapter.setData(mCourse.getTeacherDetailList());
     }
 
 }

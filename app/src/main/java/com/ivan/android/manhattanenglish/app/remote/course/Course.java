@@ -3,6 +3,7 @@ package com.ivan.android.manhattanenglish.app.remote.course;
 import android.text.format.DateFormat;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

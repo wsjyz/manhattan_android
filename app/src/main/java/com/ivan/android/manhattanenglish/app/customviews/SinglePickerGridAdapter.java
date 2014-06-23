@@ -14,27 +14,43 @@ import com.ivan.android.manhattanenglish.app.R;
  * Date: 14-5-19
  * Time: PM4:11
  */
-public class PickCategoryGridAdapter extends BaseAdapter {
+public class SinglePickerGridAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private String[] allCategory;
-    private String selectedCategory;
+    private String[] mData;
+    private String selectedItem;
     private Context mContext;
 
-    PickCategoryGridAdapter(Context context) {
+    public SinglePickerGridAdapter(Context context) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(context);
-        this.allCategory = context.getResources().getStringArray(R.array.course_categories);
+    }
+
+    SinglePickerGridAdapter(Context context, String[] data) {
+        this(context);
+        this.mData = data;
+    }
+
+    SinglePickerGridAdapter(Context context, int dataResId) {
+        this(context);
+        String[] array = context.getResources().getStringArray(dataResId);
+        this.mData = array;
+    }
+
+    public void setData(String[] newData) {
+        if (newData != null) {
+            mData = newData;
+        }
     }
 
     @Override
     public int getCount() {
-        return allCategory.length;
+        return mData.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return allCategory[position];
+        return mData[position];
     }
 
     @Override
@@ -42,31 +58,31 @@ public class PickCategoryGridAdapter extends BaseAdapter {
         return 0;
     }
 
-    public String getSelectedCategory() {
-        return selectedCategory;
+    public String getSelectedItem() {
+        return selectedItem;
     }
 
-    public void setSelectedCategory(String selectedCategory) {
-        this.selectedCategory = selectedCategory;
+    public void setSelectedItem(String selectedItem) {
+        this.selectedItem = selectedItem;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        final String category = allCategory[position];
+        final String category = mData[position];
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.pick_category_grid_item, null);
+            convertView = mInflater.inflate(R.layout.single_picker_grid_item, null);
             viewHolder = new ViewHolder();
             viewHolder.text = (TextView) convertView;
-            viewHolder.selected = category.equals(selectedCategory);
+            viewHolder.selected = category.equals(selectedItem);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         viewHolder.text.setText(category);
-        setTextSelected(viewHolder.text, category.equals(selectedCategory));
-        viewHolder.selected = category.equals(selectedCategory);
+        setTextSelected(viewHolder.text, category.equals(selectedItem));
+        viewHolder.selected = category.equals(selectedItem);
 
         return convertView;
     }
