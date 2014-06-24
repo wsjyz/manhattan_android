@@ -60,4 +60,26 @@ public interface UserService {
      * @return
      */
     List<Date> loadCourseSchedule(Date startTime, Date endTime);
+
+    /**
+     * 获得预约的教师列表
+     *
+     * @return
+     */
+    List<TeacherDetail> loadAppointTeacherDetail();
+
+    /**
+     * 获得试听的教师列表
+     *
+     * @return
+     */
+    List<TeacherDetail> loadAuditionTeacherDetail();
+
+
+    /**
+     * 获得收藏的教师列表
+     *
+     * @return
+     */
+    List<TeacherDetail> loadCollectTeacherDetail();
 }

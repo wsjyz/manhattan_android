@@ -3,7 +3,9 @@ package com.ivan.android.manhattanenglish.app.core.audition;
 import android.content.Context;
 
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.UserService;
 
 import java.util.List;
 
@@ -20,7 +22,13 @@ public class AuditionTeacherListLoader extends CommonDataLoader<List<TeacherDeta
 
     @Override
     public List<TeacherDetail> loadInBackground() {
-        //todo load from server
-        return null;
+        UserService userService = ServiceFactory.getService(UserService.class);
+        List<TeacherDetail> result = null;
+        try {
+            result = userService.loadAuditionTeacherDetail();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

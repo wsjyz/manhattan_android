@@ -30,6 +30,7 @@ public class TeacherDetail {
     /**
      * 辅导方式
      */
+    @JSONField(name = "tutoringWay")
     private String teachWay;
 
     private int focusCount;
@@ -49,10 +50,19 @@ public class TeacherDetail {
     /**
      * 授课方式
      */
+    @JSONField(name = "tutoringWay")
     private String teachMethod;
 
-    private int cost;
+    /**
+     * classFees
+     */
+    @JSONField(name = "classFees")
+    private String cost;
 
+    /**
+     * 授课时间
+     */
+    private String teachingTime;
 
     /**
      * 教师的用户基本信息
@@ -159,11 +169,11 @@ public class TeacherDetail {
         this.requiredLevel = requiredLevel;
     }
 
-    public int getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
@@ -189,5 +199,13 @@ public class TeacherDetail {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getTeachingTime() {
+        return teachingTime;
+    }
+
+    public void setTeachingTime(String teachingTime) {
+        this.teachingTime = teachingTime;
     }
 }

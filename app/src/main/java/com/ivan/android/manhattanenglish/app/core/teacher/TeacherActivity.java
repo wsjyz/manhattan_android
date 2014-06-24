@@ -3,6 +3,7 @@ package com.ivan.android.manhattanenglish.app.core.teacher;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -14,13 +15,19 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.userinfo.TeacherInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.UserService;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * 名师列表
+ */
 public class TeacherActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     public final static String ACTION_PICK_TEACHER = "com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity.ACTION_PICK_TEACHER";
@@ -42,6 +49,7 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
 
+        page = new OpenPage<TeacherDetail>();
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,27 +106,34 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        TeacherDetail item = (TeacherDetail) mAdapter.getItem(position);
+        TeacherDetail item = (TeacherDetail) mAdapter.getItem(position - 1);
         if (ACTION_PICK_TEACHER.equals(getIntent().getAction())) {
             Intent result = new Intent();
             result.putExtra("teacherId", item.getTeacherId());
             result.putExtra("teacherName", item.getName());
             setResult(0, result);
         } else {
-            //todo navigation to detail page
-
+            Intent detail = new Intent(this, TeacherDetailInfoActivity.class);
+            detail.putExtra(TeacherDetailInfoActivity.TEACHER_ID_KEY, item.getTeacherId());
+            startActivity(detail);
         }
     }
 
 
     class TeacherLoadTask extends AsyncTask<OpenPage<TeacherDetail>, Void, OpenPage<TeacherDetail>> {
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showLoadingDialog();
+        }
+
+        @Override
         protected OpenPage<TeacherDetail> doInBackground(OpenPage<TeacherDetail>... params) {
             OpenPage<TeacherDetail> param = params[0];
             param.setRows(null);//empty data
             try {
-                //todo
-                return null;
+                UserService userService = ServiceFactory.getService(UserService.class);
+                return userService.search(param, keywords);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -127,6 +142,7 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
 
         @Override
         protected void onPostExecute(OpenPage<TeacherDetail> openPage) {
+            hideLoadingDialog();
             if (openPage != null) {
                 if (openPage.getPageNo() == 1) {
                     mAdapter.clear();

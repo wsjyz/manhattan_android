@@ -11,7 +11,6 @@ import android.widget.ListView;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointCourseLoader;
 import com.ivan.android.manhattanenglish.app.core.audition.AuditionCourseLoader;
-import com.ivan.android.manhattanenglish.app.core.collect.CollectCourseLoader;
 import com.ivan.android.manhattanenglish.app.core.course.CourseListAdapter;
 import com.ivan.android.manhattanenglish.app.remote.course.Course;
 
@@ -23,7 +22,6 @@ public class CourseListFragment extends ListFragment implements LoaderManager.Lo
 
     public static final String LOAD_TYPE = "TYPE";
 
-    public static final String TYPE_COLLECT = "COLLECT";
     public static final String TYPE_APPOINT = "APPOINT";
     public static final String TYPE_AUDITION = "AUDITION";
 
@@ -62,7 +60,7 @@ public class CourseListFragment extends ListFragment implements LoaderManager.Lo
             mListener = (OnCourseItemClickListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnCourseItemClickListener");
         }
     }
 
@@ -92,7 +90,7 @@ public class CourseListFragment extends ListFragment implements LoaderManager.Lo
                 return new AuditionCourseLoader(getActivity());
             }
         }
-        return new CollectCourseLoader(getActivity());
+        return new AppointCourseLoader(getActivity());
     }
 
     @Override

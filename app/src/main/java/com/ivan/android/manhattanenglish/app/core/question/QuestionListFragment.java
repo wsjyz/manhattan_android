@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
+import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
 
 import java.util.List;
 
@@ -41,7 +43,6 @@ public class QuestionListFragment extends ListFragment implements LoaderManager.
         mAdapter = new QuestionListAdapter(getActivity());
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, getArguments(), this);
-
     }
 
     @Override
@@ -109,7 +110,7 @@ public class QuestionListFragment extends ListFragment implements LoaderManager.
         void onQuestionItemClick(Question question);
     }
 
-    public class AssignedQuestionListLoader extends CommonDataLoader<List<Question>> {
+    public static class AssignedQuestionListLoader extends CommonDataLoader<List<Question>> {
 
         public AssignedQuestionListLoader(Context context) {
             super(context);
@@ -117,11 +118,18 @@ public class QuestionListFragment extends ListFragment implements LoaderManager.
 
         @Override
         public List<Question> loadInBackground() {
-            return null;
+            List<Question> result = null;
+            QuestionService questionService = ServiceFactory.getService(QuestionService.class);
+            try {
+                result = questionService.loadQuestionByType(QuestionService.SEARCH_TYPE_ASSIGN);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result;
         }
     }
 
-    public class AnsweredQuestionListLoader extends CommonDataLoader<List<Question>> {
+    public static class AnsweredQuestionListLoader extends CommonDataLoader<List<Question>> {
 
         public AnsweredQuestionListLoader(Context context) {
             super(context);
@@ -129,11 +137,18 @@ public class QuestionListFragment extends ListFragment implements LoaderManager.
 
         @Override
         public List<Question> loadInBackground() {
-            return null;
+            List<Question> result = null;
+            try {
+                QuestionService questionService = ServiceFactory.getService(QuestionService.class);
+                result = questionService.loadQuestionByType(QuestionService.SEARCH_TYPE_ANSWER);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result;
         }
     }
 
-    public class NotAnsweredQuestionListLoader extends CommonDataLoader<List<Question>> {
+    public static class NotAnsweredQuestionListLoader extends CommonDataLoader<List<Question>> {
 
         public NotAnsweredQuestionListLoader(Context context) {
             super(context);
@@ -141,7 +156,14 @@ public class QuestionListFragment extends ListFragment implements LoaderManager.
 
         @Override
         public List<Question> loadInBackground() {
-            return null;
+            List<Question> result = null;
+            try {
+                QuestionService questionService = ServiceFactory.getService(QuestionService.class);
+                result = questionService.loadQuestionByType(QuestionService.SEARCH_TYPE_UNANSWER);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result;
         }
     }
 }

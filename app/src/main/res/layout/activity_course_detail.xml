@@ -198,7 +198,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/dimen_16sp"
                     android:textColor="@color/common_text_color"
-                    android:text="@string/infomation_content"
+                    android:text=""
                     android:gravity="center_vertical"
                     android:padding="@dimen/common_margin"
                     android:background="@drawable/login_form_border" />

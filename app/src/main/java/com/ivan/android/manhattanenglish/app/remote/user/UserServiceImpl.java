@@ -3,6 +3,7 @@ package com.ivan.android.manhattanenglish.app.remote.user;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.ivan.android.manhattanenglish.app.remote.AbstractService;
+import com.ivan.android.manhattanenglish.app.remote.course.Course;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.lang.reflect.Type;
@@ -48,18 +49,17 @@ public class UserServiceImpl extends AbstractService implements UserService {
     public OpenPage<TeacherDetail> search(OpenPage<TeacherDetail> page, String keyword) {
         String action = "/teacher/listPage";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("page", JSON.toJSONString(page));
+        params.put("openPage", JSON.toJSONString(page));
         params.put("searchKey", keyword);
         return postForObject(teacherDetailPage, getUrl(action), params);
     }
 
     @Override
     public TeacherDetail loadTeacherDetail(String teacherId) {
-        String action = "";
+        String action = "/teacher/getTeacherDetailById";
         Map<String, String> params = new HashMap<String, String>();
         params.put("teacherId", teacherId);
-
-        return null;
+        return postForObject(TeacherDetail.class, getUrl(action), params);
     }
 
 
@@ -74,4 +74,34 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
         return postForObject(type, getUrl(action), params);
     }
+
+    @Override
+    public List<TeacherDetail> loadAppointTeacherDetail() {
+        String action = "/teacher/getOrderTeachersByUserId";
+        return getTeacherDetailListByAction(action);
+    }
+
+    @Override
+    public List<TeacherDetail> loadAuditionTeacherDetail() {
+        String action = "/teacher/getListenTeachersByUserId";
+        return getTeacherDetailListByAction(action);
+    }
+
+    @Override
+    public List<TeacherDetail> loadCollectTeacherDetail() {
+        String action = "/teacher/getCollectTeachersByUserId";
+        return getTeacherDetailListByAction(action);
+    }
+
+
+    private List<TeacherDetail> getTeacherDetailListByAction(String action) {
+        OpenPage<TeacherDetail> page = new OpenPage<TeacherDetail>();
+        page.setAutoPaging(false);
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("openPage", JSON.toJSONString(page));
+        OpenPage<TeacherDetail> result = postForObject(teacherDetailPage, getUrl(action), params);
+        return result.getRows();
+    }
+
 }

@@ -191,6 +191,7 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
     private MultiPickerDialog getPickTeachMethodDialog() {
         if (pickTeachMethodDialog == null) {
             pickTeachMethodDialog = new MultiPickerDialog(this, getString(R.string.teach_method), R.array.teach_method_arr);
+            pickTeachMethodDialog.setGridColumn(2);
             pickTeachMethodDialog.setOnItemsCheckedListener(
                     new MultiPickerDialog.OnItemsCheckedListener() {
                         @Override

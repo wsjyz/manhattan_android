@@ -1,9 +1,14 @@
 package com.ivan.android.manhattanenglish.app.core.question;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,8 +16,15 @@ import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
+import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
+import com.ivan.android.manhattanenglish.app.remote.upload.UploadService;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
+
+import java.io.File;
 
 public class AskQuestionActivity extends BaseActivity {
 
@@ -46,13 +58,11 @@ public class AskQuestionActivity extends BaseActivity {
 
         mQuestion = (EditText) findViewById(R.id.content_text);
 
-        //todo choose pic and upload
         mChoosePic = (TextView) findViewById(R.id.choose_pic);
         mChoosePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pickImage = new Intent(Intent.ACTION_PICK);
-                pickImage.setType("image/*");
+                Intent pickImage = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(pickImage, PICK_IMAGE_CODE);
             }
         });
@@ -61,7 +71,7 @@ public class AskQuestionActivity extends BaseActivity {
         mChooseTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pickTeacher = new Intent(Intent.ACTION_PICK);
+                Intent pickTeacher = new Intent(TeacherActivity.ACTION_PICK_TEACHER);
                 startActivityForResult(pickTeacher, PICK_TEACHER_CODE);
             }
         });
@@ -70,7 +80,7 @@ public class AskQuestionActivity extends BaseActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new SubmitQuestionTask().execute();
+                new SubmitQuestionTask(AskQuestionActivity.this).execute();
             }
         });
 
@@ -82,7 +92,22 @@ public class AskQuestionActivity extends BaseActivity {
         switch (requestCode) {
             case PICK_IMAGE_CODE:
                 Uri uri = data.getData();
-                new UploadImageTask().execute(uri);
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                Cursor cursor = MediaStore.Images.Media.query(getContentResolver(), uri, filePathColumn);
+
+                Log.i("SubmitHomework", "URI: " + uri
+                        + " \n cursor isnull:" + (cursor == null));
+                if (cursor != null && cursor.moveToFirst()) {
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String filePath = cursor.getString(columnIndex);
+                    cursor.close();
+
+                    File selectedPic = new File(filePath);
+                    mChoosePic.setText(selectedPic.getName());
+                    new UploadImageTask().execute(selectedPic);
+                }
+
                 break;
             case PICK_TEACHER_CODE:
                 String teacherId = data.getStringExtra("teacherId");
@@ -96,39 +121,43 @@ public class AskQuestionActivity extends BaseActivity {
 
     }
 
-    class UploadImageTask extends AsyncTask<Uri, Void, String> {
-        /**
-         *
-         * @param params
-         * @return fileUrl return by server
-         */
-        @Override
-        protected String doInBackground(Uri... params) {
-            Uri uri = params[0];
+    class UploadImageTask extends AsyncTask<File, Void, String> {
 
-            return null;
+        @Override
+        protected String doInBackground(File... params) {
+            String result = null;
+            try {
+                File file = params[0];
+                UploadService uploadService = ServiceFactory.getService(UploadService.class);
+                result = uploadService.upload(file);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            if (!TextUtils.isEmpty(s)) {
+                mChoosePic.setTag(s);
+            }
         }
     }
 
-    class SubmitQuestionTask extends AsyncTask<Void, Void, Boolean> {
+    class SubmitQuestionTask extends CommonAsyncTask<Void, Void, Void> {
 
         private Question question = new Question();
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            showLoadingDialog();
+        protected SubmitQuestionTask(Context context) {
+            super(context);
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Void getResultInBackground(Void... params) {
             collectParams();
-            //todo submit
+            QuestionService questionService = ServiceFactory.getService(QuestionService.class);
+            questionService.askQuestion(question);
             return null;
         }
 
@@ -137,18 +166,10 @@ public class AskQuestionActivity extends BaseActivity {
             question.setQuestionContent(mQuestion.getText().toString());
             String imageUrl = (String) mChoosePic.getTag();
             question.setQuestionPic(imageUrl);
-
             String teacherId = (String) mChooseTeacher.getTag();
             question.setAssignTeacher(teacherId);
-
         }
 
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-            hideLoadingDialog();
-        }
     }
 
 }

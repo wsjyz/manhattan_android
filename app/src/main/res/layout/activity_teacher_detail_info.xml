@@ -48,7 +48,7 @@
                     android:layout_toRightOf="@id/teacher_avatar"
                     android:textColor="@color/common_text_color"
                     android:textSize="@dimen/dimen_18sp"
-                    android:text="JK.ROSE"
+                    android:minWidth="100dp"
                     android:gravity="center_vertical" />
 
                 <ImageView
@@ -66,7 +66,6 @@
                     android:layout_toRightOf="@id/teacher_avatar"
                     android:textColor="@color/common_text_color"
                     android:textSize="@dimen/dimen_16sp"
-                    android:text="美国麻省理工大学"
                     android:gravity="center_vertical"
                     android:layout_below="@id/teacher_name" />
 
@@ -259,7 +258,7 @@
                     android:layout_height="200dp"
                     android:background="@drawable/schedule_grid_background"
                     android:paddingLeft="52dp"
-                    android:paddingTop="62dp"
+                    android:paddingTop="63dp"
                     android:columnWidth="52dp"
                     android:numColumns="7"
                     android:scrollbars="none"
@@ -392,7 +391,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/dimen_16sp"
                     android:textColor="@color/common_text_color"
-                    android:text="@string/infomation_content"
                     android:gravity="center_vertical"
                     android:padding="@dimen/common_margin"
                     android:background="@drawable/drawable_border_light_gray" />

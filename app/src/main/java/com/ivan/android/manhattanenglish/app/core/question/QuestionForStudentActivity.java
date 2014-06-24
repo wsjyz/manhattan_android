@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -16,8 +15,11 @@ import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
+import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
 
 import java.util.List;
 
@@ -64,7 +66,6 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
 
         getSupportLoaderManager().initLoader(0, null, this);
         showLoadingDialog();
-
     }
 
     @Override
@@ -110,7 +111,7 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
     }
 
 
-    public static class QuestionListLoader extends AsyncTaskLoader<List<Question>> {
+    public static class QuestionListLoader extends CommonDataLoader<List<Question>> {
 
         public QuestionListLoader(Context context) {
             super(context);
@@ -118,12 +119,15 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
 
         @Override
         public List<Question> loadInBackground() {
-            //todo load question list from server
-            return null;
+            QuestionService questionService = ServiceFactory.getService(QuestionService.class);
+            List<Question> result = null;
+            try {
+                result = questionService.loadMyQuestions();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result;
         }
     }
-
-
-    //todo load questionList from server
 
 }

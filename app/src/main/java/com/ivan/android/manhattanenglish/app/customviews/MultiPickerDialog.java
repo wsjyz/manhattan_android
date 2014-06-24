@@ -35,6 +35,8 @@ public class MultiPickerDialog extends AlertDialog {
 
     protected String title;
 
+    protected int mGridColumn = 3;
+
     private OnItemsCheckedListener mListener;
 
 
@@ -55,6 +57,12 @@ public class MultiPickerDialog extends AlertDialog {
     public void setOnItemsCheckedListener(OnItemsCheckedListener mListener) {
         this.mListener = mListener;
     }
+
+    public void setGridColumn(int count) {
+        if (count <= 0) return;
+        this.mGridColumn = count;
+    }
+
 
     public Set<String> getSelectedItems() {
         return mAdapter.getSelectedItems();
@@ -88,6 +96,7 @@ public class MultiPickerDialog extends AlertDialog {
         mTitle.setText(title);
 
         mGrid = (GridView) findViewById(R.id.location_grid);
+        mGrid.setNumColumns(mGridColumn);
 
         mGrid.setAdapter(mAdapter);
 

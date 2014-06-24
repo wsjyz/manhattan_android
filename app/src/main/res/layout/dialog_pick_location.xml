@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:layout_gravity="center"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
     android:background="@drawable/login_form_border">
     <TextView
         android:id="@+id/dialog_title"

@@ -7,6 +7,7 @@ import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,21 +42,28 @@ public class QuestionServiceImpl extends AbstractService implements QuestionServ
         params.put("questionId", questionId);
         post(getUrl(action), params);
     }
-
     @Override
-    public OpenPage<Question> loadMyQuestions(OpenPage<Question> page) {
+    public List<Question> loadMyQuestions() {
         String action = "/question/myQuestions";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("question", JSON.toJSONString(page));
-        return postForObject(questionPageType, getUrl(action), params);
+        params.put("openPage", JSON.toJSONString(getConditionPage()));
+        OpenPage<Question> page = postForObject(questionPageType, getUrl(action), params);
+        return page.getRows();
+    }
+
+    public OpenPage<Question> getConditionPage() {
+        OpenPage<Question> result = new OpenPage<Question>();
+        result.setAutoPaging(false);
+        return result;
     }
 
     @Override
-    public OpenPage<Question> loadQuestionsByType(OpenPage<Question> page, String type) {
+    public List<Question> loadQuestionByType(String type) {
         String action = "/question/needAnswerList";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("question", JSON.toJSONString(page));
+        params.put("openPage", JSON.toJSONString(getConditionPage()));
         params.put("type", type);
-        return postForObject(questionPageType, getUrl(action), params);
+        OpenPage<Question> page = postForObject(questionPageType, getUrl(action), params);
+        return page.getRows();
     }
 }

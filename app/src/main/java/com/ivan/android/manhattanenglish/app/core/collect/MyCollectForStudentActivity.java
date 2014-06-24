@@ -1,16 +1,14 @@
 package com.ivan.android.manhattanenglish.app.core.collect;
 
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.teacher.TeacherDetailInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
@@ -20,66 +18,13 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
  * Date: 14-5-13
  * Time: PM10:17
  */
-public class MyCollectForStudentActivity extends BaseActivity {
+public class MyCollectForStudentActivity extends BaseActivity implements TeacherListFragment.OnTeacherItemClickListener {
 
-    SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link android.support.v4.view.ViewPager} that will host the section contents.
-     */
-    ViewPager mViewPager;
-
-    TextView courseTab;
-
-    TextView teacherTab;
-
-    Drawable selectedPointer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_collect);
-
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        courseTab = (TextView) findViewById(R.id.student_tab);
-        courseTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectItem(0);
-            }
-        });
-
-        teacherTab = (TextView) findViewById(R.id.teacher_tab);
-        teacherTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectItem(1);
-            }
-        });
-
-        selectedPointer = getResources().getDrawable(R.drawable.tab_selected_pointer);
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                markTab(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,55 +33,18 @@ public class MyCollectForStudentActivity extends BaseActivity {
             }
         });
 
-    }
-
-    private void selectItem(int position) {
-        int currentItem = mViewPager.getCurrentItem();
-        if (position == currentItem) return;
-        mViewPager.setCurrentItem(position, true);
-        markTab(position);
-    }
-
-    private void markTab(int position) {
-        if (position == 0) {
-            if (!hasBottomDrawable(courseTab)) {
-                teacherTab.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-                courseTab.setCompoundDrawablesWithIntrinsicBounds(null, null, null, selectedPointer);
-            }
-
-        } else {
-            if (!hasBottomDrawable(teacherTab)) {
-                courseTab.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-                teacherTab.setCompoundDrawablesWithIntrinsicBounds(null, null, null, selectedPointer);
-            }
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.findFragmentById(R.id.fragment_container) == null) {
+            FragmentTransaction transaction = fm.beginTransaction();
+            TeacherListFragment fragment = TeacherListFragment.newInstance(TeacherListFragment.TYPE_COLLECT);
+            transaction.add(R.id.fragment_container, fragment).commit();
         }
     }
 
-    private boolean hasBottomDrawable(TextView tab) {
-        Drawable[] drawables = tab.getCompoundDrawables();
-        return drawables != null && drawables[3] != null;
-    }
-
-
-    /**
-     * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return position == 0 ? CourseListFragment.newInstance(CourseListFragment.TYPE_COLLECT) : TeacherListFragment.newInstance(TeacherListFragment.TYPE_COLLECT);
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-
+    @Override
+    public void onTeacherItemClick(String teacherId) {
+        Intent detail = new Intent(this, TeacherDetailInfoActivity.class);
+        detail.putExtra(TeacherDetailInfoActivity.TEACHER_ID_KEY, teacherId);
+        startActivity(detail);
     }
 }

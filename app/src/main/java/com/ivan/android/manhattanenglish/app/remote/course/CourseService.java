@@ -2,6 +2,8 @@ package com.ivan.android.manhattanenglish.app.remote.course;
 
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
+import java.util.List;
+
 /**
  * @author: Ivan Vigoss
  * Date: 14-5-7
@@ -50,5 +52,21 @@ public interface CourseService {
      * @param appointment
      */
     void submitAppointment(Appointment appointment);
+
+
+    /**
+     * 获得我预约的课程
+     *
+     * @return
+     */
+    List<Course> loadMyAppointCourse();
+
+
+    /**
+     * 获得我试听的课程
+     *
+     * @return
+     */
+    List<Course> loadMyAuditionCourse();
 
 }

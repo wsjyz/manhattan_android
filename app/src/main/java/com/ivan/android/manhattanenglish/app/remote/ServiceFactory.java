@@ -8,6 +8,8 @@ import com.ivan.android.manhattanenglish.app.remote.info.InfomationService;
 import com.ivan.android.manhattanenglish.app.remote.info.InfomationServiceImpl;
 import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
 import com.ivan.android.manhattanenglish.app.remote.question.QuestionServiceImpl;
+import com.ivan.android.manhattanenglish.app.remote.upload.UploadService;
+import com.ivan.android.manhattanenglish.app.remote.upload.UploadServiceImpl;
 import com.ivan.android.manhattanenglish.app.remote.user.LoginService;
 import com.ivan.android.manhattanenglish.app.remote.user.LoginServiceImpl;
 import com.ivan.android.manhattanenglish.app.remote.user.UserService;
@@ -36,6 +38,7 @@ public class ServiceFactory {
         register(UserService.class, new UserServiceImpl());
         register(CourseService.class, new CourseServiceImpl());
         register(HomeworkService.class, new HomeworkServiceImpl());
+        register(UploadService.class, new UploadServiceImpl());
     }
 
 

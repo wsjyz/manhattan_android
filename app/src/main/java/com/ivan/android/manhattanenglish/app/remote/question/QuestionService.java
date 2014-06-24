@@ -2,6 +2,8 @@ package com.ivan.android.manhattanenglish.app.remote.question;
 
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
+import java.util.List;
+
 /**
  * @author: Ivan Vigoss
  * Date: 14-6-11
@@ -34,18 +36,19 @@ public interface QuestionService {
      */
     void deleteQuestion(String questionId);
 
+
     /**
-     * 获得我的提问
+     * 获得我的问题
      *
      * @return
      */
-    OpenPage<Question> loadMyQuestions(OpenPage<Question> page);
+    List<Question> loadMyQuestions();
+
 
     /**
-     * @param page
-     * @param type
+     * @param type {@link QuestionService#SEARCH_TYPE_ASSIGN}
      * @return
      */
-    OpenPage<Question> loadQuestionsByType(OpenPage<Question> page, String type);
+    List<Question> loadQuestionByType(String type);
 
 }

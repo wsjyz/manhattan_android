@@ -6,6 +6,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -13,13 +14,16 @@ import android.widget.TextView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.UserService;
 import com.squareup.picasso.Picasso;
 
 public class TeacherDetailInfoActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<TeacherDetail> {
 
-    static final String TEACHER_ID_KEY = "TEACHER_ID";
+    public static final String TEACHER_ID_KEY = "TEACHER_ID";
 
     ImageView mAvatar;
     TextView mTeacherName;
@@ -79,8 +83,28 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         mTeachWay = (TextView) findViewById(R.id.teach_way_text);
 
         mAuditionBtn = (ImageView) findViewById(R.id.audition_image_btn);
+        mAuditionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         mAppointBtn = (ImageView) findViewById(R.id.appoint_btn);
+        mAppointBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         mCollectBtn = (ImageView) findViewById(R.id.collect_image_btn);
+        mCollectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         mTeacherScheduleGrid = (GridView) findViewById(R.id.schedule_grid);
         mAdapter = new ScheduleGridAdapter(this, false);
@@ -92,9 +116,12 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
 
         mSelfIntroduce = (TextView) findViewById(R.id.self_introduce);
 
+        showLoadingDialog();
+        getSupportLoaderManager().initLoader(0, getIntent().getExtras(), this);
+
     }
 
-    public class TeacherDetailInfoLoader extends AsyncTaskLoader<TeacherDetail> {
+    public static class TeacherDetailInfoLoader extends CommonDataLoader<TeacherDetail> {
 
         private String teacherId;
 
@@ -105,7 +132,12 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
 
         @Override
         public TeacherDetail loadInBackground() {
-
+            UserService userService = ServiceFactory.getService(UserService.class);
+            try {
+                return userService.loadTeacherDetail(teacherId);
+            } catch (Exception e) {
+                Log.e("TeacherDetailInfoLoader", "load TeacherDetail error.", e);
+            }
             return null;
         }
 
@@ -119,8 +151,11 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<TeacherDetail> loader, TeacherDetail data) {
-        mData = data;
-        refresh();
+        hideLoadingDialog();
+        if (data != null) {
+            mData = data;
+            refresh();
+        }
     }
 
     @Override

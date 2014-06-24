@@ -1,5 +1,6 @@
 package com.ivan.android.manhattanenglish.app.core.audition;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,8 @@ import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.collect.CourseListFragment;
 import com.ivan.android.manhattanenglish.app.core.collect.TeacherListFragment;
+import com.ivan.android.manhattanenglish.app.core.course.CourseDetailActivity;
+import com.ivan.android.manhattanenglish.app.core.teacher.TeacherDetailInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 
 /**
@@ -22,7 +25,7 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
  * Date: 14-5-13
  * Time: PM10:17
  */
-public class MyAuditionForStudentActivity extends BaseActivity {
+public class MyAuditionForStudentActivity extends BaseActivity implements TeacherListFragment.OnTeacherItemClickListener, CourseListFragment.OnCourseItemClickListener {
 
     SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -52,7 +55,7 @@ public class MyAuditionForStudentActivity extends BaseActivity {
             }
         });
 
-        teacherTab = (TextView) findViewById(R.id.teacher_tab);
+        teacherTab = (TextView) findViewById(R.id.course_tab);
         teacherTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,5 +143,19 @@ public class MyAuditionForStudentActivity extends BaseActivity {
             return 2;
         }
 
+    }
+
+    @Override
+    public void onCourseItemClick(String courseId) {
+        Intent detail = new Intent(this, CourseDetailActivity.class);
+        detail.putExtra(CourseDetailActivity.COURSE_ID_KEY, courseId);
+        startActivity(detail);
+    }
+
+    @Override
+    public void onTeacherItemClick(String teacherId) {
+        Intent detail = new Intent(this, TeacherDetailInfoActivity.class);
+        detail.putExtra(TeacherDetailInfoActivity.TEACHER_ID_KEY, teacherId);
+        startActivity(detail);
     }
 }

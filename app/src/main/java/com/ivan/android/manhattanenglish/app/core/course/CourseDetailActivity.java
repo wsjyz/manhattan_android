@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointCourseActivity;
@@ -126,6 +128,8 @@ public class CourseDetailActivity extends BaseActivity {
         protected void onPostExecute(Course course) {
             super.onPostExecute(course);
             mCourse = course;
+            Log.d(CourseDetailActivity.class.getName(), "course load finished.result as follows :\n "
+                    + JSON.toJSONString(course));
             refresh();
         }
     }
