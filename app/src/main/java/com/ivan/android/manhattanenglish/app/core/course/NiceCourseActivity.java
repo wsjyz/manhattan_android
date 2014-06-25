@@ -83,8 +83,7 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.i("CourseActivity", "you clicked position :" + position);
-        Course item = (Course) mAdapter.getItem(position);
+        Course item = (Course) mAdapter.getItem(position - 1);
         Intent intent = new Intent(this, CourseDetailActivity.class);
         intent.putExtra(CourseDetailActivity.COURSE_ID_KEY, item.getCourseId());
         startActivity(intent);

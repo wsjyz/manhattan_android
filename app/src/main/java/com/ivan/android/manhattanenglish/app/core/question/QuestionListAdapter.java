@@ -68,7 +68,7 @@ public class QuestionListAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.question_list_item, null);
             holder = new ViewHolder();
             holder.content = (TextView) convertView;
-            convertView.setTag(convertView);
+            convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }

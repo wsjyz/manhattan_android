@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
@@ -29,7 +30,6 @@ import java.io.File;
 public class AskQuestionActivity extends BaseActivity {
 
     final static int PICK_IMAGE_CODE = 1;
-    final static int PICK_TEACHER_CODE = 2;
 
     EditText mTitle;
 
@@ -71,8 +71,9 @@ public class AskQuestionActivity extends BaseActivity {
         mChooseTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pickTeacher = new Intent(TeacherActivity.ACTION_PICK_TEACHER);
-                startActivityForResult(pickTeacher, PICK_TEACHER_CODE);
+                Intent pickTeacher = new Intent(AskQuestionActivity.this, TeacherActivity.class);
+                pickTeacher.setAction(TeacherActivity.ACTION_PICK_TEACHER);
+                startActivityForResult(pickTeacher, TeacherActivity.PICK_TEACHER_CODE);
             }
         });
 
@@ -80,15 +81,48 @@ public class AskQuestionActivity extends BaseActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new SubmitQuestionTask(AskQuestionActivity.this).execute();
+                if (checkForm()) {
+                    new SubmitQuestionTask(AskQuestionActivity.this).execute();
+                }
             }
         });
 
     }
 
+    private boolean checkForm() {
+        boolean result = true;
+
+        mTitle.setError(null);
+        mQuestion.setError(null);
+
+        View focusView = null;
+        if (TextUtils.isEmpty(getTitleText())) {
+            focusView = mTitle;
+            result = false;
+        } else if (TextUtils.isEmpty(getContentText())) {
+            focusView = mQuestion;
+            result = false;
+        }
+
+        if (!result) {
+            focusView.requestFocus();
+        }
+
+        return result;
+    }
+
+    private String getTitleText() {
+        return mTitle.getText().toString();
+    }
+
+    private String getContentText() {
+        return mQuestion.getText().toString();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK || data == null) return;
         switch (requestCode) {
             case PICK_IMAGE_CODE:
                 Uri uri = data.getData();
@@ -109,7 +143,7 @@ public class AskQuestionActivity extends BaseActivity {
                 }
 
                 break;
-            case PICK_TEACHER_CODE:
+            case TeacherActivity.PICK_TEACHER_CODE:
                 String teacherId = data.getStringExtra("teacherId");
                 String teacherName = data.getStringExtra("teacherName");
                 mChooseTeacher.setTag(teacherId);
@@ -162,14 +196,22 @@ public class AskQuestionActivity extends BaseActivity {
         }
 
         private void collectParams() {
-            question.setQuestionTitle(mTitle.getText().toString());
-            question.setQuestionContent(mQuestion.getText().toString());
+            question.setQuestionTitle(getTitleText());
+            question.setQuestionContent(getContentText());
             String imageUrl = (String) mChoosePic.getTag();
             question.setQuestionPic(imageUrl);
             String teacherId = (String) mChooseTeacher.getTag();
             question.setAssignTeacher(teacherId);
         }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (!hasError) {
+                Toast.makeText(AskQuestionActivity.this, R.string.info_submit_success, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
     }
 
 }

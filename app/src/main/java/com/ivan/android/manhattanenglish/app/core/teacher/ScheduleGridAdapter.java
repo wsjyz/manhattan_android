@@ -83,8 +83,6 @@ public class ScheduleGridAdapter extends BaseAdapter {
             }
         });
 
-        Log.i("ScheduleGridAdapter", "convertView height :" + convertView.getHeight() + " width : " + convertView.getWidth());
-
         return convertView;
     }
 }

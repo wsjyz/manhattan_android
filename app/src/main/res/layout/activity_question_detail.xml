@@ -55,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/drawable_border_light_gray"
+                android:padding="@dimen/common_margin"
                 android:layout_margin="@dimen/common_margin">
 
             </FrameLayout>

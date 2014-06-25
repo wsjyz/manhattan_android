@@ -31,7 +31,7 @@ import java.util.Date;
 public class TeacherActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     public final static String ACTION_PICK_TEACHER = "com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity.ACTION_PICK_TEACHER";
-
+    public final static int PICK_TEACHER_CODE = 2;
     PullToRefreshListView teacherList;
 
     OpenPage<TeacherDetail> page;
@@ -111,7 +111,8 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
             Intent result = new Intent();
             result.putExtra("teacherId", item.getTeacherId());
             result.putExtra("teacherName", item.getName());
-            setResult(0, result);
+            setResult(PICK_TEACHER_CODE, result);
+            finishActivity(PICK_TEACHER_CODE);
         } else {
             Intent detail = new Intent(this, TeacherDetailInfoActivity.class);
             detail.putExtra(TeacherDetailInfoActivity.TEACHER_ID_KEY, item.getTeacherId());

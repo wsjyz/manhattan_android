@@ -87,7 +87,6 @@ public class HomeworkActivity extends BaseActivity implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Homework homework = (Homework) mAdapter.getItem(position - 1);
-        Log.i("HomeworkActivity", position + " selected");
         if (homework != null) {
             Intent submitHomework = new Intent(this, SubmitHomeworkActivity.class);
             submitHomework.putExtra(SubmitHomeworkActivity.KEY_HOMEWORK, JSON.toJSONString(homework));

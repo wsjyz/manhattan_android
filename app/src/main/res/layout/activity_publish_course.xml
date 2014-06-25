@@ -126,14 +126,11 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/common_margin" />
 
-                <GridView
+                <com.ivan.android.manhattanenglish.app.customviews.ScheduleGridView
                     android:id="@+id/schedule_grid"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/schedule_grid_background"
-                    android:paddingLeft="52dp"
-                    android:paddingTop="62dp"
-                    android:columnWidth="52dp"
                     android:numColumns="7"
                     android:scrollbars="none"
                     android:gravity="center"

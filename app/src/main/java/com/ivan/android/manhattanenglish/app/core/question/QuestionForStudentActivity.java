@@ -2,6 +2,7 @@ package com.ivan.android.manhattanenglish.app.core.question;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -20,6 +21,7 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
 import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 
 import java.util.List;
 
@@ -90,7 +92,7 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        mAdapter.removeItem(menuInfo.position);
+        new DeleteQuestionTask(this, menuInfo.position).execute();
         return true;
     }
 
@@ -127,6 +129,33 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
                 e.printStackTrace();
             }
             return result;
+        }
+    }
+
+    public class DeleteQuestionTask extends CommonAsyncTask<Integer, Void, Void> {
+
+        private int position;
+        private Question question;
+
+        protected DeleteQuestionTask(Context context, int position) {
+            super(context);
+            this.position = position;
+            this.question = (Question) mAdapter.getItem(position);
+        }
+
+        @Override
+        protected Void getResultInBackground(Integer... params) {
+            QuestionService questionService = ServiceFactory.getService(QuestionService.class);
+            questionService.deleteQuestion(question.getQuestionId());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (!hasError) {
+                mAdapter.removeItem(position);
+            }
         }
     }
 

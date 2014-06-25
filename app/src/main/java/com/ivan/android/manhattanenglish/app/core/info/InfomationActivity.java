@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class InfomationActivity extends BaseActivity {
+public class InfomationActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     PullToRefreshListView infoListView;
 
@@ -80,10 +81,17 @@ public class InfomationActivity extends BaseActivity {
         mAdapter = new InfomationListAdapter(this, new ArrayList<Infomation>());
         infoListView.setAdapter(mAdapter);
         infoListView.setEmptyView(getEmptyView());
+        infoListView.setOnItemClickListener(this);
 
         new InfomationLoadTask().execute(page);
 
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //todo
+    }
+
 
     class InfomationLoadTask extends AsyncTask<OpenPage<Infomation>, Void, OpenPage<Infomation>> {
 
