@@ -18,8 +18,11 @@ import java.util.Date;
  */
 public class UserInfoLoader extends CommonDataLoader<User> {
 
-    public UserInfoLoader(Context context) {
+    private String userId;
+
+    public UserInfoLoader(Context context, String userId) {
         super(context);
+        this.userId = userId;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class UserInfoLoader extends CommonDataLoader<User> {
         UserService userService = ServiceFactory.getService(UserService.class);
         User user = null;
         try {
-            user = userService.loadUser(UserCache.getUserId());
+            user = userService.loadUser(userId);
             if (user != null) {
                 UserCache.setCurrentUser(user);
             }

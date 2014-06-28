@@ -1,7 +1,5 @@
 package com.ivan.android.manhattanenglish.app.remote.question;
 
-import com.ivan.android.manhattanenglish.app.utils.OpenPage;
-
 import java.util.List;
 
 /**

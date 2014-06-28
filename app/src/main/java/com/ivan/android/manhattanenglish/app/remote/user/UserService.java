@@ -82,4 +82,26 @@ public interface UserService {
      * @return
      */
     List<TeacherDetail> loadCollectTeacherDetail();
+
+
+    /**
+     * 获得我的学生列表
+     *
+     * @return
+     */
+    List<User> loadStudentList();
+
+    /**
+     * 获得我预约的学生列表
+     *
+     * @return
+     */
+    List<User> loadAppointStudentList();
+
+    /**
+     * 获得我试听的学生列表
+     *
+     * @return
+     */
+    List<User> loadAuditionStudentList();
 }

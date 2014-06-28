@@ -11,6 +11,8 @@
     <string name="label_teacher">主讲教师</string>
     <string name="label_course_content">授课内容</string>
 
+    <string name="action_choose_location">请选择可授课区域</string>
+
     <string-array name="required_level">
         <item>初级</item>
         <item>中级</item>

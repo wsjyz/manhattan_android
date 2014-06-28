@@ -48,6 +48,9 @@ public class MoreInfoActivity extends BaseActivity implements AdapterView.OnItem
                 finish();
             }
         });
+        if (UserCache.getCurrentUser() == null) {
+            mUnregisterBtn.setVisibility(View.GONE);
+        }
     }
 
     @Override

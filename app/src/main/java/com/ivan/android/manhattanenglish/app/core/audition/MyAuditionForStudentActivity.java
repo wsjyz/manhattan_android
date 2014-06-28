@@ -47,7 +47,7 @@ public class MyAuditionForStudentActivity extends BaseActivity implements Teache
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        courseTab = (TextView) findViewById(R.id.student_tab);
+        courseTab = (TextView) findViewById(R.id.course_tab);
         courseTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +55,7 @@ public class MyAuditionForStudentActivity extends BaseActivity implements Teache
             }
         });
 
-        teacherTab = (TextView) findViewById(R.id.course_tab);
+        teacherTab = (TextView) findViewById(R.id.teacher_tab);
         teacherTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -9,6 +9,7 @@ import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
 
+import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
@@ -41,6 +42,7 @@ public class QuestionListFragment extends ListFragment implements LoaderManager.
         super.onActivityCreated(savedInstanceState);
         setListShown(false);
         mAdapter = new QuestionListAdapter(getActivity());
+        setEmptyText(getText(R.string.empty_text));
         setListAdapter(mAdapter);
         getLoaderManager().initLoader(0, getArguments(), this);
     }

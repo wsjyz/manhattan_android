@@ -6,10 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="action_delete">删除</string>
     <string name="action_unregister">注销</string>
-
+    <string name="action_new">新增</string>
     <string name="submit">提交</string>
-
-
     <string name="back_button">back</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_section1">Section 1</string>
@@ -59,9 +57,10 @@
     <string name="title_activity_question_for_teacher">我要回答</string>
     <string name="title_activity_submit_homework">提交作业</string>
 
-
-    <!--提示信息-->
+    <!-- 提示信息 -->
     <string name="info_submit_success">提交成功</string>
     <string name="error_contact_user_required">联系人不能为空</string>
+    <string name="title_activity_answer_question">回答问题</string>
+    <string name="title_activity_publish_homework">发布作业</string>
 
 </resources>

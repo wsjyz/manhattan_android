@@ -1,5 +1,6 @@
 package com.ivan.android.manhattanenglish.app.core.appoint;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -8,9 +9,11 @@ import android.view.View;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.collect.StudentListFragment;
+import com.ivan.android.manhattanenglish.app.core.userinfo.StudentInfoActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.user.User;
 
-public class StudentListActivity extends BaseActivity{
+public class StudentListActivity extends BaseActivity implements StudentListFragment.OnStudentListItemClickListener {
 
     public static final String TITLE_KEY = "TITLE";
 
@@ -37,10 +40,15 @@ public class StudentListActivity extends BaseActivity{
         if (fm.findFragmentById(R.id.container) == null) {
             FragmentTransaction transaction = fm.beginTransaction();
             StudentListFragment fragment = StudentListFragment.newInstance(loadType);
-            transaction.replace(R.id.container, fragment).commit();
+            transaction.add(R.id.container, fragment).commit();
         }
 
     }
 
-
+    @Override
+    public void onStudentListItemClick(User student) {
+        Intent studentInfo = new Intent(this, StudentInfoActivity.class);
+        studentInfo.putExtra(StudentInfoActivity.USER_ID_KEY, student.getUserId());
+        startActivity(studentInfo);
+    }
 }

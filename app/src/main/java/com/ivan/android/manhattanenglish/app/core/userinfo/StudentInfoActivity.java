@@ -14,12 +14,15 @@ import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.user.User;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 import com.squareup.picasso.Picasso;
 
 /**
  * 学生个人资料Activity
  */
 public class StudentInfoActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<User> {
+
+    public static final String USER_ID_KEY = "USER_ID";
 
     ImageView mAvatar;
 
@@ -52,6 +55,7 @@ public class StudentInfoActivity extends BaseActivity implements LoaderManager.L
             }
         });
 
+
         mAvatar = (ImageView) findViewById(R.id.avatar_image);
 
         mUserName = (TextView) findViewById(R.id.nick_name);
@@ -64,13 +68,17 @@ public class StudentInfoActivity extends BaseActivity implements LoaderManager.L
         mVipExpired = (TextView) findViewById(R.id.vip_expired_text);
 
         showLoadingDialog();
-        getSupportLoaderManager().initLoader(0, null, this);
+        getSupportLoaderManager().initLoader(0, getIntent().getExtras(), this);
     }
 
     @Override
     public Loader<User> onCreateLoader(int id, Bundle args) {
         Log.i("studentInfoActivity", "create loader");
-        return new UserInfoLoader(this);
+        String userId = args.getString(USER_ID_KEY);
+        if (TextUtils.isEmpty(userId)) {
+            userId = UserCache.getUserId();//default is current userId
+        }
+        return new UserInfoLoader(this, userId);
     }
 
     @Override

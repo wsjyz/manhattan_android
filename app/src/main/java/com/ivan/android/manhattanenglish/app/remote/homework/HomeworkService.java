@@ -3,6 +3,7 @@ package com.ivan.android.manhattanenglish.app.remote.homework;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @author: Ivan Vigoss
@@ -25,4 +26,19 @@ public interface HomeworkService {
      * @param content
      */
     void submitHomework(String homeworkId, File homeworkFile, String content);
+
+
+    /**
+     * 获得老师创建的作业
+     *
+     * @return
+     */
+    OpenPage<Homework> loadTeacherHomework(OpenPage<Homework> condition);
+
+    /**
+     * 提交一个
+     *
+     * @param title
+     */
+    void postHomework(String title);
 }

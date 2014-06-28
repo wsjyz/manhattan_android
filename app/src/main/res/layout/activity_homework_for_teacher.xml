@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/form_default_height"
         custom:titleText="@string/title_homework"
-        custom:showRight="false" />
+        custom:rightButtonText="@string/action_new" />
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/homework_list"
@@ -22,7 +22,6 @@
         android:divider="@color/border_color"
         android:dividerHeight="1dp"
         android:scrollbars="none"
-        android:background="@drawable/login_form_border"
-        />
+        android:background="@drawable/login_form_border" />
 
 </LinearLayout>

@@ -28,8 +28,7 @@
             android:name=".core.login.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible"
-            >
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name=".core.login.RegisterActivity"
@@ -78,7 +77,12 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".core.homework.HomeworkActivity"
+            android:name=".core.homework.TeacherHomeworkActivity"
+            android:label="@string/title_activity_homework"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".core.homework.StudentHomeworkActivity"
             android:label="@string/title_activity_homework"
             android:screenOrientation="portrait" >
         </activity>
@@ -110,8 +114,8 @@
         <activity
             android:name=".core.question.AskQuestionActivity"
             android:label="@string/title_activity_ask_question"
-            android:windowSoftInputMode="adjustPan|stateVisible"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateVisible" >
         </activity>
         <activity
             android:name=".core.question.QuestionForStudentActivity"
@@ -190,7 +194,16 @@
         <activity
             android:name=".core.homework.SubmitHomeworkActivity"
             android:label="@string/title_activity_submit_homework"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".core.question.AnswerQuestionActivity"
+            android:label="@string/title_activity_answer_question"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".PublishHomeworkActivity"
+            android:label="@string/title_activity_publish_homework" >
         </activity>
     </application>
 

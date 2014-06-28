@@ -111,8 +111,8 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
             Intent result = new Intent();
             result.putExtra("teacherId", item.getTeacherId());
             result.putExtra("teacherName", item.getName());
-            setResult(PICK_TEACHER_CODE, result);
-            finishActivity(PICK_TEACHER_CODE);
+            setResult(RESULT_OK, result);
+            finish();
         } else {
             Intent detail = new Intent(this, TeacherDetailInfoActivity.class);
             detail.putExtra(TeacherDetailInfoActivity.TEACHER_ID_KEY, item.getTeacherId());

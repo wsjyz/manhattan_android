@@ -2,6 +2,8 @@ package com.ivan.android.manhattanenglish.app.remote.question;
 
 import android.text.format.DateFormat;
 
+import com.ivan.android.manhattanenglish.app.remote.user.User;
+
 import java.util.Date;
 
 /**
@@ -28,10 +30,14 @@ public class Question {
      */
     private String userId;
 
+    private User askUser;
+
     /**
      * 问题回答人
      */
     private String replyUser;
+
+    private User repUser;
 
     /**
      * 问题状态
@@ -162,5 +168,21 @@ public class Question {
 
     public void setAnswerPic(String answerPic) {
         this.answerPic = answerPic;
+    }
+
+    public User getAskUser() {
+        return askUser;
+    }
+
+    public void setAskUser(User askUser) {
+        this.askUser = askUser;
+    }
+
+    public User getRepUser() {
+        return repUser;
+    }
+
+    public void setRepUser(User repUser) {
+        this.repUser = repUser;
     }
 }

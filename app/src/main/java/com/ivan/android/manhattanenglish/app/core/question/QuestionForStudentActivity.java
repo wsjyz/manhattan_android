@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
@@ -75,9 +76,7 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
         Question question = (Question) mAdapter.getItem(position);
 
         Intent questionDetail = new Intent(this, QuestionDetailActivity.class);
-        questionDetail.putExtra("questionId", question.getQuestionId());
-        questionDetail.putExtra("content", question.getQuestionContent());
-        questionDetail.putExtra("createTime", question.getCreateTimeString());
+        questionDetail.putExtra(QuestionDetailActivity.JSON_QUESTION_KEY, JSON.toJSONString(question));
         startActivity(questionDetail);
 
     }

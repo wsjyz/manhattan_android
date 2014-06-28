@@ -3,10 +3,11 @@ package com.ivan.android.manhattanenglish.app.remote.user;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.ivan.android.manhattanenglish.app.remote.AbstractService;
-import com.ivan.android.manhattanenglish.app.remote.course.Course;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +19,12 @@ import java.util.Map;
  * Time: PM9:24
  */
 public class UserServiceImpl extends AbstractService implements UserService {
-    Type teacherDetailPage = new TypeReference<OpenPage<TeacherDetail>>() {
+    Type teacherDetailPageType = new TypeReference<OpenPage<TeacherDetail>>() {
     }.getType();
 
-    @Override
+    Type userPageType = new TypeReference<OpenPage<User>>() {
+    }.getType();
+
     public void collect(String teacherId) {
         String action = "/user/collect";
         Map<String, String> params = new HashMap<String, String>();
@@ -51,7 +54,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
         Map<String, String> params = new HashMap<String, String>();
         params.put("openPage", JSON.toJSONString(page));
         params.put("searchKey", keyword);
-        return postForObject(teacherDetailPage, getUrl(action), params);
+        return postForObject(teacherDetailPageType, getUrl(action), params);
     }
 
     @Override
@@ -68,9 +71,10 @@ public class UserServiceImpl extends AbstractService implements UserService {
         Type type = new TypeReference<List<Date>>() {
         }.getType();
         String action = "/course/getSchedule";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Map<String, String> params = new HashMap<String, String>();
-        params.put("startTime", JSON.toJSONString(startTime));
-        params.put("endTime", JSON.toJSONString(endTime));
+        params.put("startTime", format.format(startTime));
+        params.put("endTime", format.format(endTime));
 
         return postForObject(type, getUrl(action), params);
     }
@@ -100,8 +104,37 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("openPage", JSON.toJSONString(page));
-        OpenPage<TeacherDetail> result = postForObject(teacherDetailPage, getUrl(action), params);
+        OpenPage<TeacherDetail> result = postForObject(teacherDetailPageType, getUrl(action), params);
         return result.getRows();
     }
 
+
+    @Override
+    public List<User> loadStudentList() {
+        String action = "/user/getStudentList";
+        return loadStudentListByAction(action);
+    }
+
+    @Override
+    public List<User> loadAppointStudentList() {
+        String action = "/user/getOrderStudentList";
+        return loadStudentListByAction(action);
+    }
+
+    @Override
+    public List<User> loadAuditionStudentList() {
+        String action = "/user/getListenStudentList";
+        return loadStudentListByAction(action);
+    }
+
+    private List<User> loadStudentListByAction(String action) {
+        OpenPage<User> page = new OpenPage<User>();
+        page.setAutoPaging(false);
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("openPage", JSON.toJSONString(page));
+        params.put("teacherId", UserCache.getUserId());
+        OpenPage<User> result = postForObject(userPageType, getUrl(action), params);
+        return result.getRows();
+    }
 }

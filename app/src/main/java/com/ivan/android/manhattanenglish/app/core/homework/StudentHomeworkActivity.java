@@ -18,12 +18,11 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.homework.Homework;
 import com.ivan.android.manhattanenglish.app.remote.homework.HomeworkService;
-import com.ivan.android.manhattanenglish.app.remote.info.Infomation;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.Date;
 
-public class HomeworkActivity extends BaseActivity implements AdapterView.OnItemClickListener {
+public class StudentHomeworkActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     PullToRefreshListView homeworkListView;
 
@@ -74,7 +73,7 @@ public class HomeworkActivity extends BaseActivity implements AdapterView.OnItem
                     page.setPageNo(page.getPageNo() + 1);
                     new HomeworkLoadTask().execute(page);
                 } else {
-                    Toast.makeText(HomeworkActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentHomeworkActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
                 }
             }
         });

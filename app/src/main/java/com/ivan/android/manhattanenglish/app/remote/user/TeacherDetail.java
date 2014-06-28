@@ -48,12 +48,6 @@ public class TeacherDetail {
     private String requiredLevel;
 
     /**
-     * 授课方式
-     */
-    @JSONField(name = "tutoringWay")
-    private String teachMethod;
-
-    /**
      * classFees
      */
     @JSONField(name = "classFees")
@@ -179,14 +173,6 @@ public class TeacherDetail {
 
     public String getAvatarUrl() {
         return user == null ? null : user.getAvatar();
-    }
-
-    public String getTeachMethod() {
-        return teachMethod;
-    }
-
-    public void setTeachMethod(String teachMethod) {
-        this.teachMethod = teachMethod;
     }
 
     public int getSexDrawableResource() {

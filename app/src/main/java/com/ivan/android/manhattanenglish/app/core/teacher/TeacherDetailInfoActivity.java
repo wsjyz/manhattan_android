@@ -1,9 +1,9 @@
 package com.ivan.android.manhattanenglish.app.core.teacher;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,10 +15,12 @@ import android.widget.TextView;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
+import com.ivan.android.manhattanenglish.app.core.appoint.AppointCourseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
 import com.ivan.android.manhattanenglish.app.remote.user.UserService;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.squareup.picasso.Picasso;
 
 public class TeacherDetailInfoActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<TeacherDetail> {
@@ -52,6 +54,8 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
     TextView mCost;
     TextView mSelfIntroduce;
 
+    String teacherId;
+
     TeacherDetail mData;
 
     @Override
@@ -66,6 +70,8 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
                 finish();
             }
         });
+
+        teacherId = getIntent().getStringExtra(TEACHER_ID_KEY);
 
         mAvatar = (ImageView) findViewById(R.id.teacher_avatar);
         mTeacherName = (TextView) findViewById(R.id.teacher_name);
@@ -86,7 +92,7 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         mAuditionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                navigateToAppoint(AppointCourseActivity.ACTION_TYPE_AUDITION);
             }
         });
 
@@ -94,7 +100,7 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         mAppointBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                navigateToAppoint(AppointCourseActivity.ACTION_TYPE_APPOINT);
             }
         });
 
@@ -102,7 +108,7 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         mCollectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new CollectTeacherTask(TeacherDetailInfoActivity.this).execute();
             }
         });
 
@@ -119,6 +125,36 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         showLoadingDialog();
         getSupportLoaderManager().initLoader(0, getIntent().getExtras(), this);
 
+    }
+
+    private void navigateToAppoint(int actionType) {
+        if (mData == null) return;
+        Intent intent = new Intent(this, AppointCourseActivity.class);
+        intent.putExtra(AppointCourseActivity.ACTION_TYPE_KEY, actionType);
+        intent.putExtra(AppointCourseActivity.RESOURCE_ID_KEY, teacherId);
+        startActivity(intent);
+    }
+
+    class CollectTeacherTask extends CommonAsyncTask<Void, Void, Void> {
+
+        protected CollectTeacherTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected Void getResultInBackground(Void... params) {
+            UserService userService = ServiceFactory.getService(UserService.class);
+            userService.collect(teacherId);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (!hasError) {
+                onCollect();
+            }
+        }
     }
 
     public static class TeacherDetailInfoLoader extends CommonDataLoader<TeacherDetail> {
@@ -193,8 +229,16 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         mAvailableLocation.setText(availableLocation);
         mTeachWay.setText(teachWayText);
 
-        mTeachMethod.setText(mData.getTeachMethod());
+        mTeachMethod.setText(mData.getTeachWay());
         mRequiredLevel.setText(mData.getRequiredLevel());
         mCost.setText(getTextFromFormat(R.string.pattern_rmb, String.valueOf(mData.getCost())));
+
+        //授课时间GridView
+        mAdapter.setTeachingTime(mData.getTeachingTime());
+    }
+
+    private void onCollect() {
+        String collectCountText = getTextFromFormat(R.string.pattern_collect_count, String.valueOf(mData.getCollectCount() + 1));
+        mCollectCount.setText(collectCountText);
     }
 }

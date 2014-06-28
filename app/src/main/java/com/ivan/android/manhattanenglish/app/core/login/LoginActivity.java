@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
-import com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity;
+import com.ivan.android.manhattanenglish.app.core.home.TeacherHomeActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.LoginService;
@@ -95,9 +95,9 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-        if (autoLogin) {
-            attemptLogin();
-        }
+//        if (autoLogin) {
+//            attemptLogin();
+//        }
 
     }
 
@@ -189,7 +189,7 @@ public class LoginActivity extends BaseActivity {
 
                 finish();
                 if (User.USER_TYPE_TEACHER.equals(user.getType())) {
-                    navigate(TeacherActivity.class);
+                    navigate(TeacherHomeActivity.class);
                 } else {
                     navigate(StudentHomeActivity.class);
                 }

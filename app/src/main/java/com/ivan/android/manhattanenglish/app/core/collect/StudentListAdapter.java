@@ -1,6 +1,7 @@
 package com.ivan.android.manhattanenglish.app.core.collect;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,10 +82,12 @@ public class StudentListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Picasso.with(context)
-                .load(user.getAvatar())
-                .fit()
-                .into(holder.avatar);
+        if (!TextUtils.isEmpty(user.getAvatar())) {
+            Picasso.with(context)
+                    .load(user.getAvatar())
+                    .fit()
+                    .into(holder.avatar);
+        }
 
         holder.name.setText(getText(R.string.label_class_num, user.getUserName()));
         holder.phone.setText(user.getMobile());

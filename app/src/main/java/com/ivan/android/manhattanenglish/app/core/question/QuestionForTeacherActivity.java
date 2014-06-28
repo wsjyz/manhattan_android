@@ -1,5 +1,6 @@
 package com.ivan.android.manhattanenglish.app.core.question;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
@@ -57,6 +59,22 @@ public class QuestionForTeacherActivity extends BaseActivity implements Question
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                selectItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         mAssignedTab = (TextView) findViewById(R.id.assigned_tab);
         mAssignedTab.setOnClickListener(new View.OnClickListener() {
@@ -156,10 +174,14 @@ public class QuestionForTeacherActivity extends BaseActivity implements Question
         int position = mViewPager.getCurrentItem();
         switch (position) {
             case 1: //已回答
-
+                Intent questionDetail = new Intent(this, QuestionDetailActivity.class);
+                questionDetail.putExtra(QuestionDetailActivity.JSON_QUESTION_KEY, JSON.toJSONString(question));
+                startActivity(questionDetail);
                 break;
             default: //指定回答、未回答
-
+                Intent answerQuestion = new Intent(this, AnswerQuestionActivity.class);
+                answerQuestion.putExtra(AnswerQuestionActivity.JSON_QUESTION_KEY, JSON.toJSONString(question));
+                startActivity(answerQuestion);
                 break;
         }
     }

@@ -1,9 +1,7 @@
 package com.ivan.android.manhattanenglish.app.core.info;
 
-import android.os.AsyncTask;
+import android.content.Context;
 import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -17,6 +15,7 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.info.Infomation;
 import com.ivan.android.manhattanenglish.app.remote.info.InfomationService;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class InfomationActivity extends BaseActivity implements AdapterView.OnIt
                     CharSequence label = getRefreshTimeString();
                     refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 }
-                new InfomationLoadTask().execute(page);
+                new InfomationLoadTask(InfomationActivity.this).execute(page);
             }
 
         });
@@ -71,7 +70,7 @@ public class InfomationActivity extends BaseActivity implements AdapterView.OnIt
             public void onLastItemVisible() {
                 if (page.hasNext()) {
                     page.setPageNo(page.getPageNo() + 1);
-                    new InfomationLoadTask().execute(page);
+                    new InfomationLoadTask(InfomationActivity.this).execute(page);
                 } else {
                     Toast.makeText(InfomationActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
                 }
@@ -83,7 +82,7 @@ public class InfomationActivity extends BaseActivity implements AdapterView.OnIt
         infoListView.setEmptyView(getEmptyView());
         infoListView.setOnItemClickListener(this);
 
-        new InfomationLoadTask().execute(page);
+        new InfomationLoadTask(this).execute(page);
 
     }
 
@@ -93,22 +92,21 @@ public class InfomationActivity extends BaseActivity implements AdapterView.OnIt
     }
 
 
-    class InfomationLoadTask extends AsyncTask<OpenPage<Infomation>, Void, OpenPage<Infomation>> {
+    class InfomationLoadTask extends CommonAsyncTask<OpenPage<Infomation>, Void, OpenPage<Infomation>> {
+        protected InfomationLoadTask(Context context) {
+            super(context);
+        }
 
         @Override
-        protected OpenPage<Infomation> doInBackground(OpenPage<Infomation>... params) {
+        protected OpenPage<Infomation> getResultInBackground(OpenPage<Infomation>... params) {
             OpenPage<Infomation> param = params[0];
             param.setRows(null);//empty data
-            try {
-                return infomationService.loadLatestInfomation(param);
-            } catch (Exception e) {
-                Log.e(getClass().getName(), "load loadLatestInfomation error", e);
-            }
-            return null;
+            return infomationService.loadLatestInfomation(param);
         }
 
         @Override
         protected void onPostExecute(OpenPage<Infomation> openPage) {
+            super.onPostExecute(openPage);
             if (openPage != null) {
                 if (openPage.getPageNo() == 1) {
                     mAdapter.clear();

@@ -14,54 +14,42 @@
         custom:titleText="@string/title_activity_question"
         custom:showRight="false" />
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawable_border_light_gray"
+        android:padding="@dimen/common_margin"
+        android:layout_margin="@dimen/common_margin">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/question_content_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:textSize="@dimen/dimen_18sp"
+            android:textColor="@color/common_text_color"
+            android:text="新概念第一册什么时候出的？？？" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/drawable_border_light_gray"
-                android:padding="@dimen/common_margin"
-                android:layout_margin="@dimen/common_margin">
+        <ImageView
+            android:id="@+id/question_pic"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:src="@drawable/logo"
+            android:layout_below="@id/question_content_text" />
 
-                <TextView
-                    android:id="@+id/question_content_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dimen_18sp"
-                    android:textColor="@color/common_text_color"
-                    android:text="新概念第一册什么时候出的？？？" />
+        <TextView
+            android:id="@+id/create_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_16sp"
+            android:textColor="@color/label_text_color"
+            android:layout_alignParentRight="true"
+            android:text="2014-05-20 15:15"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_below="@id/question_pic" />
+    </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/create_time_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dimen_16sp"
-                    android:textColor="@color/label_text_color"
-                    android:layout_alignParentRight="true"
-                    android:text="2014-05-20 15:15"
-                    android:layout_marginTop="@dimen/common_margin"
-                    android:layout_below="@id/question_content_text" />
-            </RelativeLayout>
-
-            <FrameLayout
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/drawable_border_light_gray"
-                android:padding="@dimen/common_margin"
-                android:layout_margin="@dimen/common_margin">
-
-            </FrameLayout>
-
-        </LinearLayout>
-    </ScrollView>
-
+    <include
+        android:id="@+id/answer_container"
+        layout="@layout/answer_list_item" />
 
 </LinearLayout>

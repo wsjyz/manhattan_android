@@ -1,11 +1,10 @@
 package com.ivan.android.manhattanenglish.app.core.teacher;
 
 import android.content.Context;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -38,11 +37,40 @@ public class ScheduleGridAdapter extends BaseAdapter {
         return selectedItems;
     }
 
-    public void addSelectedItems(Set<Integer> data) {
+    public void setSelectedItems(Set<Integer> data) {
         if (data != null && data.size() > 0) {
             selectedItems.addAll(data);
             notifyDataSetChanged();
         }
+    }
+
+    public void setTeachingTime(String teachingTime) {
+        if (TextUtils.isEmpty(teachingTime) || teachingTime.length() != 21) return;
+        char[] timeChars = teachingTime.toCharArray();
+        Set<Integer> selectedItems = new HashSet<Integer>();
+        for (int i = 0; i < timeChars.length; i++) {
+            char c = timeChars[i];
+            if (c == '1') {
+                selectedItems.add(i);
+            }
+        }
+
+        setSelectedItems(selectedItems);
+
+    }
+
+    public String getTeachingTime() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < 21; i++) {
+            if (selectedItems.contains(i)) {
+                sb.append('1');
+            } else {
+                sb.append('0');
+            }
+        }
+
+        return sb.toString();
     }
 
     @Override

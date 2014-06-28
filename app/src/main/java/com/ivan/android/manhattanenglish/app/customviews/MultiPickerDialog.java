@@ -3,6 +3,7 @@ package com.ivan.android.manhattanenglish.app.customviews;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,8 @@ public class MultiPickerDialog extends AlertDialog {
 
     protected int mGridColumn = 3;
 
+    protected String defaultEmptyText;
+
     private OnItemsCheckedListener mListener;
 
 
@@ -63,6 +66,21 @@ public class MultiPickerDialog extends AlertDialog {
         this.mGridColumn = count;
     }
 
+    public String getDefaultEmptyText() {
+        if (TextUtils.isEmpty(defaultEmptyText)) {
+            defaultEmptyText = context.getString(R.string.search_no_limit);
+        }
+        return defaultEmptyText;
+    }
+
+    public void setDefaultEmptyText(String defaultEmptyText) {
+        this.defaultEmptyText = defaultEmptyText;
+    }
+
+    public void setDefaultEmptyText(int resId) {
+        String text = context.getString(resId);
+        setDefaultEmptyText(text);
+    }
 
     public Set<String> getSelectedItems() {
         return mAdapter.getSelectedItems();
@@ -70,7 +88,7 @@ public class MultiPickerDialog extends AlertDialog {
 
     public String getSelectedItemsForString() {
         Set<String> items = getSelectedItems();
-        String result = context.getString(R.string.search_no_limit);
+        String result = getDefaultEmptyText();
         if (items != null && items.size() > 0) {
             StringBuilder sb = new StringBuilder();
             for (String item : items) {

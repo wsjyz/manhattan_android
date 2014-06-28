@@ -18,6 +18,9 @@ import android.widget.LinearLayout.LayoutParams;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
+import com.ivan.android.manhattanenglish.app.core.home.TeacherHomeActivity;
+import com.ivan.android.manhattanenglish.app.remote.user.User;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 import com.viewpagerindicator.PageIndicator;
 
 
@@ -81,7 +84,11 @@ public class WelcomeActivity extends BaseActivity {
 
     public void toFirstPage() {
         finish();
-        navigate(StudentHomeActivity.class);
+        if (UserCache.getCurrentUser() != null && User.USER_TYPE_TEACHER.equals(UserCache.getCurrentUser().getType())) {
+            navigate(TeacherHomeActivity.class);
+        } else {
+            navigate(StudentHomeActivity.class);
+        }
     }
 
 
