@@ -13,6 +13,7 @@ import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.user.User;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 import com.squareup.picasso.Picasso;
 
 public class TeacherInfoActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<User> {
@@ -80,7 +81,7 @@ public class TeacherInfoActivity extends BaseActivity implements LoaderManager.L
     @Override
     public Loader<User> onCreateLoader(int id, Bundle args) {
         Log.i("studentInfoActivity", "create loader");
-        return new UserInfoLoader(this);
+        return new UserInfoLoader(this, UserCache.getUserId());
     }
 
     @Override

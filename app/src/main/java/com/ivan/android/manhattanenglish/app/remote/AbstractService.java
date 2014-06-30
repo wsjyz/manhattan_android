@@ -140,12 +140,13 @@ public class AbstractService {
         }
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(body, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
         Log.i("RestTemplate", "request url: " + url
                 + "\n request: " + JSON.toJSONString(uriVariables)
-                + "\n statusCode:" + response.getStatusCode()
-                + "\n userId: " + UserCache.getUserId()
-                + "\n response: " + response.getBody());
+                + "\n userId: " + UserCache.getUserId());
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+        Log.i("RestTemplate", "response:" + response.getBody()
+                + "\n responseStatus :" + response.getStatusCode());
         return response;
     }
 

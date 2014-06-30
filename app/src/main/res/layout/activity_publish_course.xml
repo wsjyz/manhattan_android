@@ -57,7 +57,7 @@
                     android:drawableRight="@drawable/more_expand"
                     android:paddingRight="@dimen/common_margin"
                     android:textSize="@dimen/dimen_16sp"
-                    android:textColor="@color/hint_text_color"
+                    android:textColor="@color/search_condition_text_color"
                     android:text="@string/action_choose_location"
                     android:gravity="center_vertical"
                     android:drawablePadding="@dimen/common_margin"

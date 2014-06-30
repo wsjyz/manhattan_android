@@ -1,8 +1,10 @@
 package com.ivan.android.manhattanenglish.app.core.login;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
@@ -183,16 +186,21 @@ public class LoginActivity extends BaseActivity {
             mAuthTask = null;
             hideLoadingDialog();
             if (user != null) {
+                Log.i("LoginActivity", "login success! return user :" + JSON.toJSONString(user));
+
                 UserCache.setCurrentUser(user);
                 UserCache.setLoginName(mTel);
                 UserCache.setPassword(mPassword);
 
                 finish();
+                Intent homePage;
                 if (User.USER_TYPE_TEACHER.equals(user.getType())) {
-                    navigate(TeacherHomeActivity.class);
+                    homePage = new Intent(LoginActivity.this, TeacherHomeActivity.class);
                 } else {
-                    navigate(StudentHomeActivity.class);
+                    homePage = new Intent(LoginActivity.this, StudentHomeActivity.class);
                 }
+                homePage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(homePage);
             } else {
                 Toast.makeText(LoginActivity.this, R.string.error_incorrect_login_info, Toast.LENGTH_SHORT).show();
             }

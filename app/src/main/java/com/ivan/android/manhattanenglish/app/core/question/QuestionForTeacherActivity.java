@@ -111,8 +111,6 @@ public class QuestionForTeacherActivity extends BaseActivity implements Question
     }
 
     private void selectItem(int position) {
-        int currentItem = mViewPager.getCurrentItem();
-        if (position == currentItem) return;
         mViewPager.setCurrentItem(position, true);
         markTab(position);
     }

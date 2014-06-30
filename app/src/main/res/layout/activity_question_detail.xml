@@ -37,6 +37,17 @@
             android:layout_below="@id/question_content_text" />
 
         <TextView
+            android:id="@+id/create_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_16sp"
+            android:textColor="@color/label_text_color"
+            android:layout_alignParentLeft="true"
+            android:text="Ivan"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_below="@id/question_pic" />
+
+        <TextView
             android:id="@+id/create_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

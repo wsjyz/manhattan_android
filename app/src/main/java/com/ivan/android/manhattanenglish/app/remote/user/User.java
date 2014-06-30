@@ -1,6 +1,7 @@
 package com.ivan.android.manhattanenglish.app.remote.user;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.remote.AbstractService;
 
 import java.util.Date;
 
@@ -81,7 +82,11 @@ public class User {
     }
 
     public String getAvatar() {
-        return avatar;
+        if (avatar != null && avatar.startsWith("http://")) {
+            return avatar;
+        } else {
+            return AbstractService.HOST + avatar;
+        }
     }
 
     public void setAvatar(String avatar) {

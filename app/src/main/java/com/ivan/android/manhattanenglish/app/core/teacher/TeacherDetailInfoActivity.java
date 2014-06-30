@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointCourseActivity;
+import com.ivan.android.manhattanenglish.app.core.appoint.AppointTeacherActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
@@ -55,7 +57,6 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
     TextView mSelfIntroduce;
 
     String teacherId;
-
     TeacherDetail mData;
 
     @Override
@@ -92,7 +93,7 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         mAuditionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigateToAppoint(AppointCourseActivity.ACTION_TYPE_AUDITION);
+                navigateToAppoint(AppointTeacherActivity.ACTION_TYPE_AUDITION);
             }
         });
 
@@ -100,7 +101,7 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         mAppointBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigateToAppoint(AppointCourseActivity.ACTION_TYPE_APPOINT);
+                navigateToAppoint(AppointTeacherActivity.ACTION_TYPE_APPOINT);
             }
         });
 
@@ -129,9 +130,12 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
 
     private void navigateToAppoint(int actionType) {
         if (mData == null) return;
-        Intent intent = new Intent(this, AppointCourseActivity.class);
-        intent.putExtra(AppointCourseActivity.ACTION_TYPE_KEY, actionType);
-        intent.putExtra(AppointCourseActivity.RESOURCE_ID_KEY, teacherId);
+        Intent intent = new Intent(this, AppointTeacherActivity.class);
+        intent.putExtra(AppointTeacherActivity.ACTION_TYPE_KEY, actionType);
+        intent.putExtra(AppointTeacherActivity.RESOURCE_ID_KEY, teacherId);
+        intent.putExtra(AppointTeacherActivity.SUBJECT_ARRAY_KEY,mData.getSubjectArray());
+        intent.putExtra(AppointTeacherActivity.LOCATION_ARRAY_KEY,mData.getLocations());
+        intent.putExtra(AppointTeacherActivity.STUDY_METHOD_KEY,mData.getTeachWayArray());
         startActivity(intent);
     }
 
@@ -204,6 +208,7 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         if (!TextUtils.isEmpty(mData.getAvatarUrl())) {
             Picasso.with(this)
                     .load(mData.getAvatarUrl())
+                    .placeholder(R.drawable.avatar)
                     .fit()
                     .into(mAvatar);
         }
@@ -240,5 +245,6 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
     private void onCollect() {
         String collectCountText = getTextFromFormat(R.string.pattern_collect_count, String.valueOf(mData.getCollectCount() + 1));
         mCollectCount.setText(collectCountText);
+        Toast.makeText(this, R.string.info_collect_success, Toast.LENGTH_SHORT).show();
     }
 }

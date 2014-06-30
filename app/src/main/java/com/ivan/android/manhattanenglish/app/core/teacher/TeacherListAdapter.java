@@ -91,6 +91,7 @@ public class TeacherListAdapter extends BaseAdapter {
         if (!TextUtils.isEmpty(teacher.getAvatarUrl())) {
             Picasso.with(context)
                     .load(teacher.getAvatarUrl())
+                    .placeholder(R.drawable.avatar)
                     .fit()
                     .into(holder.avatar);
         }

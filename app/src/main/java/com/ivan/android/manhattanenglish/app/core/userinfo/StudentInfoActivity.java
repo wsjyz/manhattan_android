@@ -74,9 +74,10 @@ public class StudentInfoActivity extends BaseActivity implements LoaderManager.L
     @Override
     public Loader<User> onCreateLoader(int id, Bundle args) {
         Log.i("studentInfoActivity", "create loader");
-        String userId = args.getString(USER_ID_KEY);
-        if (TextUtils.isEmpty(userId)) {
-            userId = UserCache.getUserId();//default is current userId
+
+        String userId = UserCache.getUserId();
+        if (args != null && TextUtils.isEmpty(args.getString(USER_ID_KEY))) {
+            userId = args.getString(USER_ID_KEY);
         }
         return new UserInfoLoader(this, userId);
     }

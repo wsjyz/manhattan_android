@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointCourseActivity;
+import com.ivan.android.manhattanenglish.app.core.teacher.TeacherDetailInfoActivity;
 import com.ivan.android.manhattanenglish.app.core.teacher.TeacherListAdapter;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
@@ -26,7 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class CourseDetailActivity extends BaseActivity {
+public class CourseDetailActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     public final static String COURSE_ID_KEY = "course_id";
 
@@ -94,7 +96,8 @@ public class CourseDetailActivity extends BaseActivity {
 
         mTeacherList = (ListView) findViewById(R.id.teacher_list);
         mTeacherListAdapter = new TeacherListAdapter(this, new ArrayList<TeacherDetail>());
-        mTeacherList.setEmptyView(getEmptyView());
+        mTeacherList.setAdapter(mTeacherListAdapter);
+        mTeacherList.setOnItemClickListener(this);
 
         mDescription = (TextView) findViewById(R.id.description);
 
@@ -107,6 +110,16 @@ public class CourseDetailActivity extends BaseActivity {
         intent.putExtra(AppointCourseActivity.ACTION_TYPE_KEY, actionType);
         intent.putExtra(AppointCourseActivity.RESOURCE_ID_KEY, courseId);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        TeacherDetail detail = (TeacherDetail) mTeacherListAdapter.getItem(position);
+        if (detail != null) {
+            Intent teacherDetail = new Intent(this, TeacherDetailInfoActivity.class);
+            teacherDetail.putExtra(TeacherDetailInfoActivity.TEACHER_ID_KEY, detail.getTeacherId());
+            startActivity(teacherDetail);
+        }
     }
 
     /**

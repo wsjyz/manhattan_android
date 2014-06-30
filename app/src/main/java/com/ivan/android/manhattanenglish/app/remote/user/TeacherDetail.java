@@ -1,6 +1,9 @@
 package com.ivan.android.manhattanenglish.app.remote.user;
 
+import android.text.TextUtils;
+
 import com.alibaba.fastjson.annotation.JSONField;
+import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.remote.user.User;
 
 /**
@@ -95,6 +98,11 @@ public class TeacherDetail {
         this.mainSubject = mainSubject;
     }
 
+    public String[] getSubjectArray() {
+        if (TextUtils.isEmpty(mainSubject)) return null;
+        return mainSubject.split(",");
+    }
+
     public int getRating() {
         return rating;
     }
@@ -115,12 +123,22 @@ public class TeacherDetail {
         this.availableLocation = availableLocation;
     }
 
+    public String[] getLocations() {
+        if (TextUtils.isEmpty(availableLocation)) return null;
+        return availableLocation.split(",");
+    }
+
     public String getTeachWay() {
         return teachWay;
     }
 
     public void setTeachWay(String teachWay) {
         this.teachWay = teachWay;
+    }
+
+    public String[] getTeachWayArray() {
+        if (TextUtils.isEmpty(teachWay)) return null;
+        return teachWay.split(",");
     }
 
     public int getFocusCount() {
@@ -176,7 +194,7 @@ public class TeacherDetail {
     }
 
     public int getSexDrawableResource() {
-        return user.getSexDrawableResource();
+        return user != null ? user.getSexDrawableResource() : R.drawable.male;
     }
 
     public User getUser() {

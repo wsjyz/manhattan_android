@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.homework.HomeworkService;
 import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
@@ -23,6 +24,14 @@ public class PublishHomeworkActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish_homework);
+
+        titleBar = (TitleBar) findViewById(R.id.title_bar);
+        titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mHomeworkTitle = (EditText) findViewById(R.id.homework_title_input);
 

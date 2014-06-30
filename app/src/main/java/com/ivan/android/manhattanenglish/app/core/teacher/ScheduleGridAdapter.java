@@ -45,7 +45,7 @@ public class ScheduleGridAdapter extends BaseAdapter {
     }
 
     public void setTeachingTime(String teachingTime) {
-        if (TextUtils.isEmpty(teachingTime) || teachingTime.length() != 21) return;
+        if (TextUtils.isEmpty(teachingTime)) return;
         char[] timeChars = teachingTime.toCharArray();
         Set<Integer> selectedItems = new HashSet<Integer>();
         for (int i = 0; i < timeChars.length; i++) {
@@ -54,9 +54,7 @@ public class ScheduleGridAdapter extends BaseAdapter {
                 selectedItems.add(i);
             }
         }
-
         setSelectedItems(selectedItems);
-
     }
 
     public String getTeachingTime() {
@@ -96,7 +94,7 @@ public class ScheduleGridAdapter extends BaseAdapter {
 
         CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
         if (selectedItems.contains(position)) {
-            checkBox.setSelected(true);
+            checkBox.setChecked(true);
         }
         checkBox.setClickable(clickable);
 

@@ -7,11 +7,14 @@
     <string name="label_course_start_time">开课时间：%s</string>
     <string name="label_course_end_time">结课时间：%s</string>
     <string name="label_course_peroid">课时：%s</string>
-    
+
     <string name="label_teacher">主讲教师</string>
     <string name="label_course_content">授课内容</string>
 
     <string name="action_choose_location">请选择可授课区域</string>
+
+    <string name="error_location_required">请至少选择一个可授课区域</string>
+    <string name="error_student_cost_required">请填写课程费用</string>
 
     <string-array name="required_level">
         <item>初级</item>

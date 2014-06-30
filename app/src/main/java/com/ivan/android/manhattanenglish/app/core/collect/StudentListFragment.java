@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.view.View;
+import android.widget.ListView;
 
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
@@ -40,13 +42,13 @@ public class StudentListFragment extends ListFragment implements LoaderManager.L
         return fragment;
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setListShown(false);
         mAdapter = new StudentListAdapter(getActivity());
         setListAdapter(mAdapter);
+
+        setListShown(false);
         getLoaderManager().initLoader(0, getArguments(), this);
 
     }
@@ -83,6 +85,15 @@ public class StudentListFragment extends ListFragment implements LoaderManager.L
             setListShown(true);
         } else {
             setListShownNoAnimation(true);
+        }
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        User user = (User) mAdapter.getItem(position);
+        if (mListener != null) {
+            mListener.onStudentListItemClick(user);
         }
     }
 

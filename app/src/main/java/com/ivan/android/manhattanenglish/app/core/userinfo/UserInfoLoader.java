@@ -1,15 +1,11 @@
 package com.ivan.android.manhattanenglish.app.core.userinfo;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.User;
 import com.ivan.android.manhattanenglish.app.remote.user.UserService;
-import com.ivan.android.manhattanenglish.app.utils.UserCache;
-
-import java.util.Date;
 
 /**
  * @author: Ivan Vigoss
@@ -31,9 +27,6 @@ public class UserInfoLoader extends CommonDataLoader<User> {
         User user = null;
         try {
             user = userService.loadUser(userId);
-            if (user != null) {
-                UserCache.setCurrentUser(user);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }

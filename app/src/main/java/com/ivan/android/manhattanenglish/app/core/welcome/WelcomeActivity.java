@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;
@@ -84,7 +86,9 @@ public class WelcomeActivity extends BaseActivity {
 
     public void toFirstPage() {
         finish();
-        if (UserCache.getCurrentUser() != null && User.USER_TYPE_TEACHER.equals(UserCache.getCurrentUser().getType())) {
+        User currentUser = UserCache.getCurrentUser();
+        Log.i("WelcomeActivity", "Current User:" + JSON.toJSONString(currentUser));
+        if (currentUser != null && User.USER_TYPE_TEACHER.equals(currentUser.getType())) {
             navigate(TeacherHomeActivity.class);
         } else {
             navigate(StudentHomeActivity.class);

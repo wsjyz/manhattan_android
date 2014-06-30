@@ -2,6 +2,10 @@ package com.ivan.android.manhattanenglish.app.core.course;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,20 +14,25 @@ import android.widget.GridView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
 import com.ivan.android.manhattanenglish.app.core.teacher.ScheduleGridAdapter;
 import com.ivan.android.manhattanenglish.app.customviews.MultiPickerDialog;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.course.Course;
 import com.ivan.android.manhattanenglish.app.remote.course.CourseService;
+import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.UserService;
 import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
 import java.util.Set;
 
-public class PublishCourseActivity extends BaseActivity {
+public class PublishCourseActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<TeacherDetail> {
 
     TextView mPickLocation;
 
@@ -41,6 +50,8 @@ public class PublishCourseActivity extends BaseActivity {
     MultiPickerDialog pickLocationDialog;
 
     Set<String> selectedLocations;
+
+    TeacherDetail mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,11 +93,28 @@ public class PublishCourseActivity extends BaseActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo submit
+                if (checkForm()) {
+
+
+                }
             }
         });
 
+        getSupportLoaderManager().initLoader(0, null, this);
+    }
 
+    private boolean checkForm() {
+        boolean result = true;
+        if (selectedLocations == null || selectedLocations.size() == 0) {
+            result = false;
+            Toast.makeText(this, R.string.error_location_required, Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(mStudentCost.getText().toString())) {
+            result = false;
+            mStudentCost.setError(getText(R.string.error_student_cost_required));
+            mStudentCost.requestFocus();
+        }
+
+        return result;
     }
 
 
@@ -138,5 +166,51 @@ public class PublishCourseActivity extends BaseActivity {
             courseService.postCourse(course);
             return null;
         }
+    }
+
+
+    public static class TeacherDetailInfoLoader extends CommonDataLoader<TeacherDetail> {
+
+        private String teacherId;
+
+        public TeacherDetailInfoLoader(Context context, String teacherId) {
+            super(context);
+            this.teacherId = teacherId;
+        }
+
+        @Override
+        public TeacherDetail loadInBackground() {
+            UserService userService = ServiceFactory.getService(UserService.class);
+            try {
+                return userService.loadTeacherDetail(teacherId);
+            } catch (Exception e) {
+                Log.e("TeacherDetailInfoLoader", "load TeacherDetail error.", e);
+            }
+            return null;
+        }
+
+    }
+
+    @Override
+    public Loader onCreateLoader(int id, Bundle args) {
+        return new TeacherDetailInfoLoader(this, UserCache.getUserId());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<TeacherDetail> loader, TeacherDetail data) {
+        hideLoadingDialog();
+        if (data != null) {
+            mData = data;
+            refresh();
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader loader) {
+        mData = null;
+    }
+
+    public void refresh() {
+
     }
 }

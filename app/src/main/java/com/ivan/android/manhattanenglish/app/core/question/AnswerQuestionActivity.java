@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.ivan.android.manhattanenglish.app.remote.question.Question;
 import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
 import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.ivan.android.manhattanenglish.app.utils.DateFormatUtils;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -32,6 +34,8 @@ public class AnswerQuestionActivity extends BaseActivity {
     public final static int REQ_CODE_PICK_IMAGE = 1;
 
     TextView mQuestionContent;
+
+    ImageView mQuestionPic;
 
     TextView mCreateTime;
 
@@ -51,8 +55,8 @@ public class AnswerQuestionActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer_question);
-        String questionJson = getIntent().getStringExtra(JSON_QUESTION_KEY);
 
+        String questionJson = getIntent().getStringExtra(JSON_QUESTION_KEY);
         question = JSON.parseObject(questionJson, Question.class);
 
         String content = question.getQuestionContent();
@@ -66,6 +70,15 @@ public class AnswerQuestionActivity extends BaseActivity {
             }
         });
 
+        mQuestionPic = (ImageView) findViewById(R.id.question_pic);
+        if (TextUtils.isEmpty(question.getQuestionPic())) {
+            mQuestionPic.setVisibility(View.GONE);
+        } else {
+            Picasso.with(this)
+                    .load(question.getQuestionPic())
+                    .fit()
+                    .into(mQuestionPic);
+        }
 
         mQuestionContent = (TextView) findViewById(R.id.question_content_text);
         mQuestionContent.setText(content);

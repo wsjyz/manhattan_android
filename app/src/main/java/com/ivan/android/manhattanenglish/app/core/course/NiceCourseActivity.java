@@ -1,5 +1,6 @@
 package com.ivan.android.manhattanenglish.app.core.course;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.course.Course;
 import com.ivan.android.manhattanenglish.app.remote.course.CourseService;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.ArrayList;
@@ -61,7 +63,7 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
                     CharSequence label = getRefreshTimeString();
                     refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 }
-                new CourseLoadTask().execute(page);
+                new CourseLoadTask(NiceCourseActivity.this).execute(page);
             }
         });
 
@@ -70,7 +72,7 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
             public void onLastItemVisible() {
                 if (page.hasNext()) {
                     page.setPageNo(page.getPageNo() + 1);
-                    new CourseLoadTask().execute(page);
+                    new CourseLoadTask(NiceCourseActivity.this).execute(page);
                 } else {
                     Toast.makeText(NiceCourseActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
                 }
@@ -78,7 +80,7 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
         });
 
         courseListView.setOnItemClickListener(this);
-        new CourseLoadTask().execute(page);
+        new CourseLoadTask(this).execute(page);
     }
 
     @Override
@@ -90,22 +92,23 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
 
     }
 
-    class CourseLoadTask extends AsyncTask<OpenPage<Course>, Void, OpenPage<Course>> {
+    class CourseLoadTask extends CommonAsyncTask<OpenPage<Course>, Void, OpenPage<Course>> {
+
+        protected CourseLoadTask(Context context) {
+            super(context);
+        }
+
         @Override
-        protected OpenPage<Course> doInBackground(OpenPage<Course>... params) {
+        protected OpenPage<Course> getResultInBackground(OpenPage<Course>... params) {
             OpenPage<Course> param = params[0];
             param.setRows(null);
-            try {
-                CourseService courseService = ServiceFactory.getService(CourseService.class);
-                return courseService.loadNiceCourse(param);
-            } catch (Exception e) {
-                Log.e("NiceCourseActivity", "courseService.loadNiceCourse error..", e);
-            }
-            return null;
+            CourseService courseService = ServiceFactory.getService(CourseService.class);
+            return courseService.loadNiceCourse(param);
         }
 
         @Override
         protected void onPostExecute(OpenPage<Course> openPage) {
+            super.onPostExecute(openPage);
             if (openPage != null) {
                 if (openPage.getPageNo() == 1) {
                     mAdapter.clear();

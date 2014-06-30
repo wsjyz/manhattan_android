@@ -22,4 +22,6 @@
     <string name="pattern_focus_count">关注 %s</string>
     <string name="pattern_comment_count">点评 %s</string>
     <string name="pattern_collect_count">收藏 %s</string>
+
+    <string name="info_collect_success">收藏成功</string>
 </resources>

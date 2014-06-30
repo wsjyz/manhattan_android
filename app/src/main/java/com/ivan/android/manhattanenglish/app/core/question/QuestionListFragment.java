@@ -40,10 +40,11 @@ public class QuestionListFragment extends ListFragment implements LoaderManager.
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setListShown(false);
         mAdapter = new QuestionListAdapter(getActivity());
-        setEmptyText(getText(R.string.empty_text));
         setListAdapter(mAdapter);
+
+        setEmptyText(getText(R.string.empty_text));
+        setListShown(false);
         getLoaderManager().initLoader(0, getArguments(), this);
     }
 
