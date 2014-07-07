@@ -55,7 +55,9 @@ public class MultiPickerDialog extends AlertDialog {
             selectedLocationSet = new HashSet<String>();
         }
         mAdapter.setSelectedItems(selectedLocationSet);
+        mAdapter.notifyDataSetChanged();
     }
+
 
     public void setOnItemsCheckedListener(OnItemsCheckedListener mListener) {
         this.mListener = mListener;

@@ -3,6 +3,7 @@ package com.ivan.android.manhattanenglish.app.remote.course;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.ivan.android.manhattanenglish.app.remote.AbstractService;
+import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.lang.reflect.Type;
@@ -50,10 +51,10 @@ public class CourseServiceImpl extends AbstractService implements CourseService 
     }
 
     @Override
-    public void postCourse(Course course) {
+    public void postCourse(TeacherDetail teacherDetail) {
         String action = "/course/postCourses";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("course", JSON.toJSONString(course));
+        params.put("teacherDetail", JSON.toJSONString(teacherDetail));
         post(getUrl(action), params);
     }
 

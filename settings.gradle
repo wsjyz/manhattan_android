@@ -1,1 +1,1 @@
-include ':app', ':library', ':caldroid'
+include ':app', ':library', ':caldroid', ':alipay_lib'

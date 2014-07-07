@@ -2,24 +2,33 @@ package com.ivan.android.manhattanenglish.app.core.appoint;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 
+import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.course.NiceCourseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.MultiPickerDialog;
 import com.ivan.android.manhattanenglish.app.customviews.SinglePickerDialog;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.course.QueryParam;
+import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.User;
 import com.ivan.android.manhattanenglish.app.utils.DateFormatUtils;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class AppointActivity extends BaseActivity implements AdapterView.OnItemClickListener {
@@ -60,10 +69,16 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
 
     SearchListAdapter mAdapter;
 
+    Map<String, String> mTeacherMethodMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appoint);
+
+        mTeacherMethodMap = new HashMap<String, String>();
+        mTeacherMethodMap.put(getString(R.string.teach_method_for_student), TeacherDetail.WAY_STUDENT_VISIT);
+        mTeacherMethodMap.put(getString(R.string.teach_method_for_teacher), TeacherDetail.WAY_TEACHER_VISIT);
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
@@ -85,7 +100,9 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent search = new Intent(AppointActivity.this, NiceCourseActivity.class);
+                search.putExtra(NiceCourseActivity.QUERY_PARAM_KEY, JSON.toJSONString(collectParam()));
+                startActivity(search);
             }
         });
     }
@@ -206,5 +223,42 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
 
         pickTeachMethodDialog.setSelectedItems(selectedMethods);
         return pickTeachMethodDialog;
+    }
+
+    private QueryParam collectParam() {
+        QueryParam queryParam = new QueryParam();
+
+        queryParam.setAppointmentTime(selectedDate);
+
+        String locations = conditions.get(1).conditionText;
+        if (!"不限".equals(locations)) {
+            queryParam.setPlace(locations);
+        }
+
+        String sex = null;
+        if ("男".equals(selectedSex)) {
+            sex = User.SEX_MALE;
+        } else if ("女".equals(selectedSex)) {
+            sex = User.SEX_FEMALE;
+        }
+        queryParam.setSex(sex);
+
+        String techerMethod = null;
+        if (selectedMethods != null) {
+            StringBuilder sb = new StringBuilder();
+            for (String selectedMethod : selectedMethods) {
+                sb.append(mTeacherMethodMap.get(selectedMethod)).append(",");
+            }
+            techerMethod = sb.toString();
+        }
+        queryParam.setTutoringWay(techerMethod);
+
+        String categories = conditions.get(0).conditionText;
+        if (!"不限".equals(categories)) {
+            queryParam.setCourseCategory(categories);
+        }
+
+        Log.i("AppointActivity", "query param :" + JSON.toJSONString(queryParam));
+        return queryParam;
     }
 }

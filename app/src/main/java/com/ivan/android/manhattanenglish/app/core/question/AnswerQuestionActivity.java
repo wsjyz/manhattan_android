@@ -22,8 +22,10 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
 import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
+import com.ivan.android.manhattanenglish.app.remote.upload.UploadService;
 import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.ivan.android.manhattanenglish.app.utils.DateFormatUtils;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -45,7 +47,6 @@ public class AnswerQuestionActivity extends BaseActivity {
 
     Button mSubmit;
 
-    File selectedPic;
 
     Question question;
 
@@ -76,7 +77,6 @@ public class AnswerQuestionActivity extends BaseActivity {
         } else {
             Picasso.with(this)
                     .load(question.getQuestionPic())
-                    .fit()
                     .into(mQuestionPic);
         }
 
@@ -87,8 +87,9 @@ public class AnswerQuestionActivity extends BaseActivity {
         mCreateTime.setText(createTime);
 
         mCreateUserName = (TextView) findViewById(R.id.create_user_name);
-        //todo set createUser
-        mCreateUserName.setText("");
+        if (question.getAskUser() != null) {
+            mCreateUserName.setText(question.getAskUser().getUserName());
+        }
 
         mAnswerContent = (EditText) findViewById(R.id.answer_content_input);
 
@@ -137,15 +138,14 @@ public class AnswerQuestionActivity extends BaseActivity {
                 String filePath = cursor.getString(columnIndex);
                 cursor.close();
 
-                selectedPic = new File(filePath);
-                mChoosePic.setText(selectedPic.getName());
+                File selectedPic = new File(filePath);
+                new UploadImageTask(this).execute(selectedPic);
             }
         }
 
     }
 
     class SubmitAnswerTask extends CommonAsyncTask<Void, Void, Void> {
-
         protected SubmitAnswerTask(Context context) {
             super(context);
         }
@@ -153,11 +153,12 @@ public class AnswerQuestionActivity extends BaseActivity {
         @Override
         protected Void getResultInBackground(Void... params) {
             QuestionService questionService = ServiceFactory.getService(QuestionService.class);
-            if (selectedPic != null) {
-                question.setAnswerPic(selectedPic.getPath());
-            }
-            question.setAnswer(getInputContent());
-            questionService.answerQuestion(question);
+            Question q = new Question();
+            q.setAnswer(getInputContent());
+            q.setReplyUser(UserCache.getUserId());
+            q.setQuestionId(question.getQuestionId());
+
+            questionService.answerQuestion(q);
             return null;
         }
 
@@ -168,6 +169,33 @@ public class AnswerQuestionActivity extends BaseActivity {
                 Toast.makeText(AnswerQuestionActivity.this, R.string.info_submit_success, Toast.LENGTH_SHORT).show();
                 finish();
             }
+        }
+    }
+
+    class UploadImageTask extends CommonAsyncTask<File, Void, String> {
+
+        private File file;
+
+        protected UploadImageTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected int getMessageResource() {
+            return R.string.upload_text;
+        }
+
+        @Override
+        protected String getResultInBackground(File... params) {
+            file = params[0];
+            UploadService uploadService = ServiceFactory.getService(UploadService.class);
+            return uploadService.uploadImage(context, file);
+        }
+
+        @Override
+        protected void onSuccess(String s) {
+            Toast.makeText(context, R.string.upload_success, Toast.LENGTH_SHORT).show();
+            mChoosePic.setText(file.getName());
         }
     }
 }

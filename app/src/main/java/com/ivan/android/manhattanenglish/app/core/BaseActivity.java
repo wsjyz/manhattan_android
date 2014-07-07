@@ -100,6 +100,13 @@ public class BaseActivity extends FragmentActivity {
     }
 
     protected String getTextFromFormat(int resId, String... params) {
+        if (params != null && params.length > 0) {
+            for (int i = 0; i < params.length; i++) {
+                if (params[i] == null) {
+                    params[i] = "";
+                }
+            }
+        }
         return String.format(getText(resId).toString(), params);
     }
 

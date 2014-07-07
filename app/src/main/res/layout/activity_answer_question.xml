@@ -43,7 +43,6 @@
             android:textSize="@dimen/dimen_16sp"
             android:textColor="@color/label_text_color"
             android:layout_alignParentLeft="true"
-            android:text="Ivan"
             android:layout_marginTop="@dimen/common_margin"
             android:layout_below="@id/question_pic" />
 
@@ -67,6 +66,7 @@
         android:background="@drawable/drawable_border_light_gray"
         android:hint="@string/hint_input_homework"
         android:textColorHint="@color/hint_text_color"
+        android:textColor="@color/common_text_color"
         android:minLines="6"
         android:maxLines="8"
         android:gravity="top"

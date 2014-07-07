@@ -18,8 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/drawable_border_light_gray"
-        android:padding="@dimen/common_margin"
-        android:layout_margin="@dimen/common_margin">
+        android:padding="@dimen/common_margin">
 
         <TextView
             android:id="@+id/question_content_text"
@@ -27,7 +26,8 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/dimen_18sp"
             android:textColor="@color/common_text_color"
-            android:text="新概念第一册什么时候出的？？？" />
+            android:text="新概念第一册什么时候出的？？？"
+            android:layout_margin="@dimen/dimen_5dp"/>
 
         <ImageView
             android:id="@+id/question_pic"
@@ -43,7 +43,6 @@
             android:textSize="@dimen/dimen_16sp"
             android:textColor="@color/label_text_color"
             android:layout_alignParentLeft="true"
-            android:text="Ivan"
             android:layout_marginTop="@dimen/common_margin"
             android:layout_below="@id/question_pic" />
 
@@ -59,8 +58,6 @@
             android:layout_below="@id/question_pic" />
     </RelativeLayout>
 
-    <include
-        android:id="@+id/answer_container"
-        layout="@layout/answer_list_item" />
+    <include layout="@layout/answer_list_item" />
 
 </LinearLayout>

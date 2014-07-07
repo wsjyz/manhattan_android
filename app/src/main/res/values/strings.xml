@@ -24,6 +24,7 @@
     <string name="title_homework">我的作业</string>
     <string name="empty_text">什么都没有哦！</string>
     <string name="loading_text">加载中......</string>
+    <string name="upload_text">上传中......</string>
     <string name="load_failed">加载失败</string>
     <string name="no_more_data">没有更多数据了！</string>
     <string name="password_reset_success">密码充值成功，请用新密码登录</string>
@@ -62,5 +63,10 @@
     <string name="error_contact_user_required">联系人不能为空</string>
     <string name="title_activity_answer_question">回答问题</string>
     <string name="title_activity_publish_homework">发布作业</string>
+    <string name="upload_success">上传成功</string>
+
+    <integer name="teacher_search_action_id">5</integer>
+
+    <string name="title_activity_infomation_detail">资讯详情</string>
 
 </resources>

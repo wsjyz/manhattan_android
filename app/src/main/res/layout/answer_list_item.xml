@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/answer_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/drawable_border_light_gray"
-    android:layout_marginLeft="@dimen/common_margin"
-    android:layout_marginRight="@dimen/common_margin"
+    android:visibility="gone"
     android:padding="@dimen/common_margin">
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/common_margin"
         android:layout_marginLeft="@dimen/common_margin"
         android:layout_marginRight="@dimen/common_margin"
-        android:text="英语学习者的青睐，英语学习者的青睐，英语学习者的青睐，英语学习者的青睐，英语学习者的青睐，英语学习者的青睐，英语学习者的青睐，英语学习者的青睐，英语学习者的青睐，英语学习者的青睐，英语学习者的青睐" />
+        />
 
     <ImageView
         android:id="@+id/answer_pic"
@@ -47,7 +47,6 @@
         android:layout_height="50dp"
         android:textSize="@dimen/dimen_16sp"
         android:textColor="@color/common_text_color"
-        android:text="IVAN VIGOSS"
         android:layout_toRightOf="@id/avatar_image"
         android:layout_alignBottom="@id/avatar_image"
         android:gravity="center"
@@ -60,7 +59,6 @@
         android:layout_height="50dp"
         android:textColor="@color/label_text_color"
         android:textSize="@dimen/dimen_16sp"
-        android:text="2014-5-15 15:15"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@id/avatar_image"
         android:gravity="center"/>

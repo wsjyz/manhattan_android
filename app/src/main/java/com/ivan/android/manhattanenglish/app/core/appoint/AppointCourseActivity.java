@@ -55,43 +55,11 @@ public class AppointCourseActivity extends BaseActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerForContextMenu(v);
-                openContextMenu(v);
+
             }
         });
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.appoint_course, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.online:
-                attemptSubmit("ONLINE", new Runnable() {
-                    @Override
-                    public void run() {
-                        //todo 支付宝接口
-                    }
-                });
-                return true;
-            case R.id.offline:
-                attemptSubmit("OFFLINE", new Runnable() {
-                    @Override
-                    public void run() {
-                        //todo 打电话
-                    }
-                });
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-
-    }
 
     private void attemptSubmit(String payment, Runnable runnable) {
         if (mFragment.checkForm()) {
@@ -101,7 +69,7 @@ public class AppointCourseActivity extends BaseActivity {
             appointment.setUserName(mFragment.getUserName());
             appointment.setAddress(mFragment.getAddress());
             appointment.setResourceId(courseId);
-            appointment.setResourceType(actionType == ACTION_TYPE_APPOINT ? "APPOINTMENT_COURSE" : "LISTEN_COURSE");
+            appointment.setResourceType(actionType == ACTION_TYPE_APPOINT ? Appointment.RESOURCE_TYPE_APPOINTMENT_COURSE : Appointment.RESOURCE_TYPE_LISTEN_COURSE);
             appointment.setPayment(payment);
 
             new AppointTask(this, runnable).execute(appointment);

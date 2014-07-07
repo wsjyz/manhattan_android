@@ -23,7 +23,9 @@ import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
 import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
 import com.ivan.android.manhattanenglish.app.remote.upload.UploadService;
+import com.ivan.android.manhattanenglish.app.remote.user.User;
 import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
+import com.ivan.android.manhattanenglish.app.utils.UserCache;
 
 import java.io.File;
 
@@ -67,15 +69,22 @@ public class AskQuestionActivity extends BaseActivity {
             }
         });
 
-        mChooseTeacher = (TextView) findViewById(R.id.choose_teacher);
-        mChooseTeacher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent pickTeacher = new Intent(AskQuestionActivity.this, TeacherActivity.class);
-                pickTeacher.setAction(TeacherActivity.ACTION_PICK_TEACHER);
-                startActivityForResult(pickTeacher, TeacherActivity.PICK_TEACHER_CODE);
-            }
-        });
+        if (User.USER_TYPE_VIP_STUDENT.equals(UserCache.getCurrentUser().getType())) {
+            View container = findViewById(R.id.vip_setting_container);
+            container.setVisibility(View.INVISIBLE);
+
+            mChooseTeacher = (TextView) findViewById(R.id.choose_teacher);
+            mChooseTeacher.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent pickTeacher = new Intent(AskQuestionActivity.this, TeacherActivity.class);
+                    pickTeacher.setAction(TeacherActivity.ACTION_PICK_TEACHER);
+                    startActivityForResult(pickTeacher, TeacherActivity.PICK_TEACHER_CODE);
+                }
+            });
+
+        }
+
 
         mSubmit = (Button) findViewById(R.id.submit_button);
         mSubmit.setOnClickListener(new View.OnClickListener() {
@@ -202,6 +211,7 @@ public class AskQuestionActivity extends BaseActivity {
             question.setQuestionPic(imageUrl);
             String teacherId = (String) mChooseTeacher.getTag();
             question.setAssignTeacher(teacherId);
+            question.setUserId(UserCache.getUserId());
         }
 
         @Override

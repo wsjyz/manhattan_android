@@ -15,7 +15,7 @@ import com.ivan.android.manhattanenglish.app.R;
  */
 public abstract class CommonAsyncTask<Params, Process, Result> extends AsyncTask<Params, Process, Result> {
 
-    private Context context;
+    protected Context context;
 
     private ProgressDialog progressDialog;
 
@@ -28,7 +28,7 @@ public abstract class CommonAsyncTask<Params, Process, Result> extends AsyncTask
     private String errorMsg;
 
     protected void showLoadingDialog() {
-        CharSequence message = context.getText(R.string.loading_text);
+        CharSequence message = context.getText(getMessageResource());
         if (progressDialog == null) {
             progressDialog = ProgressDialog.show(context, null, message, true, true, null);
         } else if (!progressDialog.isShowing()) {
@@ -40,6 +40,10 @@ public abstract class CommonAsyncTask<Params, Process, Result> extends AsyncTask
     protected void hideLoadingDialog() {
         if (progressDialog == null) return;
         progressDialog.dismiss();
+    }
+
+    protected int getMessageResource() {
+        return R.string.loading_text;
     }
 
     protected abstract Result getResultInBackground(Params... params);
@@ -69,6 +73,12 @@ public abstract class CommonAsyncTask<Params, Process, Result> extends AsyncTask
         hideLoadingDialog();
         if (hasError) {
             Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show();
+        } else {
+            onSuccess(result);
         }
+    }
+
+    protected void onSuccess(Result result) {
+
     }
 }

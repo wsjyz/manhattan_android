@@ -27,19 +27,18 @@
         android:drawablePadding="@dimen/common_margin"
         android:paddingLeft="@dimen/common_margin"
         android:paddingRight="@dimen/common_margin"
-        android:layout_margin="@dimen/common_margin"
-        android:gravity="center_vertical"/>
+        android:gravity="center_vertical" />
 
 
     <ListView
         android:id="@+id/question_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/common_margin"
         android:divider="@color/border_color"
         android:dividerHeight="1dp"
         android:scrollbars="none"
         android:choiceMode="none"
-        android:background="@drawable/login_form_border" />
+        android:layout_marginTop="@dimen/common_margin"
+        android:background="@drawable/drawable_border_light_gray"/>
 
 </LinearLayout>

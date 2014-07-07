@@ -22,16 +22,6 @@ public class TeacherRegisterFragment extends RegisterFragment {
 
     @Override
     public void init(View rootView) {
-        mAuthCodeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkTel()) {
-                    String tel = mTelView.getText().toString();
-                    mCallback.sendAuthCode(tel);
-                }
-            }
-        });
-
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

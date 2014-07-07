@@ -199,7 +199,7 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     homePage = new Intent(LoginActivity.this, StudentHomeActivity.class);
                 }
-                homePage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                homePage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(homePage);
             } else {
                 Toast.makeText(LoginActivity.this, R.string.error_incorrect_login_info, Toast.LENGTH_SHORT).show();

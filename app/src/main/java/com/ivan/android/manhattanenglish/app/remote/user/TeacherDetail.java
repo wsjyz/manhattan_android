@@ -4,7 +4,10 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.ivan.android.manhattanenglish.app.R;
-import com.ivan.android.manhattanenglish.app.remote.user.User;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author: Ivan Vigoss
@@ -12,6 +15,13 @@ import com.ivan.android.manhattanenglish.app.remote.user.User;
  * Time: AM9:52
  */
 public class TeacherDetail {
+
+    public static final String WAY_STUDENT_VISIT = "STUDENT_VISIT";
+    public static final String WAY_TEACHER_VISIT = "TEACHER_VISIT";
+
+    public static final String LEVEL_JUNIOR = "JUNIOR";
+    public static final String LEVEL_MIDDLE = "INTERMEDIATE";
+    public static final String LEVEL_SENIOR = "SENIOR";
 
     @JSONField(name = "userId")
     private String teacherId;
@@ -32,6 +42,8 @@ public class TeacherDetail {
 
     /**
      * 辅导方式
+     * STUDENT_VISIT
+     * TEACHER_VISIT
      */
     @JSONField(name = "tutoringWay")
     private String teachWay;
@@ -48,6 +60,11 @@ public class TeacherDetail {
     @JSONField(name = "selfIntroduction")
     private String introduction;
 
+    /**
+     * 学员程度
+     * 初级JUNIOR 中级INTERMEDIATE 高级SENIOR
+     */
+    @JSONField(name = "studentLevel")
     private String requiredLevel;
 
     /**
@@ -65,6 +82,8 @@ public class TeacherDetail {
      * 教师的用户基本信息
      */
     private User user;
+
+    private Map<String, Integer> extMap;
 
     public String getTeacherId() {
         return teacherId;
@@ -128,6 +147,16 @@ public class TeacherDetail {
         return availableLocation.split(",");
     }
 
+    public Set<String> getLocationsForSet() {
+        String[] locations = getLocations();
+        if (locations == null) return null;
+        Set<String> result = new HashSet<String>();
+        for (String location : locations) {
+            result.add(location);
+        }
+        return result;
+    }
+
     public String getTeachWay() {
         return teachWay;
     }
@@ -141,7 +170,12 @@ public class TeacherDetail {
         return teachWay.split(",");
     }
 
+
+
     public int getFocusCount() {
+        if (extMap != null && extMap.containsKey("followCount")) {
+            focusCount = extMap.get("followCount");
+        }
         return focusCount;
     }
 
@@ -150,6 +184,9 @@ public class TeacherDetail {
     }
 
     public int getCommentCount() {
+        if (extMap != null && extMap.containsKey("commentCount")) {
+            commentCount = extMap.get("commentCount");
+        }
         return commentCount;
     }
 
@@ -158,6 +195,9 @@ public class TeacherDetail {
     }
 
     public int getCollectCount() {
+        if (extMap != null && extMap.containsKey("collectCount")) {
+            collectCount = extMap.get("collectCount");
+        }
         return collectCount;
     }
 
@@ -211,5 +251,13 @@ public class TeacherDetail {
 
     public void setTeachingTime(String teachingTime) {
         this.teachingTime = teachingTime;
+    }
+
+    public Map<String, Integer> getExtMap() {
+        return extMap;
+    }
+
+    public void setExtMap(Map<String, Integer> extMap) {
+        this.extMap = extMap;
     }
 }

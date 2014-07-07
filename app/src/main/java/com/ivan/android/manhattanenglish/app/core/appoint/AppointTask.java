@@ -14,14 +14,7 @@ import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
  */
 public class AppointTask extends CommonAsyncTask<Appointment, Void, Void> {
 
-    CourseService courseService;
-
     Runnable onSuccessCallback;
-
-    protected AppointTask(Context context) {
-        super(context);
-        courseService = ServiceFactory.getService(CourseService.class);
-    }
 
     public AppointTask(Context context, Runnable onSuccessCallback) {
         super(context);
@@ -31,17 +24,17 @@ public class AppointTask extends CommonAsyncTask<Appointment, Void, Void> {
     @Override
     protected Void getResultInBackground(Appointment... params) {
         Appointment appointment = params[0];
+        CourseService courseService = ServiceFactory.getService(CourseService.class);
         courseService.submitAppointment(appointment);
         return null;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
-        if (onSuccessCallback != null && !hasError) {
+    protected void onSuccess(Void aVoid) {
+        super.onSuccess(aVoid);
+        if (onSuccessCallback != null) {
             onSuccessCallback.run();
         }
-
     }
 
     public Runnable getOnSuccessCallback() {

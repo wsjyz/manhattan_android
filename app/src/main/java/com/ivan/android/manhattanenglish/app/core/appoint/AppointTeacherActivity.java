@@ -1,9 +1,6 @@
 package com.ivan.android.manhattanenglish.app.core.appoint;
 
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,13 +34,11 @@ public class AppointTeacherActivity extends BaseActivity {
 
     Spinner mLocationSpinner;
 
-    Spinner mStudyMethodSpinner;
-
     Button mSubmit;
 
     int actionType;
 
-    String courseId;
+    String teacherId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +46,7 @@ public class AppointTeacherActivity extends BaseActivity {
         setContentView(R.layout.activity_appoint_teacher);
 
         actionType = getIntent().getIntExtra(ACTION_TYPE_KEY, ACTION_TYPE_APPOINT);
-        courseId = getIntent().getStringExtra(RESOURCE_ID_KEY);
+        teacherId = getIntent().getStringExtra(RESOURCE_ID_KEY);
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setTitleText(actionType == ACTION_TYPE_APPOINT ? getText(R.string.title_activity_appoint_course) : getText(R.string.title_activity_audition_course));
@@ -75,54 +70,18 @@ public class AppointTeacherActivity extends BaseActivity {
         ArrayAdapter<String> locationAdapter = createAdapterFromSource(locations);
         mLocationSpinner.setAdapter(locationAdapter);
 
-        mStudyMethodSpinner = (Spinner) findViewById(R.id.study_method_spinner);
-        String[] methods = getIntent().getStringArrayExtra(STUDY_METHOD_KEY);
-        ArrayAdapter<String> methodAdapter = createAdapterFromSource(methods);
-        mStudyMethodSpinner.setAdapter(methodAdapter);
-
-
         mSubmit = (Button) findViewById(R.id.submit_button);
         mSubmit.setText(actionType == ACTION_TYPE_APPOINT ? getText(R.string.action_appoint) : getText(R.string.action_audition));
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerForContextMenu(v);
-                openContextMenu(v);
+                //todo
+
             }
         });
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.appoint_course, menu);
-    }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.online:
-                attemptSubmit("ONLINE", new Runnable() {
-                    @Override
-                    public void run() {
-                        //todo 支付宝接口
-                    }
-                });
-                return true;
-            case R.id.offline:
-                attemptSubmit("OFFLINE", new Runnable() {
-                    @Override
-                    public void run() {
-                        //todo 打电话
-                    }
-                });
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-
-    }
 
     private void attemptSubmit(String payment, Runnable runnable) {
         if (mFragment.checkForm()) {
@@ -131,8 +90,8 @@ public class AppointTeacherActivity extends BaseActivity {
             appointment.setMobile(mFragment.getPhone());
             appointment.setUserName(mFragment.getUserName());
             appointment.setAddress(mFragment.getAddress());
-            appointment.setResourceId(courseId);
-            appointment.setResourceType(actionType == ACTION_TYPE_APPOINT ? "APPOINTMENT_COURSE" : "LISTEN_COURSE");
+            appointment.setResourceId(teacherId);
+            appointment.setResourceType(actionType == ACTION_TYPE_APPOINT ? Appointment.RESOURCE_TYPE_APPOINTMENT_TEACHER : Appointment.RESOURCE_TYPE_LISTEN_TEACHER);
             appointment.setPayment(payment);
 
             new AppointTask(this, runnable).execute(appointment);

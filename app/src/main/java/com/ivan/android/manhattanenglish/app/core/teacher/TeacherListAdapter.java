@@ -105,6 +105,13 @@ public class TeacherListAdapter extends BaseAdapter {
     }
 
     public String getText(int stringResId, String... params) {
+        if (params != null && params.length > 0) {
+            for (int i = 0; i < params.length; i++) {
+                if (params[i] == null) {
+                    params[i] = "";
+                }
+            }
+        }
         return String.format(context.getResources().getString(stringResId), params);
     }
 

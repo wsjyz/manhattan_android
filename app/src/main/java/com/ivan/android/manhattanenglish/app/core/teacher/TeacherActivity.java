@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -59,12 +61,25 @@ public class TeacherActivity extends BaseActivity implements AdapterView.OnItemC
         });
 
         searchView = (EditText) findViewById(R.id.teacher_search);
+        searchView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == getResources().getInteger(R.integer.teacher_search_action_id)) {
+                    keywords = searchView.getText().toString();
+                    page.setPageNo(1);
+                    new TeacherLoadTask().execute(page);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         searchBtn = (ImageButton) findViewById(R.id.search_img_button);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 keywords = searchView.getText().toString();
+                page.setPageNo(1);
                 new TeacherLoadTask().execute(page);
             }
         });

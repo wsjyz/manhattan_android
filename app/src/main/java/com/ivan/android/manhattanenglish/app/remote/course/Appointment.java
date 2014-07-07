@@ -7,6 +7,11 @@ package com.ivan.android.manhattanenglish.app.remote.course;
  */
 public class Appointment {
 
+    public static final String RESOURCE_TYPE_LISTEN_COURSE = "LISTEN_COURSE";
+    public static final String RESOURCE_TYPE_APPOINTMENT_COURSE = "APPOINTMENT_COURSE";
+    public static final String RESOURCE_TYPE_LISTEN_TEACHER = "LISTEN_TEACHER";
+    public static final String RESOURCE_TYPE_APPOINTMENT_TEACHER = "APPOINTMENT_TEACHER";
+
     private String userId;
 
     private String userName;

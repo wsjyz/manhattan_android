@@ -1,5 +1,7 @@
 package com.ivan.android.manhattanenglish.app.remote.upload;
 
+import android.content.Context;
+
 import java.io.File;
 
 /**
@@ -10,4 +12,6 @@ import java.io.File;
 public interface UploadService {
 
     String upload(File file);
+
+    String uploadImage(Context context, File imageFile);
 }

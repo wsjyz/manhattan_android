@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.ivan.android.manhattanenglish.app.core.info.InfomationDetailActivity">
+
+
+    <com.ivan.android.manhattanenglish.app.customviews.TitleBar xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/form_default_height"
+        custom:titleText="@string/title_activity_infomation_detail"
+        custom:showRight="false" />
+
+    <WebView
+        android:id="@+id/info_web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

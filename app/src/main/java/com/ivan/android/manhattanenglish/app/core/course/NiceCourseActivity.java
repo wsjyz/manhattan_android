@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.ivan.android.manhattanenglish.app.R;
@@ -18,6 +20,7 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.course.Course;
 import com.ivan.android.manhattanenglish.app.remote.course.CourseService;
+import com.ivan.android.manhattanenglish.app.remote.course.QueryParam;
 import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
@@ -28,11 +31,16 @@ import java.util.Date;
  * 精品课程
  */
 public class NiceCourseActivity extends BaseActivity implements AdapterView.OnItemClickListener {
+
+    public static final String QUERY_PARAM_KEY = "QUERY_KEY";
+
     PullToRefreshListView courseListView;
 
     OpenPage<Course> page;
 
     CourseListAdapter mAdapter;
+
+    QueryParam queryParam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,11 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_course);
 
         page = new OpenPage<Course>();
+
+        String paramJson = getIntent().getStringExtra(QUERY_PARAM_KEY);
+        if (!TextUtils.isEmpty(paramJson)) {
+            queryParam = JSON.parseObject(paramJson, QueryParam.class);
+        }
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.setLeftButtonOnClickListener(new View.OnClickListener() {
@@ -103,7 +116,7 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
             OpenPage<Course> param = params[0];
             param.setRows(null);
             CourseService courseService = ServiceFactory.getService(CourseService.class);
-            return courseService.loadNiceCourse(param);
+            return queryParam == null ? courseService.loadNiceCourse(param) : courseService.search(param, queryParam);
         }
 
         @Override
@@ -117,7 +130,6 @@ public class NiceCourseActivity extends BaseActivity implements AdapterView.OnIt
             }
             courseListView.onRefreshComplete();
             refreshDate = new Date();
-
         }
     }
 

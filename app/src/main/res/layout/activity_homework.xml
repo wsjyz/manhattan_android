@@ -18,11 +18,9 @@
         android:id="@+id/homework_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/common_margin"
         android:divider="@color/border_color"
         android:dividerHeight="1dp"
         android:scrollbars="none"
-        android:background="@drawable/login_form_border"
         />
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.ivan.android.manhattanenglish.app.core.course;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,10 +78,13 @@ public class CourseListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Picasso.with(context)
-                .load(course.getImageUrl())
-                .fit()
-                .into(holder.icon);
+        if (!TextUtils.isEmpty(course.getImageUrl())) {
+            Picasso.with(context)
+                    .load(course.getImageUrl())
+                    .placeholder(R.drawable.avatar)
+                    .fit()
+                    .into(holder.icon);
+        }
 
         holder.classNum.setText(getText(R.string.label_class_num, course.getClassNum()));
         holder.cost.setText(getText(R.string.label_fee, String.valueOf(course.getMoneyCost())));

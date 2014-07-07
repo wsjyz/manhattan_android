@@ -151,6 +151,7 @@ public class CourseDetailActivity extends BaseActivity implements AdapterView.On
         if (!TextUtils.isEmpty(mCourse.getImageUrl())) {
             Picasso.with(CourseDetailActivity.this)
                     .load(mCourse.getImageUrl())
+                    .placeholder(R.drawable.avatar)
                     .fit()
                     .into(mCourseImage);
         }

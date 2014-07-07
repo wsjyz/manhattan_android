@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.core.CommonDataLoader;
-import com.ivan.android.manhattanenglish.app.core.appoint.AppointCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointTeacherActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
@@ -133,9 +132,9 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         Intent intent = new Intent(this, AppointTeacherActivity.class);
         intent.putExtra(AppointTeacherActivity.ACTION_TYPE_KEY, actionType);
         intent.putExtra(AppointTeacherActivity.RESOURCE_ID_KEY, teacherId);
-        intent.putExtra(AppointTeacherActivity.SUBJECT_ARRAY_KEY,mData.getSubjectArray());
-        intent.putExtra(AppointTeacherActivity.LOCATION_ARRAY_KEY,mData.getLocations());
-        intent.putExtra(AppointTeacherActivity.STUDY_METHOD_KEY,mData.getTeachWayArray());
+        intent.putExtra(AppointTeacherActivity.SUBJECT_ARRAY_KEY, mData.getSubjectArray());
+        intent.putExtra(AppointTeacherActivity.LOCATION_ARRAY_KEY, mData.getLocations());
+        intent.putExtra(AppointTeacherActivity.STUDY_METHOD_KEY, mData.getTeachWayArray());
         startActivity(intent);
     }
 
@@ -228,15 +227,20 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         String gradeText = getTextFromFormat(R.string.pattern_grade, String.valueOf(mData.getRating()));
         String evaluationText = getTextFromFormat(R.string.pattern_evaluate, mData.getEvaluation());
         String availableLocation = getTextFromFormat(R.string.pattern_available_location, mData.getAvailableLocation());
-        String teachWayText = getTextFromFormat(R.string.pattern_teach_way, mData.getTeachWay());
+
+        String teachMethod = TeacherDetail.WAY_TEACHER_VISIT.equals(mData.getTeachWay())
+                ? getString(R.string.teach_method_for_teacher)
+                : getString(R.string.teach_method_for_student);
+
+        String teachWayText = getTextFromFormat(R.string.pattern_teach_way, teachMethod);
         mGrade.setText(gradeText);
         mEvaluation.setText(evaluationText);
         mAvailableLocation.setText(availableLocation);
         mTeachWay.setText(teachWayText);
 
-        mTeachMethod.setText(mData.getTeachWay());
+        mTeachMethod.setText(teachMethod);
         mRequiredLevel.setText(mData.getRequiredLevel());
-        mCost.setText(getTextFromFormat(R.string.pattern_rmb, String.valueOf(mData.getCost())));
+        mCost.setText(mData.getCost());
 
         //授课时间GridView
         mAdapter.setTeachingTime(mData.getTeachingTime());

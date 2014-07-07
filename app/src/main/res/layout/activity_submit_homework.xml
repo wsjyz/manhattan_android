@@ -32,6 +32,7 @@
         android:background="@drawable/drawable_border_light_gray"
         android:hint="@string/hint_input_homework"
         android:textColorHint="@color/hint_text_color"
+        android:textColor="@color/common_text_color"
         android:minLines="6"
         android:maxLines="10"
         android:gravity="top"

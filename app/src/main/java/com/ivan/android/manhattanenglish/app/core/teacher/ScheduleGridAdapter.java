@@ -37,6 +37,14 @@ public class ScheduleGridAdapter extends BaseAdapter {
         return selectedItems;
     }
 
+    public boolean isClickable() {
+        return clickable;
+    }
+
+    public void setClickable(boolean clickable) {
+        this.clickable = clickable;
+    }
+
     public void setSelectedItems(Set<Integer> data) {
         if (data != null && data.size() > 0) {
             selectedItems.addAll(data);

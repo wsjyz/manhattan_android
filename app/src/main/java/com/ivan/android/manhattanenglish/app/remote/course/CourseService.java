@@ -1,5 +1,6 @@
 package com.ivan.android.manhattanenglish.app.remote.course;
 
+import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.List;
@@ -42,9 +43,9 @@ public interface CourseService {
     /**
      * 发布课程
      *
-     * @param course
+     * @param teacherDetail
      */
-    void postCourse(Course course);
+    void postCourse(TeacherDetail teacherDetail);
 
     /**
      * 预约、试听操作

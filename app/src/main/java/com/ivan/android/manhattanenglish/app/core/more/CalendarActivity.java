@@ -8,7 +8,6 @@ import android.util.Pair;
 import android.view.View;
 
 import com.ivan.android.manhattanenglish.app.R;
-import com.ivan.android.manhattanenglish.app.alarm.ScheduleClient;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
@@ -23,8 +22,6 @@ import java.util.List;
 
 public class CalendarActivity extends BaseActivity {
 
-
-    ScheduleClient mScheduleClient;
     CaldroidCustomFragment caldroidFragment;
 
     @Override
@@ -49,9 +46,6 @@ public class CalendarActivity extends BaseActivity {
         caldroidFragment = new CaldroidCustomFragment();
         transaction.replace(R.id.calendar_container, caldroidFragment).commit();
 
-        mScheduleClient = new ScheduleClient(this);
-        mScheduleClient.doBindService();
-
         new CourseScheduleLoadTask(this).execute();
     }
 
@@ -75,17 +69,6 @@ public class CalendarActivity extends BaseActivity {
 
             caldroidFragment.setSelectedDates(dates);
             caldroidFragment.refreshView();
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date());
-            calendar.add(Calendar.DAY_OF_MONTH, -1);
-
-            Date date = calendar.getTime();
-            for (Date d : dates) {
-                if (d.after(date)) {
-                    mScheduleClient.setAlarmNotification(d);
-                }
-            }
         }
     }
 
@@ -103,11 +86,4 @@ public class CalendarActivity extends BaseActivity {
         return Pair.create(startTime, endTime);
     }
 
-    @Override
-    protected void onStop() {
-        if (mScheduleClient != null) {
-            mScheduleClient.unBindService();
-        }
-        super.onStop();
-    }
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:background="@drawable/login_form_border">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textSize="@dimen/dimen_18sp"
+        android:textColor="@color/common_text_color"
+        android:gravity="center"
+        android:text="@string/course_category" />
+
+    <RelativeLayout
+        android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_margin"
+        android:background="@drawable/drawable_border_light_gray" />
+
+    <Button
+        android:id="@+id/positiveBtn"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="@dimen/common_margin"
+        android:layout_marginBottom="@dimen/common_margin"
+        android:textColor="@android:color/white"
+        android:text="@string/positive_text"
+        android:background="@drawable/drawable_orange_button" />
+
+</LinearLayout>

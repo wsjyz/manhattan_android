@@ -69,11 +69,12 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/dimen_18sp"
                     android:textColor="@color/common_text_color"
-                    android:text="@string/label_teach_way1"
+                    android:text="@string/label_teach_way"
                     android:layout_below="@id/choose_location"
                     android:layout_margin="@dimen/common_margin" />
 
                 <RadioGroup
+                    android:id="@+id/teach_method_radio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/label_teach_way1"
@@ -88,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/dimen_16sp"
                         android:textColor="@color/common_text_color"
+                        android:tag="STUDENT_VISIT"
                         android:checked="true"
                         android:text="@string/teach_method_for_student"
                         android:onClick="onTeachMethodClicked" />
@@ -95,6 +97,7 @@
                     <RadioButton
                         android:id="@+id/method_for_teacher"
                         android:layout_width="wrap_content"
+                        android:tag="TEACHER_VISIT"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/dimen_16sp"
                         android:textColor="@color/common_text_color"
@@ -225,6 +228,7 @@
                     android:layout_alignBaseline="@id/teach_method_for_student"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/common_margin"
+                    android:inputType="numberDecimal"
                     android:gravity="center" />
 
             </RelativeLayout>

@@ -42,6 +42,8 @@ public class RegisterActivity extends BaseActivity implements RegisterFragment.R
 
     LoginService loginService;
 
+    String authCodeFromServer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,7 +164,7 @@ public class RegisterActivity extends BaseActivity implements RegisterFragment.R
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+                authCodeFromServer = s;
             }
         }.execute(tel);
     }
@@ -190,5 +192,10 @@ public class RegisterActivity extends BaseActivity implements RegisterFragment.R
         }.execute(tel, password, authCode, userType);
 
 
+    }
+
+    @Override
+    public boolean checkAuthCode(String inputAuthCode) {
+        return inputAuthCode.equalsIgnoreCase(authCodeFromServer);
     }
 }

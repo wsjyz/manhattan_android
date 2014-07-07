@@ -59,6 +59,15 @@ public abstract class RegisterFragment extends Fragment {
         mAuthCodeView = (EditText) rootView.findViewById(R.id.auth_code);
 
         mAuthCodeBtn = (Button) rootView.findViewById(R.id.auth_code_button);
+        mAuthCodeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkTel()) {
+                    String tel = mTelView.getText().toString();
+                    mCallback.sendAuthCode(tel);
+                }
+            }
+        });
 
         mRegisterBtn = (Button) rootView.findViewById(R.id.register_button);
 
@@ -99,6 +108,10 @@ public abstract class RegisterFragment extends Fragment {
             valid = true;
         }
 
+        if (!valid) {
+            mTelView.requestFocus();
+        }
+
         return valid;
     }
 
@@ -113,6 +126,11 @@ public abstract class RegisterFragment extends Fragment {
         } else {
             valid = true;
         }
+
+        if (!valid) {
+            mPasswordView.requestFocus();
+        }
+
         return valid;
     }
 
@@ -122,8 +140,14 @@ public abstract class RegisterFragment extends Fragment {
         boolean valid = false;
         if (TextUtils.isEmpty(authCode)) {
             mAuthCodeView.setError(mContext.getString(R.string.error_auth_code_required));
+        } else if (!mCallback.checkAuthCode(authCode)) {
+            mAuthCodeView.setError(mContext.getString(R.string.error_auth_code_invalid));
         } else {
             valid = true;
+        }
+
+        if (!valid) {
+            mAuthCodeView.requestFocus();
         }
         return valid;
     }
@@ -134,6 +158,8 @@ public abstract class RegisterFragment extends Fragment {
         void sendAuthCode(String tel);
 
         void register(String tel, String password, String authCode, String userType);
+
+        boolean checkAuthCode(String inputAuthCode);
 
     }
 

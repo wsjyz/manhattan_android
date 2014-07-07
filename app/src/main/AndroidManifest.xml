@@ -205,6 +205,10 @@
             android:name=".PublishHomeworkActivity"
             android:label="@string/title_activity_publish_homework" >
         </activity>
+        <activity
+            android:name=".core.info.InfomationDetailActivity"
+            android:label="@string/title_activity_infomation_detail" >
+        </activity>
     </application>
 
 </manifest>

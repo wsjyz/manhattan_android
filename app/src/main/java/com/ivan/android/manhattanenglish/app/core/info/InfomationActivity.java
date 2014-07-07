@@ -88,7 +88,7 @@ public class InfomationActivity extends BaseActivity implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //todo
+        
     }
 
 

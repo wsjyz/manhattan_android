@@ -12,7 +12,6 @@ import java.io.File;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -63,14 +62,13 @@ public class HomeworkServiceImpl extends AbstractService implements HomeworkServ
 
     @Override
     public void postHomework(String title) {
-        String action = "/homeWork/submitHomeWork";
+        String action = "/homeWork/postHomeWork";
         Homework homework = new Homework();
         homework.setHomeworkTitle(title);
         homework.setCreateBy(UserCache.getUserId());
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("homeWork", JSON.toJSONString(homework));
-
         post(getUrl(action), params);
     }
 }

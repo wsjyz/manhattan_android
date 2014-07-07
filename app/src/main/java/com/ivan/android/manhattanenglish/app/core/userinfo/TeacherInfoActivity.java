@@ -102,6 +102,7 @@ public class TeacherInfoActivity extends BaseActivity implements LoaderManager.L
         if (!TextUtils.isEmpty(mUser.getAvatar())) {
             Picasso.with(this)
                     .load(mUser.getAvatar())
+                    .placeholder(R.drawable.avatar)
                     .fit()
                     .into(mAvatar);
         }

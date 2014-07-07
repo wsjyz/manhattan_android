@@ -35,6 +35,7 @@
             android:hint="@string/hint_teacher_name"
             android:paddingLeft="@dimen/common_margin"
             android:singleLine="true"
+            android:imeActionId="@integer/teacher_search_action_id"
             android:imeOptions="actionSearch"
             android:paddingRight="@dimen/common_margin" />
 
@@ -55,7 +56,7 @@
         android:divider="@color/border_color"
         android:dividerHeight="1dp"
         android:scrollbars="none"
-        android:background="@drawable/login_form_border"
+        android:background="@drawable/drawable_border_light_gray"
         />
 
 </LinearLayout>

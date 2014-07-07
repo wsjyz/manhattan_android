@@ -12,6 +12,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.util.LinkedMultiValueMap;
@@ -32,7 +33,7 @@ import java.util.Map;
 public class AbstractService {
 
     public final static String HOST = "http://203.195.131.34:8080/mhd";
-//    public final static String HOST = "http://192.168.1.111:8090/mhd";
+//    public final static String HOST = "http://192.168.0.104:8090/mhd";
 
 
     public final static Type STRING_MAP = new TypeReference<Map<String, String>>() {
@@ -129,6 +130,7 @@ public class AbstractService {
     private ResponseEntity<String> getStringResponseEntity(String url, Map<String, String> uriVariables) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Connection", "Close");//avoid EOFException
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
         if (!TextUtils.isEmpty(UserCache.getUserId())) {
             body.set("userId", UserCache.getUserId());
@@ -141,7 +143,7 @@ public class AbstractService {
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(body, headers);
         Log.i("RestTemplate", "request url: " + url
-                + "\n request: " + JSON.toJSONString(uriVariables)
+                + "\n request: " + request
                 + "\n userId: " + UserCache.getUserId());
         ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 
@@ -153,6 +155,7 @@ public class AbstractService {
     protected String multiPartPost(String url, Resource fileResource, Map<String, String> variables) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Connection", "Close");//avoid EOFException
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<String, Object>();
         if (fileResource != null) {
             body.set("file", fileResource);
@@ -167,13 +170,12 @@ public class AbstractService {
         }
 
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<MultiValueMap<String, Object>>(body, headers);
+        Log.i("RestTemplate", "request url: " + url
+                + "\n request: " + request
+                + "\n file: " + (fileResource == null ? "not specified." : fileResource.getFilename()));
         ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 
-        Log.i("RestTemplate", "request url: " + url
-                + "\n request: " + JSON.toJSONString(variables)
-                + "\n statusCode:" + response.getStatusCode()
-                + "\n file: " + (fileResource == null ? "not specified." : fileResource.getFilename())
-                + "\n userId: " + UserCache.getUserId()
+        Log.i("RestTemplate", "statusCode:" + response.getStatusCode()
                 + "\n response: " + response.getBody());
 
         return response.getBody();
