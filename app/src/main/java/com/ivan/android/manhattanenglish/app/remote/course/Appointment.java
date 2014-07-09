@@ -12,6 +12,10 @@ public class Appointment {
     public static final String RESOURCE_TYPE_LISTEN_TEACHER = "LISTEN_TEACHER";
     public static final String RESOURCE_TYPE_APPOINTMENT_TEACHER = "APPOINTMENT_TEACHER";
 
+    public static final String PAYMENT_ONLINE = "ONLINE";
+    public static final String PAYMENT_ADMIN = "ADMIN";
+
+
     private String userId;
 
     private String userName;

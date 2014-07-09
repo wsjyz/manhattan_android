@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
 
     <application
         android:name=".core.MainApplication"
@@ -203,11 +204,13 @@
         </activity>
         <activity
             android:name=".PublishHomeworkActivity"
-            android:label="@string/title_activity_publish_homework" >
+            android:label="@string/title_activity_publish_homework"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".core.info.InfomationDetailActivity"
-            android:label="@string/title_activity_infomation_detail" >
+            android:label="@string/title_activity_infomation_detail"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

@@ -1,6 +1,7 @@
 package com.ivan.android.manhattanenglish.app.core.info;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -88,7 +89,12 @@ public class InfomationActivity extends BaseActivity implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        
+        Infomation info = (Infomation) mAdapter.getItem(position - 1);
+        if (info != null) {
+            Intent detail = new Intent(this, InfomationDetailActivity.class);
+            detail.putExtra(InfomationDetailActivity.INFO_ID_KEY, info.getId());
+            startActivity(detail);
+        }
     }
 
 

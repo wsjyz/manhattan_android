@@ -242,6 +242,8 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         mRequiredLevel.setText(mData.getRequiredLevel());
         mCost.setText(mData.getCost());
 
+        mSelfIntroduce.setText(mData.getIntroduction());
+
         //授课时间GridView
         mAdapter.setTeachingTime(mData.getTeachingTime());
     }

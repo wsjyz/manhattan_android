@@ -135,7 +135,7 @@ public class MyAuditionForStudentActivity extends BaseActivity implements Teache
 
         @Override
         public Fragment getItem(int position) {
-            return position == 0 ? CourseListFragment.newInstance(CourseListFragment.TYPE_APPOINT) : TeacherListFragment.newInstance(TeacherListFragment.TYPE_APPOINT);
+            return position == 0 ? CourseListFragment.newInstance(CourseListFragment.TYPE_AUDITION) : TeacherListFragment.newInstance(TeacherListFragment.TYPE_AUDITION);
         }
 
         @Override

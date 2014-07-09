@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
@@ -75,12 +76,17 @@ public class AppointTeacherActivity extends BaseActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo
+                attemptSubmit(Appointment.PAYMENT_ONLINE, new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(AppointTeacherActivity.this, R.string.appoint_success, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
 
             }
         });
     }
-
 
 
     private void attemptSubmit(String payment, Runnable runnable) {

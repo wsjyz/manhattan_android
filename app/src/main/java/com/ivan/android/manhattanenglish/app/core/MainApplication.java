@@ -11,7 +11,6 @@ import android.content.Context;
 public class MainApplication extends Application {
     public static Context GLOBAL_CONTEXT;
 
-
     @Override
     public void onCreate() {
         super.onCreate();

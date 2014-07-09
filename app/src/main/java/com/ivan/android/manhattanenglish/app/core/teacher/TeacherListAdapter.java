@@ -96,9 +96,9 @@ public class TeacherListAdapter extends BaseAdapter {
                     .into(holder.avatar);
         }
 
-        holder.name.setText(getText(R.string.label_class_num, teacher.getName()));
-        holder.college.setText(getText(R.string.label_fee, String.valueOf(teacher.getCollege())));
-        holder.mainSubject.setText(getText(R.string.label_teach_location, teacher.getMainSubject()));
+        holder.name.setText(teacher.getName());
+        holder.college.setText(teacher.getCollege());
+        holder.mainSubject.setText(getText(R.string.label_main_subject, teacher.getMainSubject()));
         holder.sex.setImageResource(teacher.getSexDrawableResource());
 
         return convertView;

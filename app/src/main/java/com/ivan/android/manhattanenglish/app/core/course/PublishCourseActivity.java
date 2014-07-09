@@ -254,7 +254,9 @@ public class PublishCourseActivity extends BaseActivity implements LoaderManager
 
     public void refresh() {
         if (mData == null) return;
-        mPickLocation.setText(mData.getAvailableLocation());
+        if (!TextUtils.isEmpty(mData.getAvailableLocation())) {
+            mPickLocation.setText(mData.getAvailableLocation());
+        }
         //set selected items
         selectedLocations = mData.getLocationsForSet();
 

@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.AbstractService;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
 import com.ivan.android.manhattanenglish.app.remote.user.User;
 import com.ivan.android.manhattanenglish.app.utils.DateFormatUtils;
@@ -74,7 +75,7 @@ public class QuestionDetailActivity extends BaseActivity {
             mQuestionPic.setVisibility(View.GONE);
         } else {
             Picasso.with(this)
-                    .load(question.getQuestionPic())
+                    .load(AbstractService.getImageUrl(question.getQuestionPic()))
                     .into(mQuestionPic);
         }
 
@@ -96,7 +97,7 @@ public class QuestionDetailActivity extends BaseActivity {
                 mAnswerPic.setVisibility(View.GONE);
             } else {
                 Picasso.with(this)
-                        .load(question.getAnswerPic())
+                        .load(AbstractService.getImageUrl(question.getAnswerPic()))
                         .into(mAnswerPic);
             }
 

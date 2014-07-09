@@ -64,6 +64,8 @@
     <string name="title_activity_answer_question">回答问题</string>
     <string name="title_activity_publish_homework">发布作业</string>
     <string name="upload_success">上传成功</string>
+    <string name="appoint_success">预约成功，您可以在首页的预约中查看已预约的课程或教师</string>
+    <string name="audition_success">试听成功，您可以在首页的试听中查看已试听的课程或教师</string>
 
     <integer name="teacher_search_action_id">5</integer>
 

@@ -1,5 +1,6 @@
 package com.ivan.android.manhattanenglish.app.core.homework;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.homework.Homework;
 import com.ivan.android.manhattanenglish.app.remote.homework.HomeworkService;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.ivan.android.manhattanenglish.app.utils.OpenPage;
 
 import java.util.Date;
@@ -62,7 +64,7 @@ public class StudentHomeworkActivity extends BaseActivity implements AdapterView
                     CharSequence label = getRefreshTimeString();
                     refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 }
-                new HomeworkLoadTask().execute(page);
+                new HomeworkLoadTask(StudentHomeworkActivity.this).execute(page);
             }
         });
 
@@ -71,7 +73,7 @@ public class StudentHomeworkActivity extends BaseActivity implements AdapterView
             public void onLastItemVisible() {
                 if (page.hasNext()) {
                     page.setPageNo(page.getPageNo() + 1);
-                    new HomeworkLoadTask().execute(page);
+                    new HomeworkLoadTask(StudentHomeworkActivity.this).execute(page);
                 } else {
                     Toast.makeText(StudentHomeworkActivity.this, R.string.no_more_data, Toast.LENGTH_SHORT).show();
                 }
@@ -80,7 +82,7 @@ public class StudentHomeworkActivity extends BaseActivity implements AdapterView
 
         homeworkListView.setOnItemClickListener(this);
 
-        new HomeworkLoadTask().execute(page);
+        new HomeworkLoadTask(StudentHomeworkActivity.this).execute(page);
     }
 
     @Override
@@ -94,24 +96,22 @@ public class StudentHomeworkActivity extends BaseActivity implements AdapterView
     }
 
 
-    class HomeworkLoadTask extends AsyncTask<OpenPage<Homework>, Void, OpenPage<Homework>> {
+    class HomeworkLoadTask extends CommonAsyncTask<OpenPage<Homework>, Void, OpenPage<Homework>> {
 
-        @Override
-        protected OpenPage<Homework> doInBackground(OpenPage<Homework>... params) {
-            OpenPage<Homework> param = params[0];
-            param.setRows(null);//empty data
-            try {
-
-                return homeworkService.loadUserHomework(param);
-            } catch (Exception e) {
-                Log.e(getClass().getName(), "load homework list error", e);
-            }
-            return null;
+        protected HomeworkLoadTask(Context context) {
+            super(context);
         }
 
         @Override
-        protected void onPostExecute(OpenPage<Homework> openPage) {
-            super.onPostExecute(openPage);
+        protected OpenPage<Homework> getResultInBackground(OpenPage<Homework>... params) {
+            OpenPage<Homework> param = params[0];
+            param.setRows(null);//empty data
+            return homeworkService.loadUserHomework(param);
+        }
+
+        @Override
+        protected void onSuccess(OpenPage<Homework> openPage) {
+            super.onSuccess(openPage);
             if (openPage != null) {
                 if (openPage.getPageNo() == 1) {
                     mAdapter.clear();
@@ -121,6 +121,7 @@ public class StudentHomeworkActivity extends BaseActivity implements AdapterView
             homeworkListView.onRefreshComplete();
             refreshDate = new Date();
         }
+
     }
 
 

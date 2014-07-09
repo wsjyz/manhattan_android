@@ -8,6 +8,7 @@ import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
 
+import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointTeacherListLoader;
 import com.ivan.android.manhattanenglish.app.core.audition.AuditionTeacherListLoader;
 import com.ivan.android.manhattanenglish.app.core.teacher.TeacherListAdapter;
@@ -61,6 +62,7 @@ public class TeacherListFragment extends ListFragment implements LoaderManager.L
         setListShown(false);
         mAdapter = new TeacherListAdapter(getActivity(), new ArrayList<TeacherDetail>());
         setListAdapter(mAdapter);
+        setEmptyText(getText(R.string.empty_text));
 
         getLoaderManager().initLoader(1, getArguments(), this);
     }
@@ -80,7 +82,7 @@ public class TeacherListFragment extends ListFragment implements LoaderManager.L
             String type = args.getString(LOAD_TYPE);
             if (TYPE_APPOINT.equals(type)) {
                 return new AppointTeacherListLoader(getActivity());
-            }else if(TYPE_AUDITION.equals(type)){
+            } else if (TYPE_AUDITION.equals(type)) {
                 return new AuditionTeacherListLoader(getActivity());
             }
         }

@@ -45,6 +45,15 @@ public class AbstractService {
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
     }
 
+    public static String getImageUrl(String imagePath) {
+        if (TextUtils.isEmpty(imagePath)) return "";
+        if (imagePath.startsWith("http://")) {
+            return imagePath;
+        } else {
+            return AbstractService.HOST + imagePath;
+        }
+    }
+
     protected <T> T getForObject(Class<T> clazz, String url, Object... params) {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class, params);
         return convertToObject(clazz, responseEntity);
@@ -66,9 +75,10 @@ public class AbstractService {
         }
         HttpHeaders headers = entity.getHeaders();
         String exception = headers.getFirst("ErrorMsg");
-        if (exception != null && !"".equals(exception)) {
+        if (!TextUtils.isEmpty(exception)) {
             try {
                 exception = URLDecoder.decode(exception, "UTF-8");
+                Log.i("RestTemplate", "Error Happens.Msg :" + exception);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

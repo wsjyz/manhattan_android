@@ -30,8 +30,7 @@ public class UserCache {
     }
 
     public static String getUserId() {
-        return "t1";
-//        return getCurrentUser() == null ? null : getCurrentUser().getUserId();
+        return getCurrentUser() == null ? null : getCurrentUser().getUserId();
     }
 
     public static void clearUserCache() {

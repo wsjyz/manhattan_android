@@ -145,6 +145,8 @@
                     android:text="@string/pattern_evaluate"
                     android:textColor="@color/common_text_color"
                     android:layout_below="@+id/grade_text"
+                    android:layout_toLeftOf="@id/appoint_btn"
+                    android:layout_alignParentLeft="true"
                     android:layout_marginBottom="@dimen/common_margin" />
 
                 <TextView

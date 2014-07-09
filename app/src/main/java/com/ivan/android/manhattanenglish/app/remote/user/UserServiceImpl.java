@@ -61,7 +61,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
     public TeacherDetail loadTeacherDetail(String teacherId) {
         String action = "/teacher/getTeacherDetailById";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("teacherId", teacherId);
+        params.put("userId", teacherId);
         return postForObject(TeacherDetail.class, getUrl(action), params);
     }
 

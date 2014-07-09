@@ -69,9 +69,10 @@ public class AskQuestionActivity extends BaseActivity {
             }
         });
 
+        Log.i("AskQuestionActivity", "Current User Type is " + UserCache.getCurrentUser().getType());
         if (User.USER_TYPE_VIP_STUDENT.equals(UserCache.getCurrentUser().getType())) {
             View container = findViewById(R.id.vip_setting_container);
-            container.setVisibility(View.INVISIBLE);
+            container.setVisibility(View.VISIBLE);
 
             mChooseTeacher = (TextView) findViewById(R.id.choose_teacher);
             mChooseTeacher.setOnClickListener(new View.OnClickListener() {
@@ -209,8 +210,10 @@ public class AskQuestionActivity extends BaseActivity {
             question.setQuestionContent(getContentText());
             String imageUrl = (String) mChoosePic.getTag();
             question.setQuestionPic(imageUrl);
-            String teacherId = (String) mChooseTeacher.getTag();
-            question.setAssignTeacher(teacherId);
+            if (mChooseTeacher != null) {
+                String teacherId = (String) mChooseTeacher.getTag();
+                question.setAssignTeacher(teacherId);
+            }
             question.setUserId(UserCache.getUserId());
         }
 

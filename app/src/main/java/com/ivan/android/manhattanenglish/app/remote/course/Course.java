@@ -3,6 +3,7 @@ package com.ivan.android.manhattanenglish.app.remote.course;
 import android.text.format.DateFormat;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.ivan.android.manhattanenglish.app.remote.AbstractService;
 import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
 
 import java.io.Serializable;
@@ -139,7 +140,11 @@ public class Course implements Serializable{
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        if (imageUrl != null && imageUrl.startsWith("http://")) {
+            return imageUrl;
+        } else {
+            return AbstractService.HOST + imageUrl;
+        }
     }
 
     public void setImageUrl(String imageUrl) {
