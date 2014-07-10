@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.ivan.android.manhattanenglish.app.R;
+import com.ivan.android.manhattanenglish.app.core.appoint.StudentListActivity;
 import com.ivan.android.manhattanenglish.app.core.course.NiceCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.course.CourseDetailActivity;
 import com.ivan.android.manhattanenglish.app.core.home.StudentHomeActivity;

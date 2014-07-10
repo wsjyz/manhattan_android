@@ -218,13 +218,14 @@ public class AskQuestionActivity extends BaseActivity {
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            if (!hasError) {
-                Toast.makeText(AskQuestionActivity.this, R.string.info_submit_success, Toast.LENGTH_SHORT).show();
-                finish();
-            }
+        protected void onSuccess(Void aVoid) {
+            super.onSuccess(aVoid);
+            Toast.makeText(AskQuestionActivity.this, R.string.info_submit_success, Toast.LENGTH_SHORT).show();
+            Intent emptyIntent = new Intent();
+            setResult(QuestionForStudentActivity.PUBLISH_QUESTION_REQ, emptyIntent);
+            finish();
         }
+
     }
 
 }

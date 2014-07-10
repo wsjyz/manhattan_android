@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
+import com.ivan.android.manhattanenglish.app.remote.AbstractService;
 import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.question.Question;
 import com.ivan.android.manhattanenglish.app.remote.question.QuestionService;
@@ -46,7 +47,6 @@ public class AnswerQuestionActivity extends BaseActivity {
     TextView mChoosePic;
 
     Button mSubmit;
-
 
     Question question;
 
@@ -76,7 +76,7 @@ public class AnswerQuestionActivity extends BaseActivity {
             mQuestionPic.setVisibility(View.GONE);
         } else {
             Picasso.with(this)
-                    .load(question.getQuestionPic())
+                    .load(AbstractService.getImageUrl(question.getQuestionPic()))
                     .into(mQuestionPic);
         }
 
@@ -157,6 +157,7 @@ public class AnswerQuestionActivity extends BaseActivity {
             q.setAnswer(getInputContent());
             q.setReplyUser(UserCache.getUserId());
             q.setQuestionId(question.getQuestionId());
+            q.setAnswerPic(question.getAnswerPic());
 
             questionService.answerQuestion(q);
             return null;
@@ -196,6 +197,7 @@ public class AnswerQuestionActivity extends BaseActivity {
         protected void onSuccess(String s) {
             Toast.makeText(context, R.string.upload_success, Toast.LENGTH_SHORT).show();
             mChoosePic.setText(file.getName());
+            question.setAnswerPic(s);
         }
     }
 }

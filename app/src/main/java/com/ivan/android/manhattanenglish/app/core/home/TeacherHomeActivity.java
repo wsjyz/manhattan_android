@@ -13,6 +13,7 @@ import com.ivan.android.manhattanenglish.app.core.course.NiceCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.course.PublishCourseActivity;
 import com.ivan.android.manhattanenglish.app.core.homework.TeacherHomeworkActivity;
 import com.ivan.android.manhattanenglish.app.core.info.InfomationActivity;
+import com.ivan.android.manhattanenglish.app.core.login.LoginActivity;
 import com.ivan.android.manhattanenglish.app.core.more.MoreInfoActivity;
 import com.ivan.android.manhattanenglish.app.core.question.QuestionForTeacherActivity;
 import com.ivan.android.manhattanenglish.app.core.teacher.TeacherActivity;
@@ -137,9 +138,16 @@ public class TeacherHomeActivity extends BaseActivity {
 
 
     private void navigateToStudentList(int titleResId, String type) {
-        Intent intent = new Intent(TeacherHomeActivity.this, StudentListActivity.class);
-        intent.putExtra(StudentListActivity.TITLE_KEY, getResources().getString(titleResId));
-        intent.putExtra(StudentListActivity.LOAD_TYPE, type);
+        Intent intent;
+        if (needLogin(StudentListActivity.class)) {
+            intent = new Intent(this, LoginActivity.class);
+
+        } else {
+            intent = new Intent(TeacherHomeActivity.this, StudentListActivity.class);
+            intent.putExtra(StudentListActivity.TITLE_KEY, getResources().getString(titleResId));
+            intent.putExtra(StudentListActivity.LOAD_TYPE, type);
+        }
+
         startActivity(intent);
     }
 

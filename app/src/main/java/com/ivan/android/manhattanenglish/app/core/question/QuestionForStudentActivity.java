@@ -37,6 +37,8 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
 
     QuestionListAdapter mAdapter;
 
+    public static final int PUBLISH_QUESTION_REQ = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,8 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
         mAddQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigate(AskQuestionActivity.class);
+                Intent askQuestion = new Intent(QuestionForStudentActivity.this, AskQuestionActivity.class);
+                startActivityForResult(askQuestion, PUBLISH_QUESTION_REQ);
             }
         });
 
@@ -78,6 +81,20 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
         Intent questionDetail = new Intent(this, QuestionDetailActivity.class);
         questionDetail.putExtra(QuestionDetailActivity.JSON_QUESTION_KEY, JSON.toJSONString(question));
         startActivity(questionDetail);
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PUBLISH_QUESTION_REQ) {
+            //force refresh.
+            if (data != null) {
+                showLoadingDialog();
+                getSupportLoaderManager().initLoader(0, null, this);
+            }
+        }
 
     }
 

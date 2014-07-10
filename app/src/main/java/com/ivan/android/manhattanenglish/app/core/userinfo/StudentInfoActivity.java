@@ -76,7 +76,7 @@ public class StudentInfoActivity extends BaseActivity implements LoaderManager.L
         Log.i("studentInfoActivity", "create loader");
 
         String userId = UserCache.getUserId();
-        if (args != null && TextUtils.isEmpty(args.getString(USER_ID_KEY))) {
+        if (args != null && !TextUtils.isEmpty(args.getString(USER_ID_KEY))) {
             userId = args.getString(USER_ID_KEY);
         }
         return new UserInfoLoader(this, userId);

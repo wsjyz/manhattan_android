@@ -261,9 +261,11 @@ public class PublishCourseActivity extends BaseActivity implements LoaderManager
         selectedLocations = mData.getLocationsForSet();
 
         if (TeacherDetail.WAY_STUDENT_VISIT.equals(mData.getTeachWay())) {
-            checkTeachMethod(0);
+            mTeachMethodRadio.check(R.id.method_for_student);
+            checkTeachMethod(1); //student
         } else {
-            checkTeachMethod(1);
+            mTeachMethodRadio.check(R.id.method_for_teacher);
+            checkTeachMethod(0);
         }
 
         mScheduleAdapter.setTeachingTime(mData.getTeachingTime());
@@ -274,8 +276,8 @@ public class PublishCourseActivity extends BaseActivity implements LoaderManager
                 break;
             }
         }
-        mStudentSpinner.setSelection(levelPosition, true);
 
+        mStudentSpinner.setSelection(levelPosition, true);
         mStudentCost.setText(mData.getCost());
     }
 }

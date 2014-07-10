@@ -24,6 +24,9 @@ import com.ivan.android.manhattanenglish.app.remote.user.UserService;
 import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TeacherDetailInfoActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<TeacherDetail> {
 
     public static final String TEACHER_ID_KEY = "TEACHER_ID";
@@ -58,6 +61,8 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
     String teacherId;
     TeacherDetail mData;
 
+    Map<String, String> requiredLevelMap = new HashMap<String, String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +75,10 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
                 finish();
             }
         });
+
+        requiredLevelMap.put(TeacherDetail.LEVEL_JUNIOR, "初级");
+        requiredLevelMap.put(TeacherDetail.LEVEL_MIDDLE, "中级");
+        requiredLevelMap.put(TeacherDetail.LEVEL_SENIOR, "高级");
 
         teacherId = getIntent().getStringExtra(TEACHER_ID_KEY);
 
@@ -239,7 +248,7 @@ public class TeacherDetailInfoActivity extends BaseActivity implements LoaderMan
         mTeachWay.setText(teachWayText);
 
         mTeachMethod.setText(teachMethod);
-        mRequiredLevel.setText(mData.getRequiredLevel());
+        mRequiredLevel.setText(requiredLevelMap.get(mData.getRequiredLevel()));
         mCost.setText(mData.getCost());
 
         mSelfIntroduce.setText(mData.getIntroduction());
