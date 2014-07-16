@@ -34,6 +34,8 @@ public class FindPasswordActivity extends BaseActivity {
 
     LoginService loginService;
 
+    String authCodeFromServer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +71,7 @@ public class FindPasswordActivity extends BaseActivity {
                         @Override
                         protected void onPostExecute(String s) {
                             super.onPostExecute(s);
-                            if (!TextUtils.isEmpty(s)) {
-                                Toast.makeText(FindPasswordActivity.this, "验证码：" + s, Toast.LENGTH_SHORT).show();
-                            }
+                            authCodeFromServer = s;
                         }
                     }.execute(tel);
                 }
@@ -129,6 +129,10 @@ public class FindPasswordActivity extends BaseActivity {
             valid = true;
         }
 
+        if (!valid) {
+            mTelView.requestFocus();
+        }
+
         return valid;
     }
 
@@ -143,18 +147,28 @@ public class FindPasswordActivity extends BaseActivity {
         } else {
             valid = true;
         }
+
+        if (!valid) {
+            mPasswordView.requestFocus();
+        }
         return valid;
     }
 
     private boolean checkAuthCode() {
         String authCode = mAuthCodeView.getText().toString();
-
         boolean valid = false;
         if (TextUtils.isEmpty(authCode)) {
             mAuthCodeView.setError(getString(R.string.error_auth_code_required));
+        } else if (!authCode.equalsIgnoreCase(authCodeFromServer)) {
+            mAuthCodeView.setError(getString(R.string.error_auth_code_invalid));
         } else {
             valid = true;
         }
+
+        if (!valid) {
+            mAuthCodeView.requestFocus();
+        }
+
         return valid;
     }
 
