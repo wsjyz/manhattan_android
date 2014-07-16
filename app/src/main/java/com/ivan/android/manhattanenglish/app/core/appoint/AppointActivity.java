@@ -131,7 +131,7 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
 
     private MultiPickerDialog getPickLocationDialog() {
         if (pickLocationDialog == null) {
-            pickLocationDialog = new MultiPickerDialog(this, getString(R.string.course_category), R.array.locations);
+            pickLocationDialog = new MultiPickerDialog(this, getString(R.string.teach_location), R.array.locations);
             pickLocationDialog.setOnItemsCheckedListener(new MultiPickerDialog.OnItemsCheckedListener() {
                 @Override
                 public void onItemsChecked(Set<String> items, String itemsForString) {

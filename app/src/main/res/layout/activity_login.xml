@@ -80,10 +80,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/drawable_checkbox"
-            android:checked="false"
+            android:checked="true"
             android:text="@string/auto_login"
             android:textColor="@color/login_text_color"
-            android:paddingLeft="20dp"
+            android:paddingLeft="5dp"
             android:layout_marginLeft="10dp" />
 
         <TextView

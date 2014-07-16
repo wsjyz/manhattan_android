@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -90,10 +91,9 @@ public class QuestionForStudentActivity extends BaseActivity implements AdapterV
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PUBLISH_QUESTION_REQ) {
             //force refresh.
-            if (data != null) {
-                showLoadingDialog();
-                getSupportLoaderManager().initLoader(0, null, this);
-            }
+            Log.i("QuestionForStudent", "Coming for next ");
+            showLoadingDialog();
+            getSupportLoaderManager().restartLoader(0, null, this);
         }
 
     }

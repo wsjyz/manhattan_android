@@ -222,7 +222,7 @@ public class AskQuestionActivity extends BaseActivity {
             super.onSuccess(aVoid);
             Toast.makeText(AskQuestionActivity.this, R.string.info_submit_success, Toast.LENGTH_SHORT).show();
             Intent emptyIntent = new Intent();
-            setResult(QuestionForStudentActivity.PUBLISH_QUESTION_REQ, emptyIntent);
+            setResult(RESULT_OK, emptyIntent);
             finish();
         }
 
