@@ -83,7 +83,6 @@
             android:checked="true"
             android:text="@string/auto_login"
             android:textColor="@color/login_text_color"
-            android:paddingLeft="5dp"
             android:layout_marginLeft="10dp" />
 
         <TextView

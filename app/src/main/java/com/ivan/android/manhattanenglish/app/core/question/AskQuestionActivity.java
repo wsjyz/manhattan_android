@@ -148,7 +148,6 @@ public class AskQuestionActivity extends BaseActivity {
                     cursor.close();
 
                     File selectedPic = new File(filePath);
-                    mChoosePic.setText(selectedPic.getName());
                     new UploadImageTask().execute(selectedPic);
                 }
 
@@ -167,13 +166,21 @@ public class AskQuestionActivity extends BaseActivity {
 
     class UploadImageTask extends AsyncTask<File, Void, String> {
 
+        File file;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showLoadingDialog(R.string.upload_text);
+        }
+
         @Override
         protected String doInBackground(File... params) {
             String result = null;
             try {
-                File file = params[0];
+                file = params[0];
                 UploadService uploadService = ServiceFactory.getService(UploadService.class);
-                result = uploadService.upload(file);
+                result = uploadService.uploadImage(AskQuestionActivity.this,file);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -183,8 +190,12 @@ public class AskQuestionActivity extends BaseActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            hideLoadingDialog();
             if (!TextUtils.isEmpty(s)) {
                 mChoosePic.setTag(s);
+                mChoosePic.setText(file.getName());
+            } else {
+                Toast.makeText(AskQuestionActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -172,22 +171,23 @@ public class CourseDetailActivity extends BaseActivity implements AdapterView.On
         setListViewHeightBasedOnChildren(mTeacherList);
     }
 
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
-            // pre-condition
-            return;
-        }
-
+    public void setListViewHeightBasedOnChildren(ListView listView) {
         int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
+        int itemCount = mTeacherListAdapter.getCount();
+        if (itemCount == 0) return;
+        View listItem = mTeacherListAdapter.getView(0, null, null);
+        if (listItem == null) return;
+
+        listItem.setLayoutParams(new ViewGroup.LayoutParams(0,0));
+        listItem.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        int itemHeight = listItem.getMeasuredHeight();
+
+        for (int i = 0; i < itemCount; i++) {
+            totalHeight += itemHeight;
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        params.height = totalHeight + (listView.getDividerHeight() * (itemCount - 1));
         listView.setLayoutParams(params);
         listView.requestLayout();
     }

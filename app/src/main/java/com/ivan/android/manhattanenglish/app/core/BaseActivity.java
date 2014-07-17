@@ -113,7 +113,11 @@ public class BaseActivity extends FragmentActivity {
 
 
     protected void showLoadingDialog() {
-        CharSequence message = getText(R.string.loading_text);
+        showLoadingDialog(R.string.loading_text);
+    }
+
+    protected void showLoadingDialog(int stringResId) {
+        CharSequence message = getText(stringResId);
         if (progressDialog == null) {
             progressDialog = ProgressDialog.show(this, null, message, true, true, null);
         } else if (!progressDialog.isShowing()) {
