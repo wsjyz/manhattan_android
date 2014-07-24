@@ -1,7 +1,6 @@
 package com.ivan.android.manhattanenglish.app.core.appoint;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -193,13 +192,6 @@ public class AppointActivity extends BaseActivity implements AdapterView.OnItemC
 
                 }
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-
-            datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, getText(R.string.positive_text), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    datePickerDialog.dismiss();
-                }
-            });
         }
 
         return datePickerDialog;

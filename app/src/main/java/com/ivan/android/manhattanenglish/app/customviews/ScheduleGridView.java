@@ -3,6 +3,7 @@ package com.ivan.android.manhattanenglish.app.customviews;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.GridView;
 
@@ -49,7 +50,7 @@ public class ScheduleGridView extends GridView {
         float offset = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1.5f, dm);
 
         setPadding((int) (fixedPaddingLeft + offset), (int) fixedPaddingTop, 0, 0);
-        setColumnWidth((int) fixedColumnWidth);
+        setColumnWidth((int) (fixedColumnWidth + 0.4f));
 
         heightMeasureSpec = MeasureSpec.makeMeasureSpec((int) fixedHeight, MeasureSpec.EXACTLY);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
