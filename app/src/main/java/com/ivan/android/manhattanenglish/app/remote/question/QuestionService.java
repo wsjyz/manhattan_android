@@ -10,7 +10,7 @@ import java.util.List;
 public interface QuestionService {
 
     public static final String SEARCH_TYPE_ASSIGN = "ASSIGN";
-    public static final String SEARCH_TYPE_ANSWER = "ANSWER";
+    public static final String SEARCH_TYPE_ANSWER = "ANSWERED";
     public static final String SEARCH_TYPE_UNANSWER = "UNANSWER";
 
     /**

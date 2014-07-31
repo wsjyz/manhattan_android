@@ -14,11 +14,27 @@
         custom:titleText="@string/title_activity_calendar"
         custom:showRight="false" />
 
+    <TextView
+        android:id="@+id/notice_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/calendar_notice"
+        android:layout_margin="@dimen/common_margin"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:textSize="@dimen/dimen_16sp"
+        android:background="@drawable/drawable_border_light_gray"
+        android:textColor="@color/common_text_color"
+        android:drawablePadding="@dimen/common_margin"
+        android:gravity="center_vertical"
+        />
+
     <FrameLayout
         android:id="@+id/calendar_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/common_margin"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginRight="@dimen/common_margin"
         android:background="@drawable/drawable_border_light_gray">
 
     </FrameLayout>

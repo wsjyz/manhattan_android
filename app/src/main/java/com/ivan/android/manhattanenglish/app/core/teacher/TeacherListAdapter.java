@@ -54,6 +54,12 @@ public class TeacherListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void removeItemAt(int index) {
+        if (index < 0 || index >= data.size()) return;
+        data.remove(index);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return data.size();

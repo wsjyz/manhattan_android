@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ivan.android.manhattanenglish.app" >
+    package="com.ivan.android.manhattanenglish.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
         android:name=".core.MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".core.welcome.WelcomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,135 +29,109 @@
             android:name=".core.login.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible" >
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateVisible"/>
         <activity
             android:name=".core.login.RegisterActivity"
             android:label="@string/title_activity_register"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateVisible"/>
         <activity
             android:name=".core.login.FindPasswordActivity"
             android:label="@string/title_activity_find_password"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.home.StudentHomeActivity"
             android:label="@string/title_activity_student_home"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.home.TeacherHomeActivity"
             android:label="@string/title_activity_student_home"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.more.MoreInfoActivity"
             android:label="@string/title_activity_more_info"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.more.ContactUsActivity"
             android:label="@string/title_activity_contact_us"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.more.AboutUsActivity"
             android:label="@string/title_activity_about_us"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.info.InfomationActivity"
             android:label="@string/title_activity_infomation"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.appoint.AppointActivity"
             android:label="@string/title_activity_appoint"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.homework.TeacherHomeworkActivity"
             android:label="@string/title_activity_homework"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.homework.StudentHomeworkActivity"
             android:label="@string/title_activity_homework"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.userinfo.StudentInfoActivity"
             android:label="@string/title_activity_student_info"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.course.NiceCourseActivity"
             android:label="@string/title_activity_course"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.course.CourseDetailActivity"
             android:label="@string/title_activity_course_detail"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.teacher.TeacherActivity"
             android:label="@string/title_activity_teacher"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.teacher.TeacherDetailInfoActivity"
             android:label="@string/title_activity_teacher_detail_info"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.question.AskQuestionActivity"
             android:label="@string/title_activity_ask_question"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible" >
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateVisible"/>
         <activity
             android:name=".core.question.QuestionForStudentActivity"
             android:label="@string/title_activity_question"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.question.QuestionDetailActivity"
             android:label="@string/title_activity_question_detail"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.purchase.StudentPurchaseActivity"
             android:label="@string/title_activity_student_purchase"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.purchase.TeacherPurchaseActivity"
             android:label="@string/title_activity_student_purchase"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.more.CalendarActivity"
             android:label="@string/title_activity_calendar"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.collect.MyCollectForStudentActivity"
             android:label="@string/title_activity_student_collect"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.appoint.MyAppointForStudentActivity"
             android:label="@string/title_activity_student_appoint"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.audition.MyAuditionForStudentActivity"
             android:label="@string/title_activity_student_audition"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
 
         <service android:name=".alarm.NoticeService" />
         <service android:name=".alarm.ScheduleService" />
@@ -165,53 +139,47 @@
         <activity
             android:name=".core.appoint.AppointTeacherActivity"
             android:label="@string/title_activity_appoint_teacher"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.appoint.AppointCourseActivity"
             android:label="@string/title_activity_appoint_course"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.course.PublishCourseActivity"
             android:label="@string/title_activity_publish_course"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.userinfo.TeacherInfoActivity"
             android:label="@string/title_activity_teacher_info"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.appoint.StudentListActivity"
             android:label="@string/title_activity_my_appoint_for_teacher"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.question.QuestionForTeacherActivity"
             android:label="@string/title_activity_question_for_teacher"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.homework.SubmitHomeworkActivity"
             android:label="@string/title_activity_submit_homework"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.question.AnswerQuestionActivity"
             android:label="@string/title_activity_answer_question"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".PublishHomeworkActivity"
             android:label="@string/title_activity_publish_homework"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".core.info.InfomationDetailActivity"
             android:label="@string/title_activity_infomation_detail"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"/>
+        <!--alipay activity-->
+        <activity
+            android:name="com.alipay.android.app.sdk.WapPayActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -1,18 +1,28 @@
 package com.ivan.android.manhattanenglish.app.core.collect;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.appoint.AppointTeacherListLoader;
 import com.ivan.android.manhattanenglish.app.core.audition.AuditionTeacherListLoader;
 import com.ivan.android.manhattanenglish.app.core.teacher.TeacherListAdapter;
+import com.ivan.android.manhattanenglish.app.remote.ServiceFactory;
 import com.ivan.android.manhattanenglish.app.remote.user.TeacherDetail;
+import com.ivan.android.manhattanenglish.app.remote.user.UserService;
+import com.ivan.android.manhattanenglish.app.utils.CommonAsyncTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,13 +68,34 @@ public class TeacherListFragment extends ListFragment implements LoaderManager.L
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         setListShown(false);
         mAdapter = new TeacherListAdapter(getActivity(), new ArrayList<TeacherDetail>());
         setListAdapter(mAdapter);
         setEmptyText(getText(R.string.empty_text));
 
         getLoaderManager().initLoader(1, getArguments(), this);
+
+        String loadType = getArguments().getString(LOAD_TYPE);
+        if (TYPE_COLLECT.equals(loadType)) {
+            Log.i("TeacherListFragment", "registerForContextMenu.");
+            registerForContextMenu(getListView());
+        }
+
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.question, menu);
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Log.i("TeacherListFragment", "onContextItemSelected.position = " + menuInfo.position);
+        new CancelCollectTask(getActivity()).execute(menuInfo.position);
+        return true;
     }
 
     @Override
@@ -103,6 +134,30 @@ public class TeacherListFragment extends ListFragment implements LoaderManager.L
     @Override
     public void onLoaderReset(Loader<List<TeacherDetail>> loader) {
         mAdapter.clear();
+    }
+
+    class CancelCollectTask extends CommonAsyncTask<Integer, Void, Void> {
+
+        private int position;
+
+        protected CancelCollectTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected Void getResultInBackground(Integer... params) {
+            position = params[0];
+            TeacherDetail detail = (TeacherDetail) mAdapter.getItem(position);
+            UserService userService = ServiceFactory.getService(UserService.class);
+            userService.cancelCollect(detail.getTeacherId());
+            return null;
+        }
+
+        @Override
+        protected void onSuccess(Void aVoid) {
+            super.onSuccess(aVoid);
+            mAdapter.removeItemAt(position);
+        }
     }
 
 
