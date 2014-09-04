@@ -25,7 +25,7 @@
             android:id="@+id/question_content_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_18sp"
+            android:textSize="@dimen/dimen_16sp"
             android:textColor="@color/common_text_color"
             android:text="新概念第一册什么时候出的？？？" />
 
@@ -67,8 +67,8 @@
         android:hint="@string/hint_input_homework"
         android:textColorHint="@color/hint_text_color"
         android:textColor="@color/common_text_color"
-        android:minLines="6"
-        android:maxLines="8"
+        android:minLines="3"
+        android:maxLines="5"
         android:gravity="top"
         android:layout_marginLeft="@dimen/common_margin"
         android:layout_marginRight="@dimen/common_margin" />
@@ -94,7 +94,6 @@
         android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/form_login_button_height"
-        android:layout_marginTop="@dimen/common_margin"
         android:layout_marginLeft="@dimen/form_login_button_horizontal_margin"
         android:layout_marginRight="@dimen/form_login_button_horizontal_margin"
         android:background="@drawable/drawable_login_button"
