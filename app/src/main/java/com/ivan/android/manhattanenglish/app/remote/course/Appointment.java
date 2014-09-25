@@ -1,5 +1,13 @@
 package com.ivan.android.manhattanenglish.app.remote.course;
 
+import com.ivan.android.manhattanenglish.app.remote.AbstractService;
+
+import org.apache.http.util.EncodingUtils;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.MessageFormat;
+
 /**
  * @author: Ivan Vigoss
  * Date: 14-6-23
@@ -122,5 +130,24 @@ public class Appointment {
 
     public void setPayment(String payment) {
         this.payment = payment;
+    }
+
+    public String toUrl(String subject) {
+        String urlPattern = AbstractService.HOST + "/payment/payment?userId={0}&mobile={1}&resourceType={2}&resourceId={3}&userName={4}&address={5}&subject={6}";
+        return MessageFormat.format(urlPattern, userId, mobile, resourceType, resourceId, encode(userName), encode(address), encode(subject));
+    }
+
+    public byte[] getPostData(String subject) {
+        String body = "userId={0}&mobile={1}&resourceType={2}&resourceId={3}&userName={4}&address={5}&subject={6}";
+        String data = MessageFormat.format(body, userId, mobile, resourceType, resourceId, userName, address, subject);
+        return EncodingUtils.getBytes(data, "UTF-8");
+    }
+
+    private String encode(String str) {
+        try {
+            return URLEncoder.encode(str, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return str;
+        }
     }
 }

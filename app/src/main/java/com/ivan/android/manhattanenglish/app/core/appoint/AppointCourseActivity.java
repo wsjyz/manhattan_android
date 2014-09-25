@@ -1,5 +1,6 @@
 package com.ivan.android.manhattanenglish.app.core.appoint;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -8,8 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.ivan.android.manhattanenglish.app.R;
 import com.ivan.android.manhattanenglish.app.core.BaseActivity;
+import com.ivan.android.manhattanenglish.app.core.purchase.AlipayActivity;
 import com.ivan.android.manhattanenglish.app.customviews.TitleBar;
 import com.ivan.android.manhattanenglish.app.remote.course.Appointment;
 import com.ivan.android.manhattanenglish.app.utils.UserCache;
@@ -56,31 +59,22 @@ public class AppointCourseActivity extends BaseActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptSubmit(Appointment.PAYMENT_ONLINE, new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(AppointCourseActivity.this, R.string.audition_success, Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
+                if (mFragment.checkForm()) {
+                    Appointment appointment = new Appointment();
+                    appointment.setUserId(UserCache.getUserId());
+                    appointment.setMobile(mFragment.getPhone());
+                    appointment.setUserName(mFragment.getUserName());
+                    appointment.setAddress(mFragment.getAddress());
+                    appointment.setResourceId(courseId);
+                    appointment.setResourceType(actionType == ACTION_TYPE_APPOINT ? Appointment.RESOURCE_TYPE_APPOINTMENT_COURSE : Appointment.RESOURCE_TYPE_LISTEN_COURSE);
+
+                    Intent payment = new Intent(AppointCourseActivity.this, AlipayActivity.class);
+                    payment.putExtra(AlipayActivity.KEY_APPOINTMENT, JSON.toJSONString(appointment));
+                    payment.putExtra(AlipayActivity.KEY_SUBJECT, actionType == ACTION_TYPE_APPOINT ? "预约课程" : "试听课程");
+                    startActivity(payment);
+                }
             }
         });
-    }
-
-
-    private void attemptSubmit(String payment, Runnable runnable) {
-        if (mFragment.checkForm()) {
-            Appointment appointment = new Appointment();
-            appointment.setUserId(UserCache.getUserId());
-            appointment.setMobile(mFragment.getPhone());
-            appointment.setUserName(mFragment.getUserName());
-            appointment.setAddress(mFragment.getAddress());
-            appointment.setResourceId(courseId);
-            appointment.setResourceType(actionType == ACTION_TYPE_APPOINT ? Appointment.RESOURCE_TYPE_APPOINTMENT_COURSE : Appointment.RESOURCE_TYPE_LISTEN_COURSE);
-            appointment.setPayment(payment);
-
-            new AppointTask(this, runnable).execute(appointment);
-        }
     }
 
 }

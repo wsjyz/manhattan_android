@@ -178,7 +178,7 @@
             android:screenOrientation="portrait"/>
         <!--alipay activity-->
         <activity
-            android:name="com.alipay.android.app.sdk.WapPayActivity"
+            android:name=".core.purchase.AlipayActivity"
             android:screenOrientation="portrait"/>
     </application>
 
